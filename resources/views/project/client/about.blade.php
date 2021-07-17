@@ -1,14 +1,8 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | Single Product 1 :: w3layouts</title>
+	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | About Us :: w3layouts</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -23,18 +17,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			window.scrollTo(0, 1);
 		}
 	</script>
+	<script src="{{ asset('js/app.js') }}"></script>
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ URL::asset('project/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- Bootstrap css -->
-	<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ URL::asset('project/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- Main css -->
-	<link rel="stylesheet" href="../css/fontawesome-all.css">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<!-- Font-Awesome-Icons-CSS -->
-	<link href="../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ URL::asset('project/css/popuo-box.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- pop-up-box -->
-	<link href="../css/menu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ URL::asset('project/css/menu.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<!-- menu style -->
 	<!-- //Custom-Files -->
 
@@ -556,7 +551,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col-md-3 logo_agile">
 					<h1 class="text-center">
 						<a href="index.html" class="font-weight-bold font-italic">
-							<img src="../images/logo2.png" alt=" " class="img-fluid">Electro Store
+							<img src="{{ URL::asset('project/images/logo2.png') }}" alt=" " class="img-fluid">Electro Store
 						</a>
 					</h1>
 				</div>
@@ -765,13 +760,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</div>
 							</div>
 						</li>
-						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+						<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="about.html">About Us</a>
 						</li>
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link" href="product.html">New Arrivals</a>
 						</li>
-						<li class="nav-item dropdown active mr-lg-2 mb-lg-0 mb-2">
+						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Pages
 							</a>
@@ -779,7 +774,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<a class="dropdown-item" href="product.html">Product 1</a>
 								<a class="dropdown-item" href="product2.html">Product 2</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item active" href="single.html">Single Product 1</a>
+								<a class="dropdown-item" href="single.html">Single Product 1</a>
 								<a class="dropdown-item" href="single2.html">Single Product 2</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="checkout.html">Checkout Page</a>
@@ -810,152 +805,111 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Single Product 1</li>
+					<li>About Us</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- Single Page -->
-	<div class="banner-bootom-w3-agileits py-5">
+	<!-- about -->
+	<div class="welcome py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>S</span>ingle
-				<span>P</span>age</h3>
+				<span>A</span>bout
+				<span>U</span>s</h3>
 			<!-- //tittle heading -->
 			<div class="row">
-				<div class="col-lg-5 col-md-8 single-right-left ">
-					<div class="grid images_3_of_2">
-						<div class="flexslider">
-							<ul class="slides">
-								<li data-thumb="images/si1.jpg">
-									<div class="thumb-image">
-										<img src="../images/si1.jpg" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li>
-								<li data-thumb="images/si2.jpg">
-									<div class="thumb-image">
-										<img src="../images/si2.jpg" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li>
-								<li data-thumb="images/si3.jpg">
-									<div class="thumb-image">
-										<img src="../images/si3.jpg" data-imagezoom="true" class="img-fluid" alt=""> </div>
-								</li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-					</div>
+				<div class="col-lg-6 welcome-left">
+					<h3>Welcome</h3>
+					<h4 class="my-sm-3 my-2">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta erat sit amet eros sagittis, quis hendrerit
+						libero aliquam. Fusce semper augue ac dolor efficitur, a pretium metus pellentesque.</p>
 				</div>
-
-				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
-					<h3 class="mb-3">Samsung Galaxy J7 Prime (Gold, 16 GB) (3 GB RAM)</h3>
-					<p class="mb-3">
-						<span class="item_price">$200.00</span>
-						<del class="mx-2 font-weight-light">$280.00</del>
-						<label>Free delivery</label>
-					</p>
-					<div class="single-infoagile">
-						<ul>
-							<li class="mb-3">
-								Cash on Delivery Eligible.
-							</li>
-							<li class="mb-3">
-								Shipping Speed to Delivery.
-							</li>
-							<li class="mb-3">
-								EMIs from $655/month.
-							</li>
-							<li class="mb-3">
-								Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
-							</li>
-						</ul>
-					</div>
-					<div class="product-single-w3l">
-						<p class="my-3">
-							<i class="far fa-hand-point-right mr-2"></i>
-							<label>1 Year</label>Manufacturer Warranty</p>
-						<ul>
-							<li class="mb-1">
-								3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
-							</li>
-							<li class="mb-1">
-								5.5 inch Full HD Display
-							</li>
-							<li class="mb-1">
-								13MP Rear Camera | 8MP Front Camera
-							</li>
-							<li class="mb-1">
-								3300 mAh Battery
-							</li>
-							<li class="mb-1">
-								Exynos 7870 Octa Core 1.6GHz Processor
-							</li>
-						</ul>
-						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
-						</p>
-					</div>
-					<div class="occasion-cart">
-						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							<form action="#" method="post">
-								<fieldset>
-									<input type="hidden" name="cmd" value="_cart" />
-									<input type="hidden" name="add" value="1" />
-									<input type="hidden" name="business" value=" " />
-									<input type="hidden" name="item_name" value="Samsung Galaxy J7 Prime" />
-									<input type="hidden" name="amount" value="200.00" />
-									<input type="hidden" name="discount_amount" value="1.00" />
-									<input type="hidden" name="currency_code" value="USD" />
-									<input type="hidden" name="return" value=" " />
-									<input type="hidden" name="cancel_return" value=" " />
-									<input type="submit" name="submit" value="Add to cart" class="button" />
-								</fieldset>
-							</form>
-						</div>
-					</div>
+				<div class="col-lg-6 welcome-right-top mt-lg-0 mt-sm-5 mt-4">
+					<img src="{{ URL::asset('project/images/ab.jpg') }}" class="img-fluid" alt=" ">
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- //Single Page -->
+	<!-- //about -->
 
-	<!-- middle section -->
-	<div class="join-w3l1 py-sm-5 py-4">
+	<!-- testimonials -->
+	<div class="testimonials py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="join-agile text-left p-4">
-						<div class="row">
-							<div class="col-sm-7 offer-name">
-								<h6>Smooth, Rich & Loud Audio</h6>
-								<h4 class="mt-2 mb-3">Branded Headphones</h4>
-								<p>Sale up to 25% off all in store</p>
-							</div>
-							<div class="col-sm-5 offerimg-w3l">
-								<img src="../images/off1.png" alt="" class="img-fluid">
-							</div>
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l text-center text-white mb-lg-5 mb-sm-4 mb-3">
+				<span>O</span>ur
+				<span>C</span>ustomers
+				<span>S</span>ays</h3>
+			<!-- tittle heading -->
+			<div class="row gallery-index">
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Tyson</h4>
+							<p>fames ac turpis</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6 mt-lg-0 mt-5">
-					<div class="join-agile text-left p-4">
-						<div class="row ">
-							<div class="col-sm-7 offer-name">
-								<h6>A Bigger Phone</h6>
-								<h4 class="mt-2 mb-3">Smart Phones 5</h4>
-								<p>Free shipping order over $100</p>
-							</div>
-							<div class="col-sm-5 offerimg-w3l">
-								<img src="../images/off2.png" alt="" class="img-fluid">
-							</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Alejandra</h4>
+							<p>fames ac turpis</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left mt-sm-5 my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Charles</h4>
+							<p>fames ac turpis</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left mt-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Jessie</h4>
+							<p>fames ac turpis</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- middle section -->
+	<!-- //testimonials -->
 
 	<!-- footer -->
 	<footer>
@@ -1335,31 +1289,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h5 class="font-weight-bold mb-3">Payment Method</h5>
 					<ul>
 						<li>
-							<img src="../images/pay2.png" alt="">
+							<img src="{{ URL::asset('project/images/pay2.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay5.png" alt="">
+							<img src="{{ URL::asset('project/images/pay5.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay1.png" alt="">
+							<img src="{{ URL::asset('project/images/pay1.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay4.png" alt="">
+							<img src="{{ URL::asset('project/images/pay4.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay6.png" alt="">
+							<img src="{{ URL::asset('project/images/pay6.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay3.png" alt="">
+							<img src="{{ URL::asset('project/images/pay3.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay7.png" alt="">
+							<img src="{{ URL::asset('project/images/pay7.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay8.png" alt="">
+							<img src="{{ URL::asset('project/images/pay8.png') }}" alt="">
 						</li>
 						<li>
-							<img src="../images/pay9.png" alt="">
+							<img src="{{ URL::asset('project/images/pay9.png') }}" alt="">
 						</li>
 					</ul>
 				</div>
@@ -1381,7 +1335,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 	<!-- js-files -->
 	<!-- jquery -->
-	<script src="../js/jquery-2.2.3.min.js"></script>
+	<script src="{{ URL::asset('project/js/jquery-2.2.3.min.js') }}"></script>
 	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->
@@ -1402,7 +1356,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //nav smooth scroll -->
 
 	<!-- popup modal (for location)-->
-	<script src="../js/jquery.magnific-popup.js"></script>
+	<script src="{{ URL::asset('project/js/jquery.magnific-popup.js') }}"></script>
 	<script>
 		$(document).ready(function () {
 			$('.popup-with-zoom-anim').magnificPopup({
@@ -1422,7 +1376,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
-	<script src="../js/minicart.js"></script>
+	<script src="{{ URL::asset('project/js/minicart.js') }}"></script>
 	<script>
 		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
 
@@ -1464,32 +1418,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script>
 	<!-- //password-script -->
 
-	<!-- imagezoom -->
-	<script src="../js/imagezoom.js"></script>
-	<!-- //imagezoom -->
-
-	<!-- flexslider -->
-	<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
-
-	<script src="../js/jquery.flexslider.js"></script>
-	<script>
-		// Can also be used with $(document).ready()
-		$(window).load(function () {
-			$('.flexslider').flexslider({
-				animation: "slide",
-				controlNav: "thumbnails"
-			});
-		});
-	</script>
-	<!-- //FlexSlider-->
-
 	<!-- smoothscroll -->
-	<script src="../js/SmoothScroll.min.js"></script>
+	<script src="{{ URL::asset('project/js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
 	<!-- start-smooth-scrolling -->
-	<script src="../js/move-top.js"></script>
-	<script src="../js/easing.js"></script>
+	<script src="{{ URL::asset('project/js/move-top.js') }}"></script>
+	<script src="{{ URL::asset('project/js/easing.js') }}"></script>
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -1523,7 +1458,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //smooth-scrolling-of-move-up -->
 
 	<!-- for bootstrap working -->
-	<script src="../js/bootstrap.js"></script>
+	<script src="{{ URL::asset('project/js/boostrap.js') }}"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 
