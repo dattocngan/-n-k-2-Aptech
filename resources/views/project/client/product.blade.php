@@ -1,5 +1,115 @@
 @extends('project.client.layout.master')
 
+@section('list')
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
+			<span class="sr-only">(current)</span>
+		</a>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Điện thoại
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Iphone</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Samsung</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Oppo</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Vinsmart</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Smart Watch
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Apple</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Huawei</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Realme</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Samsung</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Laptop
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Dell</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">HP</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Asus</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Mac</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="">Tin tức</a>
+	</li>
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ route('client_contact') }}">Liên hệ ngay</a>
+	</li>
+@endsection
+
 @section('content')
 	<!-- banner-2 -->
 	<div class="page-head_agile_info_w3l">
@@ -12,7 +122,7 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="{{route('client_single')}}">Home</a>
 						<i>|</i>
 					</li>
 					<li>Electronics</li>
@@ -44,20 +154,21 @@
 											<img src="{{ URL::asset('project/images/m1.jpg') }}" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
 												</div>
 											</div>
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">Samsung Galaxy J7</a>
+												<a href="{{route('client_single')}}">Samsung Galaxy J7</a>
 											</h4>
 											<div class="info-product-price my-2">
 												<span class="item_price">$200.00</span>
 												<del>$280.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
+												<form action="{{route('client_checkout')}}" method="post">
+													@csrf
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart" />
 														<input type="hidden" name="add" value="1" />
@@ -68,7 +179,7 @@
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
 													</fieldset>
 												</form>
 											</div>
@@ -82,7 +193,7 @@
 											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
@@ -90,14 +201,15 @@
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">OPPO A37f</a>
+												<a href="{{route('client_single')}}">OPPO A37f</a>
 											</h4>
 											<div class="info-product-price my-2">
 												<span class="item_price">$230.00</span>
 												<del>$250.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
+												<form action="{{route('client_checkout')}}" method="post">
+													@csrf
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart" />
 														<input type="hidden" name="add" value="1" />
@@ -108,7 +220,7 @@
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
 													</fieldset>
 												</form>
 											</div>
@@ -119,10 +231,10 @@
 								<div class="col-md-4 product-men mt-md-0 mt-5">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m3.jpg') }}" alt="">
+											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
@@ -130,28 +242,30 @@
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">Apple iPhone X</a>
+												<a href="{{route('client_single')}}">OPPO A37f</a>
 											</h4>
 											<div class="info-product-price my-2">
-												<span class="item_price">$280.00</span>
-												<del>$300.00</del>
+												<span class="item_price">$230.00</span>
+												<del>$250.00</del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
+												<form action="{{route('client_checkout')}}" method="post">
+													@csrf
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart" />
 														<input type="hidden" name="add" value="1" />
 														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Apple iPhone X" />
-														<input type="hidden" name="amount" value="280.00" />
+														<input type="hidden" name="item_name" value="OPPO A37f" />
+														<input type="hidden" name="amount" value="230.00" />
 														<input type="hidden" name="discount_amount" value="1.00" />
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
 													</fieldset>
 												</form>
 											</div>
+
 										</div>
 									</div>
 								</div>
@@ -167,13 +281,13 @@
 											<img src="{{ URL::asset('project/images/m4.jpg') }}" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
 												</div>
 											</div>
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
 											<h4 class="pt-1">
-												<a href="single.html">Infinix Hot S3</a>
+												<a href="{{route('client_single')}}">Infinix Hot S3</a>
 											</h4>
 											<div class="info-product-price my-2">
 												<span class="item_price">$300.00</span>
@@ -192,7 +306,7 @@
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
 													</fieldset>
 												</form>
 											</div>
@@ -203,322 +317,89 @@
 								<div class="col-md-4 product-men mt-md-0 mt-5">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk2.jpg') }}" alt="">
+											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
 												</div>
-											</div>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Moto X4 (6 GB)</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$233.00</span>
-												<del>$240.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Moto X4 (6 GB)" />
-														<input type="hidden" name="amount" value="233.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk3.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">iVooMi i Series</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$249.00</span>
-												<del>$260.00</del>
 											</div>
 											<span class="product-new-top">New</span>
+
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="{{route('client_single')}}">OPPO A37f</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">$230.00</span>
+												<del>$250.00</del>
+											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
+												<form action="{{route('client_checkout')}}" method="post">
+													@csrf
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart" />
 														<input type="hidden" name="add" value="1" />
 														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="iVooMi i Series" />
-														<input type="hidden" name="amount" value="249.00" />
+														<input type="hidden" name="item_name" value="OPPO A37f" />
+														<input type="hidden" name="amount" value="230.00" />
 														<input type="hidden" name="discount_amount" value="1.00" />
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
 													</fieldset>
 												</form>
 											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 product-men mt-md-0 mt-5">
+									<div class="men-pro-item simpleCart_shelfItem">
+										<div class="men-thumb-item text-center">
+											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="{{route('client_single')}}" class="link-product-add-cart">Chi tiết</a>
+												</div>
+											</div>
+											<span class="product-new-top">New</span>
+
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="{{route('client_single')}}">OPPO A37f</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">$230.00</span>
+												<del>$250.00</del>
+											</div>
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="{{route('client_checkout')}}" method="post">
+													@csrf
+													<fieldset>
+														<input type="hidden" name="cmd" value="_cart" />
+														<input type="hidden" name="add" value="1" />
+														<input type="hidden" name="business" value=" " />
+														<input type="hidden" name="item_name" value="OPPO A37f" />
+														<input type="hidden" name="amount" value="230.00" />
+														<input type="hidden" name="discount_amount" value="1.00" />
+														<input type="hidden" name="currency_code" value="USD" />
+														<input type="hidden" name="return" value=" " />
+														<input type="hidden" name="cancel_return" value=" " />
+														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
+													</fieldset>
+												</form>
+											</div>
+
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- //second section -->
-						<!-- 3rd section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
-							<div class="row">
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk4.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Dell Vostro Laptop</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$252.00</span>
-												<del>$260.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Dell Vostro Laptop" />
-														<input type="hidden" name="amount" value="252.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk5.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Acer Laptop</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$240.00</span>
-												<del>$260.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Acer Laptop" />
-														<input type="hidden" name="amount" value="240.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk6.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Lenovo </a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$300.00</span>
-												<del>$320.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Alcatel Tablet" />
-														<input type="hidden" name="amount" value="300.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- //3rd section -->
-						<!-- fourth section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
-							<div class="row">
-								<div class="col-md-4 product-men">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk7.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Intex Power Bank</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$100.00</span>
-												<del>$200.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Intex Power Bank" />
-														<input type="hidden" name="amount" value="100.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk8.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">HP Wireless Printer</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$243.00</span>
-												<del>$250.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="HP Wireless Printer" />
-														<input type="hidden" name="amount" value="243.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-md-0 mt-5 mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/mk9.jpg') }}" alt="" class="img-fluid">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html">Alcatel Tablet</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$320.00</span>
-												<del>$350.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Alcatel Tablet" />
-														<input type="hidden" name="amount" value="320.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Add to cart" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- //fourth section -->
+						
 					</div>
 				</div>
 				<!-- //product left -->
@@ -526,214 +407,111 @@
 				<div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
 					<div class="side-bar p-sm-4 p-3">
 						<div class="search-hotel border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Brand</h3>
+							<h3 class="agileits-sear-head mb-3">Tìm kiếm</h3>
 							<form action="#" method="post">
-								<input type="search" placeholder="Search Brand..." name="search" required="">
+								<input type="search" placeholder="Tên sản phẩm..." name="search" required="">
 								<input type="submit" value=" ">
 							</form>
-							<div class="left-side py-2">
-								<ul>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Samsung</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Red Mi</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Apple</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Nexus</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Motorola</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Micromax</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Lenovo</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Oppo</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Sony</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">LG</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">One Plus</span>
-									</li>
-								</ul>
-							</div>
 						</div>
-						<!-- ram -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Ram</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Less than 512 MB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">512 MB - 1 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">1 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">2 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">3 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">5 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">6 GB</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">6 GB & Above</span>
-								</li>
-							</ul>
-						</div>
-						<!-- //ram -->
 						<!-- price -->
 						<div class="range border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Price</h3>
+							<h3 class="agileits-sear-head mb-3">Giá</h3>
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="#">Under $1,000</a>
+										<a href="{{ route('client_product') }}">Dưới 1.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="#">$1,000 - $5,000</a>
+										<a href="{{ route('client_product') }}">1.000.000 - 5.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="#">$5,000 - $10,000</a>
+										<a href="{{ route('client_product') }}">5.000.000 - 10.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="#">$10,000 - $20,000</a>
+										<a href="{{ route('client_product') }}">10.000.000 - 20.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="#">$20,000 $30,000</a>
+										<a href="{{ route('client_product') }}">20.000.000 - 30.000.000 VNĐ</a>
 									</li>
 									<li class="mt-1">
-										<a href="#">Over $30,000</a>
+										<a href="{{ route('client_product') }}">Trên 30.000.000 VNĐ</a>
 									</li>
 								</ul>
 							</div>
 						</div>
 						<!-- //price -->
-						<!-- discounts -->
+						
+						
+						<!-- RAM -->
 						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Discount</h3>
+							<h3 class="agileits-sear-head mb-3">RAM</h3>
 							<ul>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">5% or More</span>
+									<span class="span">2GB</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">10% or More</span>
+									<span class="span">4GB</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">20% or More</span>
+									<span class="span">6GB</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">30% or More</span>
+									<span class="span">8GB</span>
 								</li>
 								<li>
 									<input type="checkbox" class="checked">
-									<span class="span">50% or More</span>
+									<span class="span">16GB</span>
 								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">60% or More</span>
-								</li>
+								
 							</ul>
 						</div>
-						<!-- //discounts -->
-						<!-- offers -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Offers</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Exchange Offer</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">No Cost EMI</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Special Price</span>
-								</li>
-							</ul>
+						<!-- //RAM -->
+
+						<!-- //electronics -->
+						
+						<!-- best seller -->
+						<div class="f-grid py-2">
+							<h3 class="agileits-sear-head mb-3">Sản phẩm bán chạy</h3>
+							<div class="box-scroll">
+								<div class="scroll">
+									<div class="row">
+										<div class="col-lg-3 col-sm-2 col-3 left-mar">
+											<img src="{{ URL::asset('project/images/k1.jpg') }}" alt="" class="img-fluid">
+										</div>
+										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
+											<a href="{{ route('client_single') }}">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>
+											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,990.00</a>
+										</div>
+									</div>
+									<div class="row my-4">
+										<div class="col-lg-3 col-sm-2 col-3 left-mar">
+											<img src="{{ URL::asset('project/images/k2.jpg') }}" alt="" class="img-fluid">
+										</div>
+										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
+											<a href="{{ route('client_single') }}">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>
+											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,499.00</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-3 col-sm-2 col-3 left-mar">
+											<img src="{{ URL::asset('project/images/k3.jpg') }}" alt="" class="img-fluid">
+										</div>
+										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
+											<a href="{{ route('client_single') }}">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
+											<a href="{{ route('client_single') }}" class="price-mar mt-2">$1,199.00 </a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<!-- //offers -->
-						<!-- delivery -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Cash On Delivery</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Eligible for Cash On Delivery</span>
-								</li>
-							</ul>
-						</div>
-						<!-- //delivery -->
-						<!-- arrivals -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">New Arrivals</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Last 30 days</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Last 90 days</span>
-								</li>
-							</ul>
-						</div>
-						<div class="left-side py-2">
-							<h3 class="agileits-sear-head mb-3">Availability</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Exclude Out of Stock</span>
-								</li>
-							</ul>
-						</div>
-						<!-- //arrivals -->
+						<!-- //best seller -->
 					</div>
-					<!-- //product right -->
 				</div>
+				<!-- //product right -->
 			</div>
 		</div>
 	</div>
@@ -867,7 +645,7 @@
 	<script src="{{ URL::asset('project/js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
-	<!-- start-smooth-scrolling -->
+	{{-- <!-- start-smooth-scrolling -->
 	<script src="{{ URL::asset('project/js/move-top.js') }}"></script>
 	<script src="{{ URL::asset('project/js/easing.js') }}"></script>
 	<script>
@@ -881,7 +659,7 @@
 			});
 		});
 	</script>
-	<!-- //end-smooth-scrolling -->
+	<!-- //end-smooth-scrolling --> --}}
 
 	<!-- smooth-scrolling-of-move-up -->
 	<script>

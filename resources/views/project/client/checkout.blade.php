@@ -1,5 +1,115 @@
 @extends('project.client.layout.master')
 
+@section('list')
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
+			<span class="sr-only">(current)</span>
+		</a>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Điện thoại
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Iphone</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Samsung</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Oppo</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Vinsmart</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Smart Watch
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Apple</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Huawei</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Realme</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Samsung</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
+			Laptop
+		</a>
+		<div class="dropdown-menu">
+			<div class="agile_inner_drop_nav_info p-4">
+				<div class="row">
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Dell</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">HP</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-6 multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<li>
+								<a href="{{ route('client_product') }}">Asus</a>
+							</li>
+							<li>
+								<a href="{{ route('client_product') }}">Mac</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="">Tin tức</a>
+	</li>
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ route('client_contact') }}">Liên hệ ngay</a>
+	</li>
+@endsection
+
 @section('content')
 	<!-- banner-2 -->
 	<div class="page-head_agile_info_w3l">
@@ -132,7 +242,8 @@
 			<div class="checkout-left">
 				<div class="address_form_agile mt-sm-5 mt-4">
 					<h4 class="mb-sm-4 mb-3">Add a new Details</h4>
-					<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+					<form action="{{route('client_payment')}}" method="post" class="creditly-card-form agileinfo_form">
+						@csrf
 						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
 							<div class="information-wrapper">
 								<div class="first-row">
@@ -169,7 +280,7 @@
 						</div>
 					</form>
 					<div class="checkout-right-basket">
-						<a href="payment.html">Make a Payment
+						<a href="{{route('client_payment')}}">Make a Payment
 							<span class="far fa-hand-point-right"></span>
 						</a>
 					</div>

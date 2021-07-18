@@ -49,6 +49,10 @@ input[type="submit"] {
     -ms-transition: 0.5s all;
 }
 
+.w3l-range li a:hover{
+    color: #F45C5D;
+}
+
 h1,
 h2,
 h3,

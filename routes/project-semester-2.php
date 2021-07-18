@@ -16,13 +16,13 @@ Route::group(['prefix' => '/client'], function () {
     Route::get('/single', [\App\Http\Controllers\Controller\ClientController::class,"single"])->name('client_single');
     
     //Checkout
-    Route::get('/checkout', [\App\Http\Controllers\Controller\ClientController::class,"checkout"])->name('client_checkout');
+    Route::post('/checkout', [\App\Http\Controllers\Controller\ClientController::class,"checkout"])->name('client_checkout');
 
     //Privacy
     Route::get('/privacy', [\App\Http\Controllers\Controller\ClientController::class,"privacy"])->name('client_privacy');
 
     //Payment
-    Route::get('/payment', [\App\Http\Controllers\Controller\ClientController::class,"payment"])->name('client_payment');
+    Route::post('/payment', [\App\Http\Controllers\Controller\ClientController::class,"payment"])->name('client_payment');
 
     //Terms
     Route::get('/terms', [\App\Http\Controllers\Controller\ClientController::class,"terms"])->name('client_terms');
