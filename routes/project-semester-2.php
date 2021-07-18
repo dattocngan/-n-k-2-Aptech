@@ -37,5 +37,5 @@ Route::group(['prefix' => '/client'], function () {
     Route::get('/contact', [\App\Http\Controllers\Controller\ClientController::class,"contact"])->name('client_contact');
      
     //About
-    Route::get('/abouttest', [\App\Http\Controllers\Controller\ClientController::class,"about"])->name('client_about');
+    Route::get('/abouttest3131', [\App\Http\Controllers\Controller\ClientController::class,"about"])->name('client_about');
 });
