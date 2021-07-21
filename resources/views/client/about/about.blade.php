@@ -1,7 +1,7 @@
-@extends('project.client.layout.master')
+@extends('client.layout.master')
 
 @section('list')
-	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+	<li class="nav-item  mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
 			<span class="sr-only">(current)</span>
 		</a>
@@ -100,9 +100,9 @@
 		</div>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link" href="">Tin tức</a>
+		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
-	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
+	<li class="nav-item active mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
 	</li>
 	<li class="nav-item">
@@ -125,116 +125,111 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Terms</li>
+					<li>About Us</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- terms -->
-	<div class="terms py-sm-5 py-4">
+	<!-- about -->
+	<div class="welcome py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>T</span>erms
-				<span>O</span>f
-				<span>U</span>se </h3>
+				<span>A</span>bout
+				<span>U</span>s</h3>
 			<!-- //tittle heading -->
-			<h3 class="w3-head w3-secong-head text-capitalize">please read these terms and conditions carefully.</h3>
-			<h6 class="my-md-4 my-3">Personal Information</h6>
-			<ol start="1" class="pl-sm-4 pl-3">
-				<li class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.it has a more-or-less normal distribution of
-					letters, as opposed Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
-				<li class="font-weight-light pl-sm-4 mb-2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-					eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-					quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores</li>
-				<li class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.it has a more-or-less normal distribution of
-					letters, as opposed Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
-			</ol>
-
-			<h6 class="my-md-4 my-3">License & Site access</h6>
-			<p class="font-weight-light pl-sm-4 mb-2">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-				ratione voluptatem sequi nesciunt..</p>
-			<p class="font-weight-light pl-sm-4 mb-2">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
-				modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. </p>
-			<p class="font-weight-light pl-sm-4 mb-2">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-				ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-			<h6 class="my-md-4 my-3">Eligibility :</h6>
-			<p class="font-weight-light pl-sm-4 mb-2">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-				middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary</p>
-			<p class="font-weight-light pl-sm-4 mb-2">first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence
-				structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition,
-				injected humour</p>
-
-			<h6 class="my-md-4 my-3">Account & Registration</h6>
-			<p class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil)
-				by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
-				first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-			<p class="font-weight-light pl-sm-4 mb-2">Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from
-				a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
-				Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"</p>
-			<p class="font-weight-light pl-sm-4 mb-2">This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem
-				ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-
-			<h6 class="my-md-4 my-3">Cancellation by Site / Customer</h6>
-			<p class="font-weight-light pl-sm-4 mb-2"> Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-				Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-			<p class="font-weight-light pl-sm-4 mb-2"> Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The
-				generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-
-			<h6 class="my-md-4 my-3">You Agree and Confirm</h6>
-			<p class="font-weight-light pl-sm-4 mb-2">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,
-				by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage
-				of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-				generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the
-				Internet.
-			</p>
-			<h6 class="my-md-4 my-3">Copyright & Trademark</h6>
-			<p class="font-weight-light pl-sm-4 mb-2"> you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on
-				the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It
-				uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures</p>
+			<div class="row">
+				<div class="col-lg-6 welcome-left">
+					<h3>Welcome</h3>
+					<h4 class="my-sm-3 my-2">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta erat sit amet eros sagittis, quis hendrerit
+						libero aliquam. Fusce semper augue ac dolor efficitur, a pretium metus pellentesque.</p>
+				</div>
+				<div class="col-lg-6 welcome-right-top mt-lg-0 mt-sm-5 mt-4">
+					<img src="{{ URL::asset('project/images/ab.jpg') }}" class="img-fluid" alt=" ">
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- //terms -->
+	<!-- //about -->
 
-	<!-- middle section -->
-	<div class="join-w3l1 py-sm-5 py-4">
+	<!-- testimonials -->
+	<div class="testimonials py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="join-agile text-left p-4">
-						<div class="row">
-							<div class="col-sm-7 offer-name">
-								<h6>Smooth, Rich & Loud Audio</h6>
-								<h4 class="mt-2 mb-3">Branded Headphones</h4>
-								<p>Sale up to 25% off all in store</p>
-							</div>
-							<div class="col-sm-5 offerimg-w3l">
-								<img src="{{ URL::asset('project/images/off1.png') }}" alt="" class="img-fluid">
-							</div>
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l text-center text-white mb-lg-5 mb-sm-4 mb-3">
+				<span>O</span>ur
+				<span>C</span>ustomers
+				<span>S</span>ays</h3>
+			<!-- tittle heading -->
+			<div class="row gallery-index">
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Tyson</h4>
+							<p>fames ac turpis</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6 mt-lg-0 mt-5">
-					<div class="join-agile text-left p-4">
-						<div class="row ">
-							<div class="col-sm-7 offer-name">
-								<h6>A Bigger Phone</h6>
-								<h4 class="mt-2 mb-3">Smart Phones 5</h4>
-								<p>Free shipping order over $100</p>
-							</div>
-							<div class="col-sm-5 offerimg-w3l">
-								<img src="{{ URL::asset('project/images/off2.png') }}" alt="" class="img-fluid">
-							</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Alejandra</h4>
+							<p>fames ac turpis</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left mt-sm-5 my-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Charles</h4>
+							<p>fames ac turpis</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 med-testi-grid">
+					<div class="med-testi test-tooltip rounded p-4">
+						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					</div>
+					<div class="row med-testi-left mt-5">
+						<div class="col-lg-2 col-3 w3ls-med-testi-img">
+							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
+						</div>
+						<div class="col-lg-10 col-9 med-testi-txt">
+							<h4 class="font-weight-bold mb-lg-1 mb-2">Jessie</h4>
+							<p>fames ac turpis</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- middle section -->
+	<!-- //testimonials -->
 @endsection
 
 @section('js')
@@ -367,3 +362,4 @@
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 @endsection
+	

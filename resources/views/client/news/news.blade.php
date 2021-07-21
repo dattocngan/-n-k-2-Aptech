@@ -1,4 +1,4 @@
-@extends('project.client.layout.master')
+@extends('client.layout.master')
 
 @section('list')
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
@@ -99,8 +99,8 @@
 			</div>
 		</div>
 	</li>
-	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link" href="">Tin tức</a>
+	<li class="nav-item active mr-lg-3 mb-lg-0 mb-2">
+		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
@@ -122,153 +122,64 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="{{route('client_single')}}">Home</a>
 						<i>|</i>
 					</li>
-					<li>Help</li>
+					<li>News</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- help -->
-	<div class="faqs-w3l py-sm-5 py-4">
+	<!-- news -->
+	<div class="ads-grid py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>H</span>elp
-				<span>P</span>age
+				<span>N</span>ews
 			</h3>
 			<!-- //tittle heading -->
-			<!-- help content -->
-			<div class="wthree-help mb-sm-5 mb-4">
-				<div class="agile-left-help">
-					<h3 class="w3-head">How Can We help you</h3>
-					<form action="#" method="get">
-						<textarea placeholder="Your Query" name="Message" required=""></textarea>
-						<input type="submit" value="Submit">
-					</form>
-					<h5 class="my-sm-4 my-3">OR</h5>
-					<a href="contact.html">Contact Us</a>
+			<div class="row">
+				<!-- product left -->
+				<div class="agileinfo-ads-display col-lg-12">
+					<div class="wrapper">
+						<div class="product-sec1 px-sm-4 px-3 pb-sm-2 pb-2 pt-sm-5 pt-3 mb-4">
+							<div class="row mb-4">
+								<div class="col-md-5">
+									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
+								</div>
+								<div class="col-md-7">
+                                    <h3>Đổi mới công nghệ</h3>
+                                </div>
+							</div>
+                            <hr>
+                            <div class="row mb-4">
+								<div class="col-md-5">
+									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
+								</div>
+								<div class="col-md-7 product-men">
+                                    <h3>Đổi mới công nghệ</h3>
+                                </div>
+							</div>
+                            <hr>
+                            <div class="row mb-4">
+								<div class="col-md-5 product-men">
+									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
+								</div>
+								<div class="col-md-7 product-men">
+                                    <h3>Đổi mới công nghệ</h3>
+                                </div>
+							</div>
+                            <hr>
+						</div>
+					</div>
 				</div>
+
 			</div>
-			<!-- //help content -->
-			<!-- Faqs -->
-			<h3 class="w3-head mb-2">Top 10 Frequently asked questions</h3>
-			<div class="faq-w3agile">
-				<ul class="faq pl-4">
-					<li class="item1 mt-3 pl-2">
-						<a href="#" title="click here">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor vehicula ipsum nec ?</a>
-						<ul>
-							<li class="subitem1">
-								<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.
-									At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-									corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item2 mt-3 pl-2">
-						<a href="#" title="click here">The standard Lorem Ipsum passage Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices ?
-						</a>
-						<ul>
-							<li class="subitem1">
-								<p> Tincidunt ut laoreet dolore At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-									nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus
-									qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-									cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item3 mt-3 pl-2">
-						<a href="#" title="click here">Consectetuer adipiscing elit Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices?</a>
-						<ul>
-							<li class="subitem1">
-								<p>Dincidunt ut laoreet dolore At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-									nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus
-									qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-									cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item4 mt-3 pl-2">
-						<a href="#" title="click here">Sed diam nonummy nibh euismod Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices?</a>
-						<ul>
-							<li class="subitem1">
-								<p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod consectetuer
-									adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-									voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item5 mt-3 pl-2">
-						<a href="#" title="click here">Euismod tincidunt laoreet Etiam faucibus viverra libero vel efficitur ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod consectetuer
-									adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-									voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item6 mt-3 pl-2">
-						<a href="#" title="click here">Voluptas sit aspernatur aut Ut semper nisl ut laoreet ultrices ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod consectetuer
-									adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-									voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item7 mt-3 pl-2">
-						<a href="#" title="click here">Donec ut quam ligula feugiat Ut semper nisl ut laoreet ultrices ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod consectetuer
-									adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-									voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item8 mt-3 pl-2">
-						<a href="#" title="click here">The standard Lorem Ipsum Ut semper nisl ut laoreet ultrices passage ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>Lorem ipsum dolor sit amet At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-									nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus
-									qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-									cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item9 mt-3 pl-2">
-						<a href="#" title="click here">Consectetuer adipiscing Ut semper nisl ut laoreet ultrices elit ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>Lorem ipsum dolor sit amet At vero eos et Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-									nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod accusamus et iusto odio dignissimos ducimus
-									qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-									cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-					<li class="item10 mt-3 pl-2">
-						<a href="#" title="click here">Sed diam nonummy Ut semper nisl ut laoreet ultrices nibh euismod ?</a>
-						<ul>
-							<li class="subitem1">
-								<p>Consectetuer adipiscing elit, sed diam nonummy nibh euismod consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-									et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<!-- //Faqs -->
 		</div>
 	</div>
-	<!-- //help -->
+    <!-- //news -->
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
@@ -398,7 +309,7 @@
 	<script src="{{ URL::asset('project/js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
-	<!-- start-smooth-scrolling -->
+	{{-- <!-- start-smooth-scrolling -->
 	<script src="{{ URL::asset('project/js/move-top.js') }}"></script>
 	<script src="{{ URL::asset('project/js/easing.js') }}"></script>
 	<script>
@@ -412,7 +323,7 @@
 			});
 		});
 	</script>
-	<!-- //end-smooth-scrolling -->
+	<!-- //end-smooth-scrolling --> --}}
 
 	<!-- smooth-scrolling-of-move-up -->
 	<script>
