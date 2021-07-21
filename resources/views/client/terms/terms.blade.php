@@ -1,4 +1,4 @@
-@extends('project.client.layout.master')
+@extends('client.layout.master')
 
 @section('list')
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
@@ -100,12 +100,12 @@
 		</div>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link" href="">Tin tức</a>
+		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
 	</li>
-	<li class="nav-item active">
+	<li class="nav-item">
 		<a class="nav-link" href="{{ route('client_contact') }}">Liên hệ ngay</a>
 	</li>
 @endsection
@@ -125,93 +125,79 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Contact Us</li>
+					<li>Terms</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- contact -->
-	<div class="contact py-sm-5 py-4">
+	<!-- terms -->
+	<div class="terms py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>C</span>ontact
-				<span>U</span>s
-			</h3>
+				<span>T</span>erms
+				<span>O</span>f
+				<span>U</span>se </h3>
 			<!-- //tittle heading -->
-			<div class="row contact-grids agile-1 mb-5">
-				<div class="col-sm-4 contact-grid agileinfo-6 mt-sm-0 mt-2">
-					<div class="contact-grid1 text-center">
-						<div class="con-ic">
-							<i class="fas fa-map-marker-alt rounded-circle"></i>
-						</div>
-						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Address</h4>
-						<p>1PO Box 8568954 Melbourne
-							<label>Australia.</label>
-						</p>
-					</div>
-				</div>
-				<div class="col-sm-4 contact-grid agileinfo-6 my-sm-0 my-4">
-					<div class="contact-grid1 text-center">
-						<div class="con-ic">
-							<i class="fas fa-phone rounded-circle"></i>
-						</div>
-						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Call Us</h4>
-						<p>+(0121) 121 121
-							<label>+(0121) 121 122</label>
-						</p>
-					</div>
-				</div>
-				<div class="col-sm-4 contact-grid agileinfo-6">
-					<div class="contact-grid1 text-center">
-						<div class="con-ic">
-							<i class="fas fa-envelope-open rounded-circle"></i>
-						</div>
-						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Email</h4>
-						<p>
-							<a href="mailto:info@example.com">info@example1.com</a>
-							<label>
-								<a href="mailto:info@example.com">info@example2.com</a>
-							</label>
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- form -->
-			<form action="#" method="post">
-				<div class="contact-grids1 w3agile-6">
-					<div class="row">
-						<div class="col-md-6 col-sm-6 contact-form1 form-group">
-							<label class="col-form-label">Name</label>
-							<input type="text" class="form-control" name="Name" placeholder="" required="">
-						</div>
-						<div class="col-md-6 col-sm-6 contact-form1 form-group">
-							<label class="col-form-label">E-mail</label>
-							<input type="email" class="form-control" name="Email" placeholder="" required="">
-						</div>
-					</div>
-					<div class="contact-me animated wow slideInUp form-group">
-						<label class="col-form-label">Message</label>
-						<textarea name="Message" class="form-control" placeholder="" required=""> </textarea>
-					</div>
-					<div class="contact-form">
-						<input type="submit" value="Submit">
-					</div>
-				</div>
-			</form>
-			<!-- //form -->
+			<h3 class="w3-head w3-secong-head text-capitalize">please read these terms and conditions carefully.</h3>
+			<h6 class="my-md-4 my-3">Personal Information</h6>
+			<ol start="1" class="pl-sm-4 pl-3">
+				<li class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.it has a more-or-less normal distribution of
+					letters, as opposed Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
+				<li class="font-weight-light pl-sm-4 mb-2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+					eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+					quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores</li>
+				<li class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.it has a more-or-less normal distribution of
+					letters, as opposed Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</li>
+			</ol>
+
+			<h6 class="my-md-4 my-3">License & Site access</h6>
+			<p class="font-weight-light pl-sm-4 mb-2">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+				ratione voluptatem sequi nesciunt..</p>
+			<p class="font-weight-light pl-sm-4 mb-2">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius
+				modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. </p>
+			<p class="font-weight-light pl-sm-4 mb-2">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+				ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+			<h6 class="my-md-4 my-3">Eligibility :</h6>
+			<p class="font-weight-light pl-sm-4 mb-2">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
+				middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary</p>
+			<p class="font-weight-light pl-sm-4 mb-2">first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence
+				structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition,
+				injected humour</p>
+
+			<h6 class="my-md-4 my-3">Account & Registration</h6>
+			<p class="font-weight-light pl-sm-4 mb-2">Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil)
+				by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
+				first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+			<p class="font-weight-light pl-sm-4 mb-2">Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from
+				a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+				Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"</p>
+			<p class="font-weight-light pl-sm-4 mb-2">This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem
+				ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+
+			<h6 class="my-md-4 my-3">Cancellation by Site / Customer</h6>
+			<p class="font-weight-light pl-sm-4 mb-2"> Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+				Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+			<p class="font-weight-light pl-sm-4 mb-2"> Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The
+				generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+
+			<h6 class="my-md-4 my-3">You Agree and Confirm</h6>
+			<p class="font-weight-light pl-sm-4 mb-2">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,
+				by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage
+				of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum
+				generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the
+				Internet.
+			</p>
+			<h6 class="my-md-4 my-3">Copyright & Trademark</h6>
+			<p class="font-weight-light pl-sm-4 mb-2"> you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on
+				the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It
+				uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures</p>
 		</div>
 	</div>
-	<!-- //contact -->
-
-	<!-- map -->
-	<div class="map mt-sm-0 mt-4">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805196.5077734194!2d144.49270863101745!3d-37.97015423820711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne+VIC%2C+Australia!5e0!3m2!1sen!2sin!4v1474020956974"
-		    allowfullscreen></iframe>
-	</div>
-	<!-- //map -->
+	<!-- //terms -->
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">

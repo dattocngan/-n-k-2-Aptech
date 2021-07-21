@@ -1,7 +1,7 @@
-@extends('project.client.layout.master')
+@extends('client.layout.master')
 
 @section('list')
-	<li class="nav-item  mr-lg-3 mb-lg-0 mb-2">
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
 			<span class="sr-only">(current)</span>
 		</a>
@@ -100,12 +100,12 @@
 		</div>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link" href="">Tin tức</a>
+		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
-	<li class="nav-item active mr-lg-3 mb-lg-0 mb-2">
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>
 	</li>
-	<li class="nav-item">
+	<li class="nav-item active">
 		<a class="nav-link" href="{{ route('client_contact') }}">Liên hệ ngay</a>
 	</li>
 @endsection
@@ -125,111 +125,130 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>About Us</li>
+					<li>Contact Us</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
 
-	<!-- about -->
-	<div class="welcome py-sm-5 py-4">
+	<!-- contact -->
+	<div class="contact py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>A</span>bout
-				<span>U</span>s</h3>
+				<span>C</span>ontact
+				<span>U</span>s
+			</h3>
 			<!-- //tittle heading -->
-			<div class="row">
-				<div class="col-lg-6 welcome-left">
-					<h3>Welcome</h3>
-					<h4 class="my-sm-3 my-2">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta erat sit amet eros sagittis, quis hendrerit
-						libero aliquam. Fusce semper augue ac dolor efficitur, a pretium metus pellentesque.</p>
+			<div class="row contact-grids agile-1 mb-5">
+				<div class="col-sm-4 contact-grid agileinfo-6 mt-sm-0 mt-2">
+					<div class="contact-grid1 text-center">
+						<div class="con-ic">
+							<i class="fas fa-map-marker-alt rounded-circle"></i>
+						</div>
+						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Address</h4>
+						<p>1PO Box 8568954 Melbourne
+							<label>Australia.</label>
+						</p>
+					</div>
 				</div>
-				<div class="col-lg-6 welcome-right-top mt-lg-0 mt-sm-5 mt-4">
-					<img src="{{ URL::asset('project/images/ab.jpg') }}" class="img-fluid" alt=" ">
+				<div class="col-sm-4 contact-grid agileinfo-6 my-sm-0 my-4">
+					<div class="contact-grid1 text-center">
+						<div class="con-ic">
+							<i class="fas fa-phone rounded-circle"></i>
+						</div>
+						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Call Us</h4>
+						<p>+(0121) 121 121
+							<label>+(0121) 121 122</label>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-4 contact-grid agileinfo-6">
+					<div class="contact-grid1 text-center">
+						<div class="con-ic">
+							<i class="fas fa-envelope-open rounded-circle"></i>
+						</div>
+						<h4 class="font-weight-bold mt-sm-4 mt-3 mb-3">Email</h4>
+						<p>
+							<a href="mailto:info@example.com">info@example1.com</a>
+							<label>
+								<a href="mailto:info@example.com">info@example2.com</a>
+							</label>
+						</p>
+					</div>
 				</div>
 			</div>
+			<!-- form -->
+			<form action="#" method="post">
+				<div class="contact-grids1 w3agile-6">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 contact-form1 form-group">
+							<label class="col-form-label">Name</label>
+							<input type="text" class="form-control" name="Name" placeholder="" required="">
+						</div>
+						<div class="col-md-6 col-sm-6 contact-form1 form-group">
+							<label class="col-form-label">E-mail</label>
+							<input type="email" class="form-control" name="Email" placeholder="" required="">
+						</div>
+					</div>
+					<div class="contact-me animated wow slideInUp form-group">
+						<label class="col-form-label">Message</label>
+						<textarea name="Message" class="form-control" placeholder="" required=""> </textarea>
+					</div>
+					<div class="contact-form">
+						<input type="submit" value="Submit">
+					</div>
+				</div>
+			</form>
+			<!-- //form -->
 		</div>
 	</div>
-	<!-- //about -->
+	<!-- //contact -->
 
-	<!-- testimonials -->
-	<div class="testimonials py-sm-5 py-4">
+	<!-- map -->
+	<div class="map mt-sm-0 mt-4">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805196.5077734194!2d144.49270863101745!3d-37.97015423820711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne+VIC%2C+Australia!5e0!3m2!1sen!2sin!4v1474020956974"
+		    allowfullscreen></iframe>
+	</div>
+	<!-- //map -->
+
+	<!-- middle section -->
+	<div class="join-w3l1 py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
-			<!-- tittle heading -->
-			<h3 class="tittle-w3l text-center text-white mb-lg-5 mb-sm-4 mb-3">
-				<span>O</span>ur
-				<span>C</span>ustomers
-				<span>S</span>ays</h3>
-			<!-- tittle heading -->
-			<div class="row gallery-index">
-				<div class="col-sm-6 med-testi-grid">
-					<div class="med-testi test-tooltip rounded p-4">
-						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="row med-testi-left my-5">
-						<div class="col-lg-2 col-3 w3ls-med-testi-img">
-							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
-						</div>
-						<div class="col-lg-10 col-9 med-testi-txt">
-							<h4 class="font-weight-bold mb-lg-1 mb-2">Tyson</h4>
-							<p>fames ac turpis</p>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="join-agile text-left p-4">
+						<div class="row">
+							<div class="col-sm-7 offer-name">
+								<h6>Smooth, Rich & Loud Audio</h6>
+								<h4 class="mt-2 mb-3">Branded Headphones</h4>
+								<p>Sale up to 25% off all in store</p>
+							</div>
+							<div class="col-sm-5 offerimg-w3l">
+								<img src="{{ URL::asset('project/images/off1.png') }}" alt="" class="img-fluid">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 med-testi-grid">
-					<div class="med-testi test-tooltip rounded p-4">
-						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="row med-testi-left my-5">
-						<div class="col-lg-2 col-3 w3ls-med-testi-img">
-							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
-						</div>
-						<div class="col-lg-10 col-9 med-testi-txt">
-							<h4 class="font-weight-bold mb-lg-1 mb-2">Alejandra</h4>
-							<p>fames ac turpis</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 med-testi-grid">
-					<div class="med-testi test-tooltip rounded p-4">
-						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="row med-testi-left mt-sm-5 my-5">
-						<div class="col-lg-2 col-3 w3ls-med-testi-img">
-							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
-						</div>
-						<div class="col-lg-10 col-9 med-testi-txt">
-							<h4 class="font-weight-bold mb-lg-1 mb-2">Charles</h4>
-							<p>fames ac turpis</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 med-testi-grid">
-					<div class="med-testi test-tooltip rounded p-4">
-						<p>"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="row med-testi-left mt-5">
-						<div class="col-lg-2 col-3 w3ls-med-testi-img">
-							<img src="{{ URL::asset('project/images/user.jpg') }}" alt=" " class="img-fluid rounded-circle" />
-						</div>
-						<div class="col-lg-10 col-9 med-testi-txt">
-							<h4 class="font-weight-bold mb-lg-1 mb-2">Jessie</h4>
-							<p>fames ac turpis</p>
+				<div class="col-lg-6 mt-lg-0 mt-5">
+					<div class="join-agile text-left p-4">
+						<div class="row ">
+							<div class="col-sm-7 offer-name">
+								<h6>A Bigger Phone</h6>
+								<h4 class="mt-2 mb-3">Smart Phones 5</h4>
+								<p>Free shipping order over $100</p>
+							</div>
+							<div class="col-sm-5 offerimg-w3l">
+								<img src="{{ URL::asset('project/images/off2.png') }}" alt="" class="img-fluid">
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- //testimonials -->
+	<!-- middle section -->
 @endsection
 
 @section('js')
@@ -362,4 +381,3 @@
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 @endsection
-	

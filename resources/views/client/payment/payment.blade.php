@@ -1,4 +1,4 @@
-@extends('project.client.layout.master')
+@extends('client.layout.master')
 
 @section('list')
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
@@ -100,7 +100,7 @@
 		</div>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link" href="">Tin tức</a>
+		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_about') }}">Về chúng tôi</a>

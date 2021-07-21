@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 //Test
 Route::group(['prefix' => '/admin'], function () {
 	Route::get('/test', function () {
