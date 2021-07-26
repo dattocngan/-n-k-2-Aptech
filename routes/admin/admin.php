@@ -2,7 +2,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NewsController;
 
+
+//Category
 Route::group(['prefix' => 'admin'], function () {
 	Route::group(['prefix' => 'category'], function () {
 
@@ -18,3 +21,21 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::post('/delete', [CategoryController::class , 'deleteCategory'])->name('category_delete');
 	});
 });
+
+
+// News
+Route::group(['prefix' => 'admin'], function () {
+	Route::group(['prefix' => 'news'], function () {
+		
+
+		Route::get('/create', [NewsController::class , 'createNews'])->name('news_create');
+
+		Route::post('/sendfile', [NewsController::class ,'sendFile'])->name('news_sendfile');
+
+		Route::post('/store', [NewsController::class , 'storeNews'])->name('news_store');
+
+	});
+});
+
+
+
