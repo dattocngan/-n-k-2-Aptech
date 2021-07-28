@@ -34,7 +34,7 @@ class CategoryController extends Controller
     	// 	]);
 
 		$validatedData = $request->validate([
-    			'name' => 'required|unique:category|min:3|max:150'
+    		'name' => 'required|unique:category|min:3|max:150'
 			
 		], [
 			'name.required' => 'Bạn chưa nhập tên danh mục',
