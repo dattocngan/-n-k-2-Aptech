@@ -5,7 +5,9 @@
 	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | About Us :: w3layouts</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8" />
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 	<meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
 	/>
 	<script>
@@ -132,8 +134,14 @@
 					<div class="row">
 						<!-- search -->
 						<div class="col-10 agileits_search">
-							<form class="form-inline" action="#" method="post">
-								<input class="form-control mr-sm-2" type="search" placeholder="Nhập sản phẩm muốn tìm..." aria-label="Search" required>
+							<form class="form-inline" action="{{route('client_product')}}" method="get">
+								@php
+									if(!empty($idCategory)){
+										echo '<input hidden name="idCategory" value="'.$idCategory.'" type="text">';
+									}
+								@endphp
+								{{-- <input hidden name="idCategory" value="{{$idCategory}}" type="text"> --}}
+								<input class="form-control mr-sm-2" name="s" type="search" placeholder="Nhập sản phẩm muốn tìm..." aria-label="Search">
 								<button class="btn my-2 my-sm-0" type="submit">Search</button>
 							</form>
 						</div>
