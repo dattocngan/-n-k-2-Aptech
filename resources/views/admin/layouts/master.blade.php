@@ -27,6 +27,11 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('/template/admin/AdminLTE3/plugins/summernote/summernote-bs4.min.css')}}">
 
+  <style type="text/css">
+      body{
+      font-family: times new roman, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+  </style>
 
 
   @yield('css')

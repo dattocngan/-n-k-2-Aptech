@@ -1,4 +1,20 @@
 @extends('admin/layouts/master')
+@section('css')
+	<style type="text/css">
+    .card-body thead th {
+        text-align: center!important;
+    }
+
+    .card-body thead th {
+        padding: 0px;
+    }
+
+    card-body{
+    	font-family: "Times New Roman"!important;
+    } 
+
+  </style>
+@stop
 
 @section('content')
 <div class="content-wrapper">
@@ -29,7 +45,7 @@
 							<table id="example2" class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										<th>STT</th>
+										<th style="padding: 0px">STT</th>
 										<th>Tên Danh Mục Sản Phẩm</th>
 										<th colspan="2">Sửa Hoặc Xóa Danh Mục Sản Phẩm</th>
 									</tr>
@@ -90,7 +106,7 @@
 			'id': id,
 			'_token': '{{csrf_token()}}'
 		} , function(data){
-			alert("Xóa danh mục sản phẩm thành côn");
+			alert("Xóa danh mục sản phẩm thành công");
 			location.reload();
 		})
 	}

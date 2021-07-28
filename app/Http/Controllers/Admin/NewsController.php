@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\News;
-
+use DB;
 class NewsController extends Controller
-{
+{	
+
+	//Đổ ra Form Tạo Tin Tức mới
 	public function createNews(Request $request) {
 		return view('admin.news.create');
 	}
 
+
+	//AJAX- Upoad ảnh vào folder khi thả ảnh vào khung summernote, trả về đường link ảnh
 	public function sendFile(Request $request) {
 
 		// if ($_FILES['file']['name']) {
@@ -59,7 +63,7 @@ class NewsController extends Controller
   		}
 	}
 
-
+	//Lưu Tin tức mới vào Database
 	public function storeNews(Request $request) {
 		$validatedNews = $request->validate([
     		'title' => 'required|unique:news|min:5',
@@ -104,7 +108,7 @@ class NewsController extends Controller
   		}
 	  		$news = new News;
 			$news->title = $request->title;
-			$news->thumnail = 'project/images/news/details'.$thumnail_name;
+			$news->thumnail = '/project/images/news/thumnails/'.$thumnail_name;
 			$news->short_content = $request->short_content;
 			$news->content = $request->content;
 			$news->created_at = date('Y-m-d H:i:s');
@@ -116,8 +120,97 @@ class NewsController extends Controller
 			]);
 		}
 
+		//Đổ danh sách tin tức từ DataBase ra table dữ liệu
+		public function indexNews(Request $request){
+			$newsList = News::where('is_deleted', 0)->paginate(10);
+
+			return view('admin.news.index')->with([
+				'newsList' => $newsList,
+				'count'=> 0,
+			]);
+		}
 
 
+		//Đổ ra Form sửa tin tức
+		public function editNews(Request $request, $id){
+			$news = News::find($id);
+			return view('admin.news.edit')->with([
+				'news' => $news,
+			]);
+		}
 
+
+		//Lưu nội dung tin tức trong Form sửa vào database
+		public function updateNews(Request $request, $id){
+			$validatedNews = $request->validate([
+    		'title' => 'required|min:5',
+    		'short_content' => 'required|min:20',
+    		'content' => 'required|min:100',
+		], [
+			'title.required' => 'Bạn chưa nhập tiêu đề bài viết',
+			'title.min' => 'Tiêu đề bài viết phải tối thiểu có 5 ký tự',
+
+			'short_content.required' => 'Bạn chưa nhập tóm tắt nội dung bài viết',
+			'short_content.min' => 'Nội dung tóm tắt bài viết bài viết phải tối thiểu có 20 ký tự',
+
+			'content.required' => 'Bạn chưa nhập nội dung bài viết',
+			'content.min' => 'Nội dung bài viết bài viết phải tối thiểu có 100 ký tự',
+		]);
+
+			$news = News::find($id);
+			$news->title = $request->title;
+			
+			$news->short_content = $request->short_content;
+			$news->content = $request->content;
+			$news->created_at = date('Y-m-d H:i:s');
+			$news->updated_at = date('Y-m-d H:i:s');
+			
+
+		if ($request->hasFile('thumnail')) {
+			$thumnail = $request->file('thumnail');
+
+			$type = $thumnail->getClientOriginalExtension();
+
+			if ($type == 'jpg' || $type == 'png' || $type == 'jpeg') {
+
+	            $thumnail_name = time().'_'. $thumnail->getClientOriginalName(); 
+
+	            while (file_exists("project/images/news/thumnails/".$thumnail_name)) {
+					$thumnail_name = time().'_'.$thumnail->getClientOriginalName();
+				}
+
+	      		$thumnail->move('project/images/news/thumnails/',$thumnail_name); 
+
+				// if(file_exists($news->thumnail)){
+				//    unlink($news->thumnail);
+				// }
+
+	          	$news->thumnail = '/project/images/news/thumnails/'.$thumnail_name;
+  			}
+			
+		}
+				$news->save();
+
+				return redirect()->route('news_edit',['id'=>$news->id]) -> with([
+					'message' => "Đã sửa bài viết thành công",
+			]);
+		}
+
+
+		public function deleteNews(Request $request){
+			$id = $request->id;
+			$news = News::find($id);
+			$news->is_deleted = 1;
+			$news->save();
+
+			// $newsList = News::where('is_deleted', 0)->paginate(10);
+			$newsList = $users = DB::table('news')-> where('is_deleted', 0) -> get();
+			$res = [
+          			'newsList'=> $newsList,
+          			'message' => 'Đã xóa danh mục sản phẩm thành công',
+          	 ];
+
+			return json_encode($res);
+		}
 	}
 

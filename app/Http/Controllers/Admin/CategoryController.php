@@ -22,17 +22,6 @@ class CategoryController extends Controller
 	}
 
 	public function storeCategory(Request $request) {
-    	// $this->validate($request,
-    	// 	[
-    	// 		'name' => 'required|unique:category|min:3|max:150'
-    	// 	],
-    	// 	[
-    	// 		'name.required' => 'Bạn chưa nhập tên danh mục',
-    	// 		'name.unique' => 'Tên danh mục đã tồn tại',
-    	// 		'name.min' => 'Tên danh mục phải tối thiểu có 3 ký tự',
-    	// 		'name.max' => 'Tên danh mục phải tối đa có 150 ký tự',
-    	// 	]);
-
 		$validatedData = $request->validate([
     		'name' => 'required|unique:category|min:3|max:150'
 			

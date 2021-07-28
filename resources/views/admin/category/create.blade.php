@@ -39,7 +39,7 @@
 							<label for="exampleInputEmail1">Tên Danh Mục</label>
 							<input name="name" type="text" class="form-control" id="name" placeholder="Nhập tên danh mục">
 						</div>
-						<button type="submit" class="btn btn-primary">Lưu</button>
+						<button style="width: 100%" type="submit" class="btn btn-primary">Lưu</button>
 					</form>
 				</div>
 			</div>
