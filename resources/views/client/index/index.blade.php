@@ -6,99 +6,34 @@
 			<span class="sr-only">(current)</span>
 		</a>
 	</li>
+	
+	{{-- Danh sách Category --}}
+	@foreach ($categoryP as $parent)
 	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Điện thoại
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product', ['idCategory'=>$parent->id]) }}">
+			{{ $parent -> name }}
 		</a>
 		<div class="dropdown-menu">
 			<div class="agile_inner_drop_nav_info p-4">
 				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Iphone</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Oppo</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Vinsmart</a>
-							</li>
-						</ul>
-					</div>
+					@foreach ($categoryC as $child)
+						@if ($child->parent_id == $parent->id )
+						<div class="col-sm-6 multi-gd-img">
+							<ul class="multi-column-dropdown">
+								<li>
+									<a href="{{ route('client_product', ['idCategory'=>$child->id]) }}">{{$child->name}}</a>
+								</li>
+							</ul>
+						</div>
+						@endif
+					@endforeach
 				</div>
 			</div>
 		</div>
 	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Smart Watch
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Apple</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Huawei</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Realme</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Laptop
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Dell</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">HP</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Asus</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Mac</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
+	@endforeach
+	{{-- //Danh sách Category --}}
+
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
@@ -205,382 +140,85 @@
 				<!-- product left -->
 				<div class="agileinfo-ads-display col-lg-9">
 					<div class="wrapper">
-						<!-- first section -->
+						{{-- Chạy qua từng thằng bố to nhất --}}
+						@foreach ($categoryP as $parent)
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Điện thoại</h3>
+							<h3 class="heading-tittle text-center font-italic">{{ $parent -> name}}</h3>
 							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m1.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
+								{{-- Chạy qua từng sản phẩm đã gán leftjoin lấy parent_id --}}
+								@php
+									$check = 0;
+								@endphp
+								@foreach ($productList as $product)
+									@if ($product->parent_id == $parent->id)
+										<div class="col-md-4 product-men mt-5">
+											<div class="men-pro-item simpleCart_shelfItem">
+												<div class="men-thumb-item text-center">
+													<img src="{{ URL::asset($product->image) }}" alt="">
+													<div class="men-cart-pro">
+														<div class="inner-men-cart-pro">
+															<a href="{{ route('client_single',['idproduct'=>$product->id]) }}" class="link-product-add-cart">Chi tiết</a>
+														</div>
+													</div>
+												</div>
+												<div class="item-info-product text-center border-top mt-4">
+													<h4 class="pt-1">
+														<a href="{{ route('client_single') }}">{{$product->name}}</a>
+													</h4>
+													<div class="info-product-price my-2">
+														<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
+														<del>{{number_format($product->price, 0, '', '.')}}</del>
+													</div>
+													@php
+														if (time() - strtotime($product->created_at) < 5*60*60 ) {
+															echo '<span class="product-new-top">New</span>';
+														}
+													@endphp
+													<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+														<form action="{{route('client_single')}}" method="get">
+															<fieldset>
+																<input hidden name="productId" value="{{$product->id}}" type="text">
+																<input type="submit" value="Thêm giỏ hàng" class="button btn" />
+															</fieldset>
+														</form>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Samsung Galaxy J7</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$200.00</span>
-												<del>$280.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Samsung Galaxy J7" />
-														<input type="hidden" name="amount" value="200.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">OPPO A37f</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$250.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="OPPO A37f" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m3.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Apple iPhone X</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$280.00</span>
-												<del>$300.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Apple iPhone X" />
-														<input type="hidden" name="amount" value="280.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
+										@php
+											$check++;
+										@endphp
+									@endif
+									@if ($check == 3)
+										@break
+									@endif
+								@endforeach
+								@php
+									$count++;
+								@endphp
+							</div>
+						</div>
+						{{-- Nếu đến bảng thứ 2 thì in ra thêm banner --}}
+						@if ($count == 2)
+							<div class="product-sec1 product-sec2 px-sm-5 px-3 mb-4">
+								<div class="row">
+									<h3 class="col-md-4 effect-bg">Summer Carnival</h3>
+									<p class="w3l-nut-middle">Get Extra 10% Off</p>
+									<div class="col-md-8 bg-right-nut">
+										<img src="{{ URL::asset('project/images/image1.png') }}" alt="">
 									</div>
 								</div>
 							</div>
-						</div>
+						@endif
+						@endforeach
+						
 						<!-- //first section -->
 						<!-- second section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Smart Watch</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m4.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Sony 80 cm (32 inches)</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$320.00</span>
-												<del>$340.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Sony 80 cm (32 inches)" />
-														<input type="hidden" name="amount" value="320.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m5.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
 
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Artis Speaker</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$349.00</span>
-												<del>$399.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Artis Speaker" />
-														<input type="hidden" name="amount" value="349.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m6.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Philips Speakers</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$249.00</span>
-												<del>$300.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Philips Speakers" />
-														<input type="hidden" name="amount" value="249.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 						<!-- //second section -->
 						<!-- third section -->
-						<div class="product-sec1 product-sec2 px-sm-5 px-3">
-							<div class="row">
-								<h3 class="col-md-4 effect-bg">Summer Carnival</h3>
-								<p class="w3l-nut-middle">Get Extra 10% Off</p>
-								<div class="col-md-8 bg-right-nut">
-									<img src="{{ URL::asset('project/images/image1.png') }}" alt="">
-								</div>
-							</div>
-						</div>
+					
 						<!-- //third section -->
-						<!-- fourth section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
-							<h3 class="heading-tittle text-center font-italic">Laptop</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m7.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Whirlpool 245</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$280.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Whirlpool 245" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m8.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">BPL Washing Machine</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$180.00</span>
-												<del>$200.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="BPL Washing Machine" />
-														<input type="hidden" name="amount" value="180.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m9.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Microwave Oven</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$199.00</span>
-												<del>$299.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Microwave Oven" />
-														<input type="hidden" name="amount" value="199.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- //fourth section -->
 					</div>
 				</div>
 				<!-- //product left -->
@@ -590,8 +228,13 @@
 					<div class="side-bar p-sm-4 p-3">
 						<div class="search-hotel border-bottom py-2">
 							<h3 class="agileits-sear-head mb-3">Tìm kiếm</h3>
-							<form action="#" method="post">
-								<input type="search" placeholder="Tên sản phẩm..." name="search" required="">
+							<form action="{{route('client_product')}}" method="get">
+								@php
+									if(!empty($idCategory)){
+										echo '<input hidden name="idCategory" value="'.$idCategory.'" type="text">';
+									}
+								@endphp
+								<input type="search" placeholder="Tên sản phẩm..." name="s">
 								<input type="submit" value=" ">
 							</form>
 						</div>
@@ -601,22 +244,22 @@
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="{{ route('client_product') }}">Dưới 1.000.000 VNĐ</a>
+										<a href="{{ route('client_product', ['price_level'=>1,'idCategory'=>$idCategory]) }}">Dưới 1.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product') }}">1.000.000 - 5.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>2,'idCategory'=>$idCategory]) }}">1.000.000 - 5.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product') }}">5.000.000 - 10.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>3,'idCategory'=>$idCategory]) }}">5.000.000 - 10.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product') }}">10.000.000 - 20.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>4,'idCategory'=>$idCategory]) }}">10.000.000 - 20.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product') }}">20.000.000 - 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>5,'idCategory'=>$idCategory]) }}">20.000.000 - 30.000.000 VNĐ</a>
 									</li>
 									<li class="mt-1">
-										<a href="{{ route('client_product') }}">Trên 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>6,'idCategory'=>$idCategory]) }}">Trên 30.000.000 VNĐ</a>
 									</li>
 								</ul>
 							</div>
@@ -624,20 +267,7 @@
 						<!-- //price -->
 						
 						
-						<!-- categories -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Danh mục</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Điện thoại</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Smart Watch</span>
-								</li>
-							</ul>
-						</div>
+	
 						<!-- //electronics -->
 						
 						<!-- best seller -->
@@ -645,33 +275,24 @@
 							<h3 class="agileits-sear-head mb-3">Sản phẩm bán chạy</h3>
 							<div class="box-scroll">
 								<div class="scroll">
-									<div class="row">
+									@php
+										$count = 0;
+									@endphp
+									@foreach ($productList as $product)
+									<div class="row my-5">
 										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k1.jpg') }}" alt="" class="img-fluid">
+											<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,990.00</a>
+											<a href="{{ route('client_single') }}">{{$product-> name}}</a>
+											<a href="{{ route('client_single') }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
 										</div>
 									</div>
-									<div class="row my-4">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k2.jpg') }}" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,499.00</a>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k3.jpg') }}" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$1,199.00 </a>
-										</div>
-									</div>
+									@php
+										$count++;
+										if($count == 3) break;
+									@endphp
+									@endforeach
 								</div>
 							</div>
 						</div>
@@ -692,8 +313,8 @@
 			<h3 class="tittle-w3l text-center col-lg-9 mb-lg-5 mb-sm-4 mb-3">
 				<span>S</span>ản
 				<span>P</span>hẩm
-				<span>B</span>án
-				<span>C</span>hạy
+				<span>M</span>ới
+				<span>N</span>hất
 			</h3>
 			<!-- //tittle heading -->
 			<div class="row">
@@ -701,381 +322,53 @@
 				<div class="agileinfo-ads-display col-lg-9">
 					<div class="wrapper">
 						<!-- first section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Điện thoại</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m1.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
+						@foreach ($categoryP as $parent)
+							<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+								<h3 class="heading-tittle text-center font-italic">{{$parent->name}}</h3>
+								<div class="row">
+									@php
+										$count = 0;
+									@endphp
+									@foreach ($productListTime as $item)
+										@if($item->parent_id == $parent->id)
+											<div class="col-md-4 product-men mt-5">
+												<div class="men-pro-item simpleCart_shelfItem">
+													<div class="men-thumb-item text-center">
+														<img src="{{ URL::asset($item->image) }}" alt="">
+														<div class="men-cart-pro">
+															<div class="inner-men-cart-pro">
+																<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
+															</div>
+														</div>
+														<span class="product-new-top">New</span>
+													</div>
+													<div class="item-info-product text-center border-top mt-4">
+														<h4 class="pt-1">
+															<a href="{{ route('client_single') }}">{{$item->name}}</a>
+														</h4>
+														<div class="info-product-price my-2">
+															<span class="item_price">{{number_format($item->price_discount, 0, '', '.')}} VNĐ</span>
+															<del>{{number_format($item->price, 0, '', '.')}}</del>
+														</div>
+														<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+															<form action="#" method="post">
+																<fieldset>
+																	<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
+																</fieldset>
+															</form>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Samsung Galaxy J7</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$200.00</span>
-												<del>$280.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Samsung Galaxy J7" />
-														<input type="hidden" name="amount" value="200.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m2.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">OPPO A37f</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$250.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="OPPO A37f" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m3.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Apple iPhone X</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$280.00</span>
-												<del>$300.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Apple iPhone X" />
-														<input type="hidden" name="amount" value="280.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
+											@php
+												$count++;
+												if($count == 3) break;
+											@endphp
+										@endif
+									@endforeach
 								</div>
 							</div>
-						</div>
-						<!-- //first section -->
-						<!-- second section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Smart Watch</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m4.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Sony 80 cm (32 inches)</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$320.00</span>
-												<del>$340.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Sony 80 cm (32 inches)" />
-														<input type="hidden" name="amount" value="320.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m5.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-											<span class="product-new-top">New</span>
-
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Artis Speaker</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$349.00</span>
-												<del>$399.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Artis Speaker" />
-														<input type="hidden" name="amount" value="349.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m6.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Philips Speakers</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$249.00</span>
-												<del>$300.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Philips Speakers" />
-														<input type="hidden" name="amount" value="249.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- //second section -->
-						<!-- third section -->
-						<div class="product-sec1 product-sec2 px-sm-5 px-3">
-							<div class="row">
-								<h3 class="col-md-4 effect-bg">Summer Carnival</h3>
-								<p class="w3l-nut-middle">Get Extra 10% Off</p>
-								<div class="col-md-8 bg-right-nut">
-									<img src="{{ URL::asset('project/images/image1.png') }}" alt="">
-								</div>
-							</div>
-						</div>
-						<!-- //third section -->
-						<!-- fourth section -->
-						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mt-4">
-							<h3 class="heading-tittle text-center font-italic">Laptop</h3>
-							<div class="row">
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m7.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<span class="product-new-top">New</span>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Whirlpool 245</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$230.00</span>
-												<del>$280.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Whirlpool 245" />
-														<input type="hidden" name="amount" value="230.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m8.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">BPL Washing Machine</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$180.00</span>
-												<del>$200.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="BPL Washing Machine" />
-														<input type="hidden" name="amount" value="180.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 product-men mt-5">
-									<div class="men-pro-item simpleCart_shelfItem">
-										<div class="men-thumb-item text-center">
-											<img src="{{ URL::asset('project/images/m9.jpg') }}" alt="">
-											<div class="men-cart-pro">
-												<div class="inner-men-cart-pro">
-													<a href="{{ route('client_single') }}" class="link-product-add-cart">Chi tiết</a>
-												</div>
-											</div>
-										</div>
-										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="{{ route('client_single') }}">Microwave Oven</a>
-											</h4>
-											<div class="info-product-price my-2">
-												<span class="item_price">$199.00</span>
-												<del>$299.00</del>
-											</div>
-											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="Microwave Oven" />
-														<input type="hidden" name="amount" value="199.00" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- //fourth section -->
+						@endforeach
 					</div>
 				</div>
 				<!-- //product left -->
@@ -1096,22 +389,22 @@
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="{{ route('client_product') }}">Dưới 1.000.000 VNĐ</a>
+										<a href="{{ route('client_product', ['price_level'=>1,'idCategory'=>$idCategory]) }}">Dưới 1.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product') }}">1.000.000 - 5.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>2,'idCategory'=>$idCategory]) }}">1.000.000 - 5.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product') }}">5.000.000 - 10.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>3,'idCategory'=>$idCategory]) }}">5.000.000 - 10.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product') }}">10.000.000 - 20.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>4,'idCategory'=>$idCategory]) }}">10.000.000 - 20.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product') }}">20.000.000 - 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>5,'idCategory'=>$idCategory]) }}">20.000.000 - 30.000.000 VNĐ</a>
 									</li>
 									<li class="mt-1">
-										<a href="{{ route('client_product') }}">Trên 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>6,'idCategory'=>$idCategory]) }}">Trên 30.000.000 VNĐ</a>
 									</li>
 								</ul>
 							</div>
@@ -1120,53 +413,32 @@
 						
 						
 						<!-- categories -->
-						<div class="left-side border-bottom py-2">
-							<h3 class="agileits-sear-head mb-3">Danh mục</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Điện thoại</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Smart Watch</span>
-								</li>
-							</ul>
-						</div>
+			
 						<!-- //electronics -->
 						
 						<!-- best seller -->
 						<div class="f-grid py-2">
-							<h3 class="agileits-sear-head mb-3">Sản phẩm bán chạy</h3>
+							<h3 class="agileits-sear-head mb-3">Sản phẩm mới nhất</h3>
 							<div class="box-scroll">
 								<div class="scroll">
-									<div class="row">
+									@php
+										$count = 0;
+									@endphp
+									@foreach ($productListTime as $product)
+									<div class="row my-5">
 										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k1.jpg') }}" alt="" class="img-fluid">
+											<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,990.00</a>
+											<a href="{{ route('client_single') }}">{{$product-> name}}</a>
+											<a href="{{ route('client_single') }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
 										</div>
 									</div>
-									<div class="row my-4">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k2.jpg') }}" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$12,499.00</a>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-3 col-sm-2 col-3 left-mar">
-											<img src="{{ URL::asset('project/images/k3.jpg') }}" alt="" class="img-fluid">
-										</div>
-										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">$1,199.00 </a>
-										</div>
-									</div>
+									@php
+										$count++;
+										if($count == 3) break;
+									@endphp
+									@endforeach
 								</div>
 							</div>
 						</div>

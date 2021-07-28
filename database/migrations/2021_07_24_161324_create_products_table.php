@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->float('price_discount');
             $table->Integer('price_lever');
             $table->unsignedBigInteger('quantity_available');
+            $table->unsignedBigInteger('quantity_sale');
+            $table->longtext('image');
             $table->text('short_descreption');
             $table->longtext('descreption');
             $table->Integer('is_deleted')->default(0);
