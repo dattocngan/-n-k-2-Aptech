@@ -12,7 +12,9 @@ body {
     background: #fff;
     font-family: 'Open Sans', sans-serif;
 }
-
+#dong::focus{
+    outline: none !important;
+}
 body a {
     text-decoration: none;
     transition: 0.5s all;
@@ -2382,6 +2384,9 @@ div#testimonials h4.m-title {
 @media(max-width: 991px) {
     .logo_agile {
         padding: 20px 0 21px;
+    }
+    .description h2{
+        margin-top: 20px;
     }
     .logo_agile h1 a {
         font-size: 31px;
