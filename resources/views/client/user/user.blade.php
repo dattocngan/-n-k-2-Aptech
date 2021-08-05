@@ -59,7 +59,7 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Checkout</li>
+					<li>Thông tin cá nhân</li>
 				</ul>
 			</div>
 		</div>
@@ -70,97 +70,86 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>C</span>heckout
+				<span>P</span>rofile
 			</h3>
-			<!-- //tittle heading -->
-			<div class="checkout-right">
-				<h4 class="mb-sm-4 mb-3">Your shopping cart contains:
-					<span>{{count($cartList)}}</span>
-				</h4>
-				<div class="table-responsive">
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
+                <div class="form-group">
+                    <label for="name">Họ tên</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{$name}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="dong" readonly style="background-color: #f5f1f1" type="email" class="form-control" value="{{$email}}" name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone" id="phone" value="{{$phone}}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" class="form-control" name="address" id="address" value="{{$address}}">
+                </div>
+                <button type="button" id="update" class="btn btn-primary" onclick="updateInfo()">Cập nhật</button>
+		</div>
+		<div class="container py-xl-4 py-lg-2">
+			<h2 style="color: #F44336">Lịch sử đơn hàng</h2>
+			<div class="table-responsive mt-4">
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>STT</th>
+							<th>Ngày đặt đơn hàng</th>
+							<th>Số điện thoại</th>
+							<th>Địa chỉ</th>
+							<th>Chi tiết</th>
+							<th>Tình trạng đơn hàng</th>
+						</tr>
+					</thead>
+					<tbody>
+						@php
+							$index = 1;
+						@endphp
+						@foreach ($orderList as $order)
+							<tr class="rem1">
+								<td class="invert">{{$index++}}</td>
+								<td class="invert">
+									<span>{{$order->order_date}}</span>
+								</td>
+								<td class="invert">
+									<span>{{$order->phone}}</span>
+								</td>
+								<td class="invert">
+									<span>{{$order->address}}</span>
+								</td>
+								<td class="invert">
+									<a href="{{ route('client_orderDetails', ['id'=>$order->id]) }}"><span>Xem chi tiết</span></a>
+								</td>
+								@if ($order->status_id == 1)
+									<td class="invert">
+										<span style="color: orange">Chờ xác nhận <a onclick="deleteOrder({{$order->id}})" href="javascript:void(0)" style="color: red">(Hủy đơn hàng)</a></span>
+									</td>
+								@elseif($order->status_id == 2)
+									<td class="invert">
+										<span style="color: green">Đã xác nhận <a onclick="deleteOrder({{$order->id}})" href="javascript:void(0)" style="color: red">(Hủy đơn hàng)</a></span>
+									</td>
+								@elseif($order->status_id == 3)
+								<td class="invert">
+									<span style="color: orange">Đang giao hàng <a onclick="deleteOrder({{$order->id}})" href="javascript:void(0)" style="color: red">(Hủy đơn hàng)</a></span>
+								</td>
+								@elseif($order->status_id == 4)
+								<td class="invert">
+									<span style="color: green">Đã giao hàng</span>
+								</td>
+								@else
+									<td class="invert">
+										<span style="color: red">Đã hủy đơn</span>
+									</td>
+								@endif
 							</tr>
-						</thead>
-						<tbody>
-							@php
-								$count = 1;
-							@endphp
-							@foreach ($cartList as $item)
-								<tr class="rem1">
-									<td class="invert">{{$index++}}</td>
-									<td class="invert-image">
-										<a href="single.html">
-											<img src="{{ URL::asset($item->image) }}" alt=" " class="img-responsive">
-										</a>
-									</td>
-									<td class="invert">
-										<div class="quantity">
-											<div class="quantity-select">
-												<div class="entry value-minus">&nbsp;</div>
-												<div hidden class="entry valueId">
-													<span>{{$item->product_id}}</span>
-												</div>
-												<div class="entry value">
-													<span>{{$item->quantity}}</span>
-												</div>
-												<div class="entry value-plus active">&nbsp;</div>
-											</div>
-										</div>
-									</td>
-									<td class="invert">{{$item->name}}</td>
-									<td class="invert">{{number_format($item->price, 0, '', '.')}} VNĐ</td>
-									<td class="invert">
-										<button type="button" onclick="deleteProduct({{$item->product_id}})" class="btn btn-danger">Xoá</button>
-									</td>
-								</tr>
-							@endforeach
-							
-						</tbody>
-					</table>
-				</div>
+						@endforeach
+						
+					</tbody>
+				</table>
 			</div>
-			@if (count($cartList) > 0)
-				<div class="checkout-left">
-					<div class="address_form_agile mt-sm-5 mt-4">
-						<h4 class="mb-sm-4 mb-3">Điền thông tin</h4>
-						<form action="{{route('client_process')}}" method="post" class="creditly-card-form agileinfo_form">
-							@csrf
-							<div class="creditly-wrapper wthree, w3_agileits_wrapper">
-								<div class="information-wrapper">
-									<div class="first-row">
-										<div class="controls form-group">
-											<input class="billing-address-name form-control" type="text" name="name" placeholder="Họ và tên" required="">
-										</div>
-										<div class="w3_agileits_card_number_grids">
-											<div class="w3_agileits_card_number_grid_left form-group">
-												<div class="controls">
-													<input type="text" class="form-control" placeholder="Số điện thoại" name="phone" required="">
-												</div>
-											</div>
-											<div class="w3_agileits_card_number_grid_right form-group">
-												<div class="controls">
-													<input type="text" class="form-control" placeholder="Địa chỉ" name="address" required="">
-												</div>
-											</div>
-										</div>
-									</div>
-									<button class="submit check_out btn">Vận chuyển tới địa chỉ này</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			@endif
-			
 		</div>
 	</div>
 	<!-- //checkout page -->
@@ -204,6 +193,53 @@
 @endsection
 
 @section('js')
+	{{-- Xóa đơn hàng --}}
+	<script>
+		function deleteOrder(id) {
+			Swal.fire({
+			title: 'Bạn có chắc muốn hủy đơn hàng này không?',
+			showDenyButton: true,
+			showCancelButton: true,
+			confirmButtonText: `Có`,
+			denyButtonText: `Không`,
+			}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				Swal.fire('Đã hủy!', '', 'success')
+				$.post("{{route('client_deleteOrder')}}",{
+					'id': id,
+					'_token' : '{{ csrf_token() }}'
+				},function (data) {
+					location.reload()
+				});	
+
+			} else if (result.isDenied) {
+				Swal.fire('Chưa xóa!', '', 'info')
+				return
+			}
+			})
+		}
+	</script>
+	{{-- //Xóa đơn hàng --}}
+    {{-- Cập nhật --}}
+    <script>
+        function updateInfo() {
+            // alert('hello')
+            $.post("{{route('client_userUpdate')}}",{
+                '_token' : '{{ csrf_token() }}',
+                'name' : $('#name').val(),
+                'phone' : $('#phone').val(),
+                'address' : $('#address').val()
+            },function (data) {
+                Swal.fire(
+                'Cập nhật dữ liệu thành công!',
+                'Vui lòng load lại trang để cập nhật dữ liệu',
+                'success'
+                )  
+            });      
+        }
+    </script>
+    {{-- //Cập nhật --}}
 	<!-- js-files -->
 	<!-- jquery -->
 	<script src="{{ URL::asset('project/js/jquery-2.2.3.min.js') }}"></script>
@@ -303,29 +339,15 @@
 	<!--quantity-->
 	<script>
 		function deleteProduct(idProduct) {
-			Swal.fire({
-			title: 'Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng không?',
-			showDenyButton: true,
-			showCancelButton: true,
-			confirmButtonText: `Có`,
-			denyButtonText: `Không`,
-			}).then((result) => {
-			/* Read more about isConfirmed, isDenied below */
-			if (result.isConfirmed) {
-				Swal.fire('Đã xóa!', '', 'success')
-				$.post("{{route('client_updateQuantity')}}",{
-					'idProduct': idProduct,
-					'status' : 'delete',
-					'_token' : '{{ csrf_token() }}'
-				},function (data) {
-					location.reload()
-				});	
-
-			} else if (result.isDenied) {
-				Swal.fire('Chưa xóa!', '', 'info')
-				return
-			}
-			})
+			var option = confirm('Bạn chắc chắn muốn xóa sản phẩm này khỏi danh sách cart không?')
+			if(!option) return
+			$.post("{{route('client_updateQuantity')}}",{
+				'idProduct': idProduct,
+				'status' : 'delete',
+				'_token' : '{{ csrf_token() }}'
+			},function (data) {
+				location.reload()
+			});	
 		}
 	</script>
 	<!-- //quantity -->

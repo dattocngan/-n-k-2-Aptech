@@ -6,99 +6,34 @@
 			<span class="sr-only">(current)</span>
 		</a>
 	</li>
+	
+	{{-- Danh sách Category --}}
+	@foreach ($categoryP as $parent)
 	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Điện thoại
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product', ['idCategory'=>$parent->id]) }}">
+			{{ $parent -> name }}
 		</a>
 		<div class="dropdown-menu">
 			<div class="agile_inner_drop_nav_info p-4">
 				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Iphone</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Oppo</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Vinsmart</a>
-							</li>
-						</ul>
-					</div>
+					@foreach ($categoryC as $child)
+						@if ($child->parent_id == $parent->id )
+						<div class="col-sm-6 multi-gd-img">
+							<ul class="multi-column-dropdown">
+								<li>
+									<a href="{{ route('client_product', ['idCategory'=>$child->id]) }}">{{$child->name}}</a>
+								</li>
+							</ul>
+						</div>
+						@endif
+					@endforeach
 				</div>
 			</div>
 		</div>
 	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Smart Watch
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Apple</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Huawei</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Realme</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Laptop
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Dell</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">HP</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Asus</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Mac</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
+	@endforeach
+	{{-- //Danh sách Category --}}
+
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
@@ -125,7 +60,7 @@
 						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>Single Product 1</li>
+					<li>{{$product->name}}</li>
 				</ul>
 			</div>
 		</div>
@@ -137,8 +72,14 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>S</span>ingle
-				<span>P</span>age</h3>
+				@php
+				$title = $product->name;
+				for ($i=0; $i < strlen($title); $i++) { 
+					if($i == 0 || $title[$i-1] == ' ') echo "<span>$title[$i]</span>";
+					else echo $title[$i];
+				}
+				@endphp
+			</h3>
 			<!-- //tittle heading -->
 			<div class="row">
 				<div class="col-lg-5 col-md-8 single-right-left ">
@@ -164,75 +105,58 @@
 				</div>
 
 				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
-					<h3 class="mb-3">Samsung Galaxy J7 Prime (Gold, 16 GB) (3 GB RAM)</h3>
+					<h3 class="mb-3">{{ $product->name }}</h3>
 					<p class="mb-3">
-						<span class="item_price">$200.00</span>
-						<del class="mx-2 font-weight-light">$280.00</del>
-						<label>Free delivery</label>
+						<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
+						<del class="mx-2 font-weight-light">{{number_format($product->price, 0, '', '.')}}</del>
+						<label>Miễn phí vận chuyển</label>
 					</p>
 					<div class="single-infoagile">
 						<ul>
 							<li class="mb-3">
-								Cash on Delivery Eligible.
+								Thanh toán khi giao hàng thành công.
 							</li>
 							<li class="mb-3">
-								Shipping Speed to Delivery.
+								Vận chuyển nhanh chóng.
 							</li>
 							<li class="mb-3">
-								EMIs from $655/month.
-							</li>
-							<li class="mb-3">
-								Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
+								Ưu đãi Ngân hàng Giảm giá đặc biệt 5% * với Thẻ tín dụng Agribank và Techcombank.
 							</li>
 						</ul>
 					</div>
 					<div class="product-single-w3l">
 						<p class="my-3">
 							<i class="far fa-hand-point-right mr-2"></i>
-							<label>1 Year</label>Manufacturer Warranty</p>
-						<ul>
-							<li class="mb-1">
-								3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
-							</li>
-							<li class="mb-1">
-								5.5 inch Full HD Display
-							</li>
-							<li class="mb-1">
-								13MP Rear Camera | 8MP Front Camera
-							</li>
-							<li class="mb-1">
-								3300 mAh Battery
-							</li>
-							<li class="mb-1">
-								Exynos 7870 Octa Core 1.6GHz Processor
-							</li>
-						</ul>
+							<label>1 năm</label> bảo hành</p>
+						<div>
+							{{$product->short_description}}
+						</div>
 						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
+							<i class="fas fa-retweet mr-3"></i>Ngân hàng điện tử và tín dụng/ Ghi nợ/ Thẻ ATM
 						</p>
 					</div>
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-							<form method="post" id="theForm" action="http://localhost:82/WEB/Back-end/Project/semester2/public/api/cart/index">
-								<fieldset>
-									<input type="hidden" name="cmd" value="_cart" />
-									<input type="hidden" name="add" value="1" />
-									<input type="hidden" name="business" value=" " />
-									<input type="hidden" name="item_name" value="Samsung Galaxy J7 Prime" />
-									<input type="hidden" name="amount" value="200.00" />
-									<input type="hidden" name="discount_amount" value="1.00" />
-									<input type="hidden" name="currency_code" value="USD" />
-									<input type="hidden" name="return" value=" " />
-									<input type="hidden" name="cancel_return" value=" " />
-									<input type="submit" name="submit" value="Thêm giỏ hàng" class="button" />
-								</fieldset>
-							</form>	
+							@if ($product->quantity_available <= 0)
+								<input type="submit" value="Hết hàng" style="cursor:not-allowed" class="button" />
+							@else
+								<form method="post" action="{{route('client_checkout')}}">
+									@csrf
+									<input hidden type="text" name="idProduct" value="{{$product->id}}">
+									<input type="submit" value="Thêm giỏ hàng" class="button" />
+								</form>
+							@endif
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="description">
+				<h2 style="margin-bottom:20px">Mô tả sản phẩm</h2>
+				{{$product->description}}
+			</div>
 		</div>
 	</div>
+	
 	<!-- //Single Page -->
 
 	<!-- middle section -->
@@ -317,27 +241,6 @@
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
-	<script src="{{ URL::asset('project/js/minicart.js') }}"></script>
-	<script>
-		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-		paypals.minicarts.cart.on('checkout', function (evt) {
-			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
-
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
-			}
-
-			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-				evt.preventDefault();
-			}
-		});
-	</script>
 	<!-- //cart-js -->
 
 	<!-- password-script -->

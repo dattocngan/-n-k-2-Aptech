@@ -1,105 +1,39 @@
 @extends('client.layout.master')
-
 @section('list')
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
 			<span class="sr-only">(current)</span>
 		</a>
 	</li>
+	
+	{{-- Danh sách Category --}}
+	@foreach ($categoryP as $parent)
 	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Điện thoại
+		<a class="nav-link dropdown-toggle" href="{{ route('client_product', ['idCategory'=>$parent->id]) }}">
+			{{ $parent -> name }}
 		</a>
 		<div class="dropdown-menu">
 			<div class="agile_inner_drop_nav_info p-4">
 				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Iphone</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Oppo</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Vinsmart</a>
-							</li>
-						</ul>
-					</div>
+					@foreach ($categoryC as $child)
+						@if ($child->parent_id == $parent->id )
+						<div class="col-sm-6 multi-gd-img">
+							<ul class="multi-column-dropdown">
+								<li>
+									<a href="{{ route('client_product', ['idCategory'=>$child->id]) }}">{{$child->name}}</a>
+								</li>
+							</ul>
+						</div>
+						@endif
+					@endforeach
 				</div>
 			</div>
 		</div>
 	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Smart Watch
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Apple</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Huawei</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Realme</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Samsung</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li class="nav-item dropdown mr-lg-3 mb-lg-0 mb-2">
-		<a class="nav-link dropdown-toggle" href="{{ route('client_product') }}">
-			Laptop
-		</a>
-		<div class="dropdown-menu">
-			<div class="agile_inner_drop_nav_info p-4">
-				<div class="row">
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Dell</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">HP</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-6 multi-gd-img">
-						<ul class="multi-column-dropdown">
-							<li>
-								<a href="{{ route('client_product') }}">Asus</a>
-							</li>
-							<li>
-								<a href="{{ route('client_product') }}">Mac</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</li>
-	<li class="nav-item active mr-lg-3 mb-lg-0 mb-2">
+	@endforeach
+	{{-- //Danh sách Category --}}
+
+	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_news') }}">Tin tức</a>
 	</li>
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
@@ -122,64 +56,60 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="{{route('client_index')}}">Home</a>
+						<a href="index.html">Home</a>
 						<i>|</i>
 					</li>
-					<li>News</li>
+					<li>Checkout</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- //page -->
-
-	<!-- news -->
-	<div class="ads-grid py-sm-5 py-4">
+	<!-- checkout page -->
+	<div class="privacy py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>N</span>ews
+				<span>X</span>ử <span>L</span>í
 			</h3>
 			<!-- //tittle heading -->
-			<div class="row">
-				<!-- product left -->
-				<div class="agileinfo-ads-display col-lg-12">
-					<div class="wrapper">
-						<div class="product-sec1 px-sm-4 px-3 pb-sm-2 pb-2 pt-sm-5 pt-3 mb-4">
-							<div class="row mb-4">
-								<div class="col-md-5">
-									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
-								</div>
-								<div class="col-md-7">
-                                    <h3>Đổi mới công nghệ</h3>
-                                </div>
-							</div>
-                            <hr>
-                            <div class="row mb-4">
-								<div class="col-md-5">
-									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
-								</div>
-								<div class="col-md-7 product-men">
-                                    <h3>Đổi mới công nghệ</h3>
-                                </div>
-							</div>
-                            <hr>
-                            <div class="row mb-4">
-								<div class="col-md-5 product-men">
-									<img src="https://1.bp.blogspot.com/-fJOYWF8sRcc/XqPMUl5F0uI/AAAAAAAAipA/FOrgLq4mcqQ23Lp_hA4_QPcjGym-ez4agCLcBGAsYHQ/s1600/Hinh-anh-dep-nhat-the-gioi%2B%25281%2529.jpg" style="width:100%" alt="">
-								</div>
-								<div class="col-md-7 product-men">
-                                    <h3>Đổi mới công nghệ</h3>
-                                </div>
-							</div>
-                            <hr>
-						</div>
-					</div>
+			<div class="checkout-right">
+				<h4 class="mb-sm-4 mb-3">
+					<span>Một số sản phẩm không đáp ứng được nhu cầu mua bán của bạn</span>
+				</h4>
+				<div class="table-responsive">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>STT</th>
+								<th>Sản phẩm</th>
+								<th>Số lượng còn lại</th>
+								<th>Tên sản phẩm</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($listFail as $item)
+								<tr class="rem1">
+									<td class="invert">{{$index++}}</td>
+									<td class="invert-image">
+										<a href="single.html">
+											<img src="{{ URL::asset($item['image']) }}" alt=" " class="img-responsive">
+										</a>
+									</td>
+									<td class="invert">
+										{{$item['quantity_available']}}	
+									</td>
+									<td class="invert">{{$item['name']}}</td>
+								</tr>
+							@endforeach
+							
+						</tbody>
+					</table>
 				</div>
-
 			</div>
 		</div>
 	</div>
-    <!-- //news -->
+	<!-- //checkout page -->
 
 	<!-- middle section -->
 	<div class="join-w3l1 py-sm-5 py-4">
@@ -262,29 +192,6 @@
 	</script>
 	<!-- //popup modal (for location)-->
 
-	<!-- cart-js -->
-	<script src="{{ URL::asset('project/js/minicart.js') }}"></script>
-	<script>
-		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-		paypals.minicarts.cart.on('checkout', function (evt) {
-			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
-
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
-			}
-
-			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-				evt.preventDefault();
-			}
-		});
-	</script>
-	<!-- //cart-js -->
 
 	<!-- password-script -->
 	<script>
@@ -305,11 +212,61 @@
 	</script>
 	<!-- //password-script -->
 
+	<!-- quantity -->
+	<script>
+		$('.value-plus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) + 1;
+			divUpd.text(newVal);
+			var idP = $(this).parent().find('.valueId');
+			idProduct = parseInt(idP.text(),10);
+			$.post("{{route('client_updateQuantity')}}",{
+				'value' : newVal,
+				'_token': '{{ csrf_token() }}',
+				'idProduct' : idProduct
+			},function (data) {
+		
+			});
+		});
+
+		$('.value-minus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) - 1;
+				var idP = $(this).parent().find('.valueId');
+				idProduct = parseInt(idP.text(),10);
+			if (newVal >= 1){
+				divUpd.text(newVal);
+				$.post("{{route('client_updateQuantity')}}",{
+					'value' : newVal,
+					'_token': '{{ csrf_token() }}',
+					'idProduct': idProduct
+				},function (data) {
+		
+				});
+			} 
+		});
+	</script>
+	<!--quantity-->
+	<script>
+		function deleteProduct(idProduct) {
+			var option = confirm('Bạn chắc chắn muốn xóa sản phẩm này khỏi danh sách cart không?')
+			if(!option) return
+			$.post("{{route('client_updateQuantity')}}",{
+				'idProduct': idProduct,
+				'status' : 'delete',
+				'_token' : '{{ csrf_token() }}'
+			},function (data) {
+				location.reload()
+			});	
+		}
+	</script>
+	<!-- //quantity -->
+
 	<!-- smoothscroll -->
 	<script src="{{ URL::asset('project/js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
-	{{-- <!-- start-smooth-scrolling -->
+	<!-- start-smooth-scrolling -->
 	<script src="{{ URL::asset('project/js/move-top.js') }}"></script>
 	<script src="{{ URL::asset('project/js/easing.js') }}"></script>
 	<script>
@@ -323,7 +280,7 @@
 			});
 		});
 	</script>
-	<!-- //end-smooth-scrolling --> --}}
+	<!-- //end-smooth-scrolling -->
 
 	<!-- smooth-scrolling-of-move-up -->
 	<script>

@@ -20,6 +20,7 @@
 		}
 	</script>
 	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
@@ -53,24 +54,42 @@
 						<i class="fas fa-shopping-cart ml-1"></i>
 					</p>
 				</div>
-				<div class="col-lg-8 header-right mt-lg-0 mt-2">
+				<div class="col-lg-8">
 					<!-- header lists -->
-					<ul>
-						<li class="text-center border-right text-white">
+					<ul style="display: flex;list-style-type: none">
+						<li class="text-center border-right text-white px-4">
 							<a class="play-icon popup-with-zoom-anim text-white" href="#small-dialog1">
 								<i class="fas fa-map-marker mr-2"></i>Chọn địa chỉ</a>
 						</li>
-						<li class="text-center border-right text-white">
+						<li class="text-center border-right text-white px-4">
 							<i class="fas fa-phone mr-2"></i> 0 967 962 184
 						</li>
-						<li class="text-center border-right text-white">
-							<a href="{{ route('login') }}" class="text-white">
-								<i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
-						</li>
-						<li class="text-center text-white">
-							<a href="{{ route('register') }}"  class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>Đăng kí </a>
-						</li>
+						@guest
+                            @if (Route::has('login'))
+								<li class="text-center border-right text-white px-4">
+									<a href="{{ route('login') }}" class="text-white">
+										<i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
+								</li>
+                            @endif
+
+                            @if (Route::has('register'))
+								<li class="text-center text-white px-4">
+									<a href="{{ route('register') }}"  class="text-white">
+										<i class="fas fa-sign-out-alt mr-2"></i>Đăng kí </a>
+								</li>
+                            @endif
+                        @else
+							<li class="text-center border-right text-white px-4">
+								<a href="{{ route('client_user') }}" class="text-white">Xin chào, {{ Auth::user()->name }}</a>
+							</li>
+							<li class="text-center text-white px-4">
+								<a href="{{ route('logout') }}"  class="text-white" onclick="event.preventDefault();
+								document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất </a>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+									@csrf
+								</form>
+							</li>
+                        @endguest
 					</ul>
 					<!-- //header lists -->
 				</div>
@@ -149,7 +168,7 @@
 						<!-- cart details -->
 						<div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
 							<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-								<a href="{{route('client_checkout')}}">
+								<a href="{{route('client_showCart')}}">
 									<button class="btn w3view-cart" type="submit" name="submit" value="">
 										<i class="fas fa-cart-arrow-down"></i>
 									</button>
@@ -316,13 +335,8 @@
 							<div class="social">
 								<ul>
 									<li>
-										<a class="icon fb" href="https://www.facebook.com/nguyentiendat18042002" target="_blank">
+										<a class="icon tw" href="https://www.facebook.com/nguyentiendat18042002" target="_blank">
 											<i class="fab fa-facebook-f"></i>
-										</a>
-									</li>
-									<li>
-										<a class="icon tw" href="#">
-											<i class="fab fa-twitter"></i>
 										</a>
 									</li>
 									<li>

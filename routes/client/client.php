@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::group(['prefix' => '/client'], function () {
+    Route::get('/test', [\App\Http\Controllers\Client\ClientController::class,"test"])->name('test');
     //Index
     Route::get('/index', [\App\Http\Controllers\Client\ClientController::class,"index"])->name('client_index');
     
@@ -13,10 +14,31 @@ Route::group(['prefix' => '/client'], function () {
     Route::get('/product', [\App\Http\Controllers\Client\ClientController::class,"product"])->name('client_product');
 
     //Single
-    Route::get('/single', [\App\Http\Controllers\Client\ClientController::class,"single"])->name('client_single');
+    Route::get('/single/{id}', [\App\Http\Controllers\Client\ClientController::class,"single"])->name('client_single');
     
     //Checkout
-    Route::post('/checkout', [\App\Http\Controllers\Client\ClientController::class,"checkout"])->name('client_checkout');
+    Route::post('/uptoDB', [\App\Http\Controllers\Client\ClientController::class,"checkout"])->name('client_checkout');
+
+    //Update Quantity
+    Route::post('/update', [\App\Http\Controllers\Client\ClientController::class,"update"])->name('client_updateQuantity');
+
+    //CheckoutGet
+    Route::get('/checkout', [\App\Http\Controllers\Client\ClientController::class,"showCart"])->name('client_showCart');
+
+    //Process Cart
+    Route::post('/process', [\App\Http\Controllers\Client\ClientController::class,"process"])->name('client_process');
+
+    //User information
+    Route::get('/user', [\App\Http\Controllers\Client\ClientController::class,"userInfo"])->name('client_user');
+
+    //User update
+    Route::post('/userUpdate', [\App\Http\Controllers\Client\ClientController::class,"userUpdate"])->name('client_userUpdate');
+
+    //OrderDetails
+    Route::get('/order/{id}', [\App\Http\Controllers\Client\ClientController::class,"orderDetails"])->name('client_orderDetails');
+
+    //deleteOrder
+    Route::post('/deleteOrder', [\App\Http\Controllers\Client\ClientController::class,"deleteOrder"])->name('client_deleteOrder');
 
     //Privacy
     Route::get('/privacy', [\App\Http\Controllers\Client\ClientController::class,"privacy"])->name('client_privacy');

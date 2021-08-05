@@ -57,7 +57,7 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="{{route('client_single')}}">Home</a>
+						<a href="{{route('client_index')}}">Home</a>
 						<i>|</i>
 					</li>
 					<li>{{$title}}</li>
@@ -87,40 +87,47 @@
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
 							<div class="row">
 								{{-- Chạy qua từng sản phẩm  --}}
+								@if (count($productList) == 0)
+									<h3 class="agileits-sear-head mt-3">Không có sản phẩm nào phù hợp với tìm kiếm của bạn</h3>
+								@endif
 								@foreach ($productList as $product)
-										<div class="col-md-4 product-men mt-5">
-											<div class="men-pro-item simpleCart_shelfItem">
-												<div class="men-thumb-item text-center">
-													<img src="{{ URL::asset($product->image) }}" alt="">
-													<div class="men-cart-pro">
-														<div class="inner-men-cart-pro">
-															<a href="{{ route('client_single',['idproduct'=>$product->id]) }}" class="link-product-add-cart">Chi tiết</a>
-														</div>
-													</div>
-												</div>
-												<div class="item-info-product text-center border-top mt-4">
-													<h4 class="pt-1">
-														<a href="{{ route('client_single') }}">{{$product->name}}</a>
-													</h4>
-													<div class="info-product-price my-2">
-														<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
-														<del>{{number_format($product->price, 0, '', '.')}}</del>
-													</div>
-													@php
-														if (time() - strtotime($product->created_at) < 2*24*60*60 ) {
-															echo '<span class="product-new-top">New</span>';
-														}
-													@endphp
-													<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-														<form action="#" method="post">
-															<fieldset>
-																<input type="submit" name="submit" value="Thêm giỏ hàng" class="button btn" />
-															</fieldset>
-														</form>
+									<div class="col-md-4 product-men mt-5">
+										<div class="men-pro-item simpleCart_shelfItem">
+											<div class="men-thumb-item text-center">
+												<img src="{{ URL::asset($product->image) }}" alt="">
+												<div class="men-cart-pro">
+													<div class="inner-men-cart-pro">
+														<a href="{{ route('client_single',['id'=>$product->id]) }}" class="link-product-add-cart">Chi tiết</a>
 													</div>
 												</div>
 											</div>
+											<div class="item-info-product text-center border-top mt-4">
+												<h4 class="pt-1">
+													<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product->name}}</a>
+												</h4>
+												<div class="info-product-price my-2">
+													<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
+													<del>{{number_format($product->price, 0, '', '.')}}</del>
+												</div>
+												@php
+													if (time() - strtotime($product->created_at) < 2*24*60*60 ) {
+														echo '<span class="product-new-top">New</span>';
+													}
+												@endphp
+												<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+													@if ($product->quantity_available <= 0)
+														<input type="submit" value="Hết hàng" style="cursor:not-allowed" class="button" />
+													@else
+														<form method="post" action="{{route('client_checkout')}}">
+															@csrf
+															<input hidden type="text" name="idProduct" value="{{$product->id}}">
+															<input type="submit" value="Thêm giỏ hàng" class="button" />
+														</form>
+													@endif
+												</div>
+											</div>
 										</div>
+									</div>
 								@endforeach
 							</div>
 						</div>
@@ -149,22 +156,22 @@
 							<div class="w3l-range">
 								<ul>
 									<li>
-										<a href="{{ route('client_product', ['price_level'=>1,'idCategory'=>$idCategory]) }}">Dưới 1.000.000 VNĐ</a>
+										<a href="{{ route('client_product', ['s'=>$search,'price_level'=>1,'idCategory'=>$idCategory]) }}">Dưới 1.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product',['price_level'=>2,'idCategory'=>$idCategory]) }}">1.000.000 - 5.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['s'=>$search,'price_level'=>2,'idCategory'=>$idCategory]) }}">1.000.000 - 5.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product',['price_level'=>3,'idCategory'=>$idCategory]) }}">5.000.000 - 10.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['s'=>$search,'price_level'=>3,'idCategory'=>$idCategory]) }}">5.000.000 - 10.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product',['price_level'=>4,'idCategory'=>$idCategory]) }}">10.000.000 - 20.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['s'=>$search,'price_level'=>4,'idCategory'=>$idCategory]) }}">10.000.000 - 20.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product',['price_level'=>5,'idCategory'=>$idCategory]) }}">20.000.000 - 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['s'=>$search,'price_level'=>5,'idCategory'=>$idCategory]) }}">20.000.000 - 30.000.000 VNĐ</a>
 									</li>
 									<li class="mt-1">
-										<a href="{{ route('client_product',['price_level'=>6,'idCategory'=>$idCategory]) }}">Trên 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['s'=>$search,'price_level'=>6,'idCategory'=>$idCategory]) }}">Trên 30.000.000 VNĐ</a>
 									</li>
 								</ul>
 							</div>
@@ -186,8 +193,8 @@
 											<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single') }}">{{$product-> name}}</a>
-											<a href="{{ route('client_single') }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
+											<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product-> name}}</a>
+											<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
 										</div>
 									</div>
 									@endforeach
@@ -285,27 +292,6 @@
 	<!-- //popup modal (for location)-->
 
 	<!-- cart-js -->
-	<script src="{{ URL::asset('project/js/minicart.js') }}"></script>
-	<script>
-		paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-		paypals.minicarts.cart.on('checkout', function (evt) {
-			var items = this.items(),
-				len = items.length,
-				total = 0,
-				i;
-
-			// Count the number of each item in the cart
-			for (i = 0; i < len; i++) {
-				total += items[i].get('quantity');
-			}
-
-			if (total < 3) {
-				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-				evt.preventDefault();
-			}
-		});
-	</script>
 	<!-- //cart-js -->
 
 	<!-- password-script -->
@@ -327,11 +313,30 @@
 	</script>
 	<!-- //password-script -->
 
+	<!-- imagezoom -->
+	<script src="{{ URL::asset('project/js/imagezoom.js') }}"></script>
+	<!-- //imagezoom -->
+
+	<!-- flexslider -->
+	<link rel="stylesheet" href="{{ URL::asset('project/css/flexslider.css') }}" type="text/css" media="screen" />
+
+	<script src="{{ URL::asset('project/js/jquery.flexslider.js') }}"></script>
+	<script>
+		// Can also be used with $(document).ready()
+		$(window).load(function () {
+			$('.flexslider').flexslider({
+				animation: "slide",
+				controlNav: "thumbnails"
+			});
+		});
+	</script>
+	<!-- //FlexSlider-->
+
 	<!-- smoothscroll -->
 	<script src="{{ URL::asset('project/js/SmoothScroll.min.js') }}"></script>
 	<!-- //smoothscroll -->
 
-	{{-- <!-- start-smooth-scrolling -->
+	<!-- start-smooth-scrolling -->
 	<script src="{{ URL::asset('project/js/move-top.js') }}"></script>
 	<script src="{{ URL::asset('project/js/easing.js') }}"></script>
 	<script>
@@ -345,7 +350,7 @@
 			});
 		});
 	</script>
-	<!-- //end-smooth-scrolling --> --}}
+	<!-- //end-smooth-scrolling -->
 
 	<!-- smooth-scrolling-of-move-up -->
 	<script>
