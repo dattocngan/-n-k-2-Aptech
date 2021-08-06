@@ -39,35 +39,40 @@
           </div>
           @endif
 
-          <form enctype="multipart/form-data" method="post" action="{{route('news_store')}}">
+          <form enctype="multipart/form-data" method="post" action="{{route('news_update',['id'=>$news->id])}}">
             @csrf
             <div class="row">
               <div class="col-5">
                 <div class="form-group">
-                  <label for="title">Tiêu đề</label>
-                  <input name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
+                  <label for="title">Tiêu đề bài viết</label>
+                  <input value="{{$news->title}}" name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
                 </div>
 
                 <div for = "thumnail" class="form-group">
-                  <label>Hình minh họa</label>
-                  <input type="file" name="thumnail" class="form-control" id="thumnail">
+                  <label>Chọn hình minh họa bài viết</label>
+                  <input multiple type="file" name="thumnail" class="form-control" id="thumnail">
+                  <p><img style=" width: 100%" src="{{asset($news->thumnail)}}"></p>
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tóm tắt nội dung</label>
-                  <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content"></textarea>
+                  <label for="exampleInputEmail1">Nhập tóm tắt nội dung</label>
+                  <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content">
+                    {{$news->short_content}}
+                  </textarea>
                 </div>
               </div>
 
               <div class="col-7">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nội dung chi tiết</label>
-                  <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content"></textarea>
+                  <label for="exampleInputEmail1">Nhập nội dung chi tiết bài viết</label>
+                  <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content">
+                    {!!$news->content!!}
+                  </textarea>
                 </div>
               </div>
             </div>
 
-            <button style="width: 100%" type="submit" class="btn btn-primary">Lưu Bài Viết</button>
+            <button style="width: 100%" type="submit" class="btn btn-primary">Sửa Bài Viết</button>
           </form>
         </div>
       </div>
@@ -89,7 +94,7 @@ $(document).ready(function() {
   });
    
   $('#content').summernote({
-    height: 450,
+    height: 500,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             that = $(this);
@@ -123,6 +128,20 @@ function sendFile(file, editor, welEditable) {
     });
   }
 });
+
+//kiem tra dinh dang ảnh thumnail
+$( "#thumnail" ).on( "change", function() {
+    var files = this.files;
+    let thumnail = this.files[0]; //Lấy phần tử ảnh thumnail
+    let thumnail_name = thumnail.name; //Lấy tên phần tử ảnh thumnail
+    const thumnail_name_array = thumnail_name.split("."); //Biến phần tử ảnh thumnail thành 1 mảng ngăn cách bởi dấu chấm
+    const thumnail_type = thumnail_name_array.pop(); // Lấy phần tử cuối cùng của mảng, chính là định dạng ảnh thumnail
+    if (thumnail_type != 'jpg' && thumnail_type != 'jpeg' && thumnail_type != 'png' ) {
+      alert('Chọn lại ảnh minh họa bài viết định dạng png, jpeg, jpg');
+    }
+  });
+
+
 </script>
 
 @stop

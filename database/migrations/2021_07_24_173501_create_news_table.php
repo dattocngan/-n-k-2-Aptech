@@ -21,6 +21,7 @@ class CreateNewsTable extends Migration
             $table->longtext('content');
             // $table->unsignedBigInteger('user_id');
             // $table->foreign('user_id')->references('id')->on("users");
+            $table->string('href_param');
             $table->Integer('is_deleted')->default(0);
             $table->timestamps();
         });

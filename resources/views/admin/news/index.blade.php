@@ -21,8 +21,16 @@
       width: 15%;
     }
 
+        .card-body thead tr th:nth-child(4) {
+      width: 40%;
+    }
+
+        .card-body thead tr th:nth-child(5) {
+      width: 15%;
+    }
+
     tbody {
-      text-align: center;
+      text-align: justify;
     }
   </style>
 @stop
@@ -33,7 +41,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Thống Kê Thương Hiệu</h1>
+          <h1>Thống Kê Tin Tức</h1>
         </div>
       </div>
     </div>
@@ -56,26 +64,28 @@
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Tên Thương Hiệu</th>
-                    <th colspan="2">Sửa Hoặc Xóa</th>
+                    <th>Tiêu đề bài viết</th>
+                    <th>Ảnh minh họa bài viết</th>
+                    <th>Tóm tắt nội bài viết</th>
+                    <th colspan="2">Sửa Hoặc Xóa Bài Viết</th>
                   </tr>
                 </thead>
                 <tbody id="data">
-                  @php
-                    $count = 0;
-                  @endphp
-                  @foreach ($brandList as $brand)
+                
+                  @foreach ($newsList as $news)
                   <tr>
-                    <td>{{++$count}}</td>
-                    <td>{{$brand->name}}</td>
-                    <td><a class="btn btn-warning" href="{{route('brand_edit',['id'=>$brand->id])}}">Sửa</a></td>
-                    <td><button onclick="deleteBrand({{$brand->id}})" class="btn btn-danger">Xóa</button></td>
+                    <td>{{++$index}}</td>
+                    <td>{{$news->title}}</td>
+                    <td><img width="100%" src="{{asset($news->thumnail)}}"></td>
+                    <td>{!!$news->short_content!!}</td>
+                    <td><a class="btn btn-warning" href="{{route('news_edit',['id'=>$news->id])}}">Sửa</a></td>
+                    <td><button onclick="deleteNews({{$news->id}})" class="btn btn-danger">Xóa</button></td>
                   </tr>
                   @endforeach
-                  
+                 
                 </tbody>
               </table>
-                <div style="margin-top: 10px">{{ $brandList->appends($_GET)->links() }}</div>
+               <div style="margin-top: 10px">{{ $newsList->links() }}</div>
             </div>
             <!-- /.card-body -->
               
@@ -106,19 +116,36 @@
   });
 
 
-    function deleteBrand(id){
+    function deleteNews(id){
       var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không?')
       if (!option) {
         return
       }
 
-    $.post('{{route('brand_delete')}}', {
+    $.post('{{route('news_delete')}}', {
       'id': id,
       '_token': '{{csrf_token()}}'
     } , function(res){
+
         var res = JSON.parse(res);
         alert(res.message);
-        location.reload();
+
+        var newsList = res.newsList.data;
+        console.log(newsList);
+        $('#data').html('');
+
+        for(var i = 0; i < newsList.length; i++){
+          $('#data').append(`
+              <tr>
+                <td>${i+1}</td>
+                <td>${newsList[i].title}</td>
+                <td><img width="100%" src="${newsList[i].thumnail}"></td>
+                <td>${newsList[i].short_content}</td>
+                <td><a class="btn btn-warning" href="{{ URL::to('/') }}/admin/news/edit/${newsList[i].id}">Sửa</a></td>
+                <td><button onclick="deleteNews(${newsList[i].id})" class="btn btn-danger">Xóa</button></td>
+              </tr>
+          `);
+        }
       })
     }
 

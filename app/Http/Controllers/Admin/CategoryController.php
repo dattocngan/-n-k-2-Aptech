@@ -5,46 +5,63 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 
 class CategoryController extends Controller
 {
 	public function indexCategory(Request $request) {
-		$categoryList = Category::paginate(10);
+		$categoryParentList = Category::where([
+		    ['is_deleted', '=', '0'],
+		    ['parent_id', '=', '0'],
+		])->get();
+
+
+		$categoryChildList = Category::where([
+		    ['is_deleted', '=', '0'],
+		    ['parent_id', '<>', '0'],
+		])->get();
 
 		return view('admin.category.index')->with([
-			'categoryList' => $categoryList,
-			'count' => 0,
-		]);
+			'categoryParentList' => $categoryParentList,
+			'categoryChildList' => $categoryChildList,
+		]);	
 	}
 
 	public function createCategory(Request $request) {
-		return view('admin.category.create');
+		$categoryParentList = Category::where([
+		    ['is_deleted', '=', '0'],
+		    ['parent_id', '=', '0'],
+		])->get();
+
+
+		$categoryChildList = Category::where([
+		    ['is_deleted', '=', '0'],
+		    ['parent_id', '<>', '0'],
+		])->get();
+
+		return view('admin.category.create')->with([
+			'categoryParentList' => $categoryParentList,
+			'categoryChildList' => $categoryChildList,
+		]);
 	}
 
 	public function storeCategory(Request $request) {
-    	// $this->validate($request,
-    	// 	[
-    	// 		'name' => 'required|unique:category|min:3|max:150'
-    	// 	],
-    	// 	[
-    	// 		'name.required' => 'Bạn chưa nhập tên danh mục',
-    	// 		'name.unique' => 'Tên danh mục đã tồn tại',
-    	// 		'name.min' => 'Tên danh mục phải tối thiểu có 3 ký tự',
-    	// 		'name.max' => 'Tên danh mục phải tối đa có 150 ký tự',
-    	// 	]);
-
 		$validatedData = $request->validate([
-    		'name' => 'required|unique:category|min:3|max:150'
+    		'name' => 'required|unique:categories|min:3|max:150'
 			
 		], [
-			'name.required' => 'Bạn chưa nhập tên danh mục',
 			'name.unique' => 'Tên danh mục đã tồn tại',
+			'name.required' => 'Bạn chưa nhập tên danh mục',
 			'name.min' => 'Tên danh mục phải tối thiểu có 3 ký tự',
 			'name.max' => 'Tên danh mục phải tối đa có 150 ký tự',
 		]);
 
 		$category = new Category;
 		$category->name = $request->name;
+		$category->href_param = $request->name;
+		$category->parent_id = $request->parent_id;
+		$category->created_at = date('Y-m-d H:i:s');
+		$category->is_deleted = 0;
 		$category->save();
 
 		return redirect()->route('category_create') -> with([
@@ -60,20 +77,71 @@ class CategoryController extends Controller
 	}
 
 	public function updateCategory(Request $request, $id) {
-		echo $id;
-		// $category = Category::find($id);
-		// $category->name = $request->name;
-		// $category->save();
-  //   	return redirect()->route('category_edit',['id' => $id]) ->with([
-  //   		'message' => 'Đã sửa danh mục sản phẩm thành công',
-  //   	]);
+		$validatedData = $request->validate([
+			'name' => 'required|unique:categories|min:3|max:150'
+			
+		], [
+			'name.required' => 'Bạn chưa nhập tên danh mục',
+			'name.unique' => 'Tên danh mục đã tồn tại',
+			'name.min' => 'Tên danh mục phải tối thiểu có 3 ký tự',
+			'name.max' => 'Tên danh mục phải tối đa có 150 ký tự',
+		]);
+
+		$category = Category::find($id);
+		$category->name = $request->name;
+		$category->href_param = $request->name;
+		$category->save();
+    	return redirect()->route('category_edit',['id' => $id]) ->with([
+    		'message' => 'Đã sửa danh mục sản phẩm thành công',
+    	]);
 	}
 
 	public function deleteCategory(Request $request) {
 		$id = $request->id;
 		$category = Category::find($id);
-		$category->delete();
-		return "Đã xóa danh mục sản phẩm thành công";
+
+		$checkParentId = $category->parent_id;
+
+		//Kiem tra neu la category cha thi xoa het cac category con cung category cha
+		if($checkParentId > 0 ){
+			$category->is_deleted = 1;
+			$category->save();
+
+		$productList = Product::where([
+		    ['is_deleted', '=', '0'],
+		    ['category_id', '=', $category->id],
+		])->get();
+
+			foreach ($productList as $product) {
+				$product->is_deleted = 1;
+				$product->save();
+			}
+
+		} else {
+
+			$category->is_deleted = 1;
+			$category->save();
+
+			$categoryChildList = Category::where([
+			    ['parent_id', '=', $id],
+			])->get();
+
+			foreach ($categoryChildList as $category) {
+				$category->is_deleted = 1;
+				$category->save();
+
+				$productList = Product::where([
+			    ['is_deleted', '=', '0'],
+			    ['category_id', '=', $category->id],
+			])->get();
+
+				foreach ($productList as $product) {
+				  $product->is_deleted = 1;
+				  $product->save();
+				}
+			}
+		}
+		return 'Đã xóa danh mục sản phẩm thành công';
 	}
 
 }
