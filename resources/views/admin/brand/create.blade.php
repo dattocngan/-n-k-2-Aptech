@@ -7,7 +7,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Nhập Thông Tin Danh Mục Sản Phẩm</h1>
+					<h1>Nhập Thương Hiệu</h1>
 				</div>
 			</div>
 		</div>
@@ -33,22 +33,13 @@
 					</div>
 					@endif
 
-					<form method="post" action="{{route('category_store')}}">
+					<form method="post" action="{{route('brand_store')}}">
 						@csrf
 						<div class="form-group">
-							<label for="name">Tên Danh Mục Muốn Thêm</label>
-							<input name="name" type="text" class="form-control" id="name" placeholder="Nhập tên danh mục">
+							<label for="name">Tên Thương Hiệu Muốn Thêm</label>
+							<input name="name" type="text" class="form-control" id="name" placeholder="Nhập thương hiệu...">
 						</div>
 
-						<div class="form-group">
-						  <label for="category_parent">Chọn Danh Mục Sản Phẩm Liên Kết:</label>
-						  	 <select value = "" class="form-control" name="parent_id">
-						  	 	<option value="0">Không có</option>
-						  	 	 @foreach ($categoryParentList as $item)
-						  	 	 	<option value="{{$item->id}}">{{$item->name}}</option>
-						  	 	 @endforeach
-						  	 </select>
-						</div>
 						<button style="width: 100%" type="submit" class="btn btn-primary">Lưu</button>
 					</form>
 				</div>

@@ -108,6 +108,7 @@ class NewsController extends Controller
   		}
 	  		$news = new News;
 			$news->title = $request->title;
+			$news->href_param = $request->title;
 			$news->thumnail = '/project/images/news/thumnails/'.$thumnail_name;
 			$news->short_content = $request->short_content;
 			$news->content = $request->content;
@@ -122,11 +123,20 @@ class NewsController extends Controller
 
 		//Đổ danh sách tin tức từ DataBase ra table dữ liệu
 		public function indexNews(Request $request){
-			$newsList = News::where('is_deleted', 0)->paginate(10);
+			// Danh so thu tu cho du lieu
+			$numberPage = 10;  //so luong tin tuc tren 1 page
 
+			$newsList = News::where('is_deleted', 0)->paginate($numberPage);
+
+			$index = 0; //danh so thu tu mac dinh = 0 cho truong hop ban dau khong co page
+			if (isset($request->page)) {
+				$index = ($request->page - 1) * $numberPage;
+			}
+
+			// Danh so thu tu cho du lieu End
 			return view('admin.news.index')->with([
 				'newsList' => $newsList,
-				'count'=> 0,
+				'index'=> $index,
 			]);
 		}
 
@@ -159,7 +169,7 @@ class NewsController extends Controller
 
 			$news = News::find($id);
 			$news->title = $request->title;
-			
+			$news->href_param = $request->title;
 			$news->short_content = $request->short_content;
 			$news->content = $request->content;
 			$news->created_at = date('Y-m-d H:i:s');
@@ -203,11 +213,11 @@ class NewsController extends Controller
 			$news->is_deleted = 1;
 			$news->save();
 
-			// $newsList = News::where('is_deleted', 0)->paginate(10);
-			$newsList = $users = DB::table('news')-> where('is_deleted', 0) -> get();
+			$newsList = News::where('is_deleted', 0)->paginate(10);
+			
 			$res = [
           			'newsList'=> $newsList,
-          			'message' => 'Đã xóa danh mục sản phẩm thành công',
+          			'message' => 'Đã xóa tin tức thành công',
           	 ];
 
 			return json_encode($res);

@@ -10,15 +10,15 @@
   }
 
   .card-body thead tr th:nth-child(1) {
-    width: 5%;
+    /*width: 5%;*/
   }
 
   .card-body thead tr th:nth-child(2) {
-    width: 75%;
+    /*width: 75%;*/
   }
 
   .card-body thead tr th:nth-child(3) {
-    width: 20%;
+    /*width: 20%;*/
   }
   .card-title{
     width: 100%;
@@ -48,7 +48,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Thống Kê Danh Mục Sản Phẩm</h1>
+          <h1>Chi Tiết Đơn Hàng</h1>
         </div>
       </div>
     </div>
@@ -67,43 +67,34 @@
             </div>
             <!-- /.card-header -->
             <div id ="data" class="card-body">
-              @foreach ($categoryParentList as $categoryParent)
-
-              <div class="card">
-                <div class="card-body">
-                  <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th style="text-align: left!important;" colspan="2">{{$categoryParent->name}}</th>
-                        <th> <a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryParent->id])}}">Sửa</a></th>
-                        <th><button onclick="deleteCategory({{$categoryParent->id}})" class="btn btn-danger">Xóa</button></th>
-                      </tr>
-                      <tr>
-                        <th>STT</th>
-                        <th>Tên Danh Mục</th>
-                        <th colspan="2">Sửa Hoặc Xóa Danh Mục</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @php
-                      $count = 0;
-                      @endphp
-                      @foreach ($categoryChildList as $categoryChild)
-                      @if ($categoryParent->id == $categoryChild->parent_id)
-                      <tr>
-                        <td>{{++$count}}</td>
-                        <td>{{$categoryChild->name}}</td>
-                        <td><a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryChild->id])}}">Sửa</a></td>
-                        <td><button onclick="deleteCategory({{$categoryChild->id}})" class="btn btn-danger">Xóa</button></td>
-                      </tr>
-                      @endif   
+            
+                <div class="card">
+                  <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>STT</th>
+                          <th>Tên Sản Phẩm</th>
+                          <th>Số Lượng</th>
+                          <th>Giá Đơn Vị</th>
+                          <th>Tổng Tiền</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($orderDetails as $item)
+                        <tr>
+                          <td>{{++$count}}</td>
+                          <td>{{$item->product_name}}</td>
+                          <td>{{$item->quantity}}</td>
+                          <td>{{number_format($item->price)}}</td>
+                          <td>{{number_format($item->price * $item->quantity)}}</td>
+                        </tr>
                       @endforeach
 
                     </tbody>
                   </table>
                 </div>
               </div>
-              @endforeach
               <!-- /.card-body -->
 
             </div>
@@ -133,13 +124,13 @@
     });
 
 
-    function deleteCategory(id){
-      var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không, toàn bộ các sản phẩm trong danh mục sẽ bị xóa?')
+    function deleteOrder(id){
+      var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không?')
       if (!option) {
         return
       }
 
-    $.post('{{route('category_delete')}}', {
+    $.post('{{route('order.destroy',['order'=>1])}}', {
       'id': id,
       '_token': '{{csrf_token()}}'
     } , function(res){

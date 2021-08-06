@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->string('name');
             $table->Integer('is_deleted')->default(0);
+            $table->string('href_param');
             $table->timestamps();
         });
     }

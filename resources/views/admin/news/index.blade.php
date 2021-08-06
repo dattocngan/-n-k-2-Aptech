@@ -71,19 +71,21 @@
                   </tr>
                 </thead>
                 <tbody id="data">
+                
                   @foreach ($newsList as $news)
                   <tr>
-                    <td>{{++$count}}</td>
+                    <td>{{++$index}}</td>
                     <td>{{$news->title}}</td>
-                    <td><img width="100%" src="{{$news->thumnail}}"></td>
+                    <td><img width="100%" src="{{asset($news->thumnail)}}"></td>
                     <td>{!!$news->short_content!!}</td>
                     <td><a class="btn btn-warning" href="{{route('news_edit',['id'=>$news->id])}}">Sửa</a></td>
                     <td><button onclick="deleteNews({{$news->id}})" class="btn btn-danger">Xóa</button></td>
                   </tr>
                   @endforeach
-                  <div style="margin-top: 10px">{{ $newsList->links() }}</div>
+                 
                 </tbody>
               </table>
+               <div style="margin-top: 10px">{{ $newsList->links() }}</div>
             </div>
             <!-- /.card-body -->
               
@@ -127,10 +129,9 @@
 
         var res = JSON.parse(res);
         alert(res.message);
-        alert(res.newsList);
 
-        var newsList = res.newsList;
-
+        var newsList = res.newsList.data;
+        console.log(newsList);
         $('#data').html('');
 
         for(var i = 0; i < newsList.length; i++){
@@ -140,7 +141,7 @@
                 <td>${newsList[i].title}</td>
                 <td><img width="100%" src="${newsList[i].thumnail}"></td>
                 <td>${newsList[i].short_content}</td>
-                <td><a class="btn btn-warning" href="{{route('news_edit',['id'=>$news->id])}}">Sửa</a></td>
+                <td><a class="btn btn-warning" href="{{ URL::to('/') }}/admin/news/edit/${newsList[i].id}">Sửa</a></td>
                 <td><button onclick="deleteNews(${newsList[i].id})" class="btn btn-danger">Xóa</button></td>
               </tr>
           `);

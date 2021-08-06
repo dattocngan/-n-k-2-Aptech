@@ -57,6 +57,77 @@
             </ul>
           </li>
 
+            <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Thương hiệu
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('brand_index')}}" class="nav-link">
+                  <p>Danh sách</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('brand_create')}}" class="nav-link">
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>         
+
+         <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Sản phẩm
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('product_index')}}" class="nav-link">
+                  <p>Danh sách</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('product_create')}}" class="nav-link">
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+           <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Đơn hàng
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('order_pending')}}" class="nav-link">
+                  <p>Danh sách chờ xác nhận</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('order.index')}}" class="nav-link">
+                  <p>Danh sách đã xác nhận</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

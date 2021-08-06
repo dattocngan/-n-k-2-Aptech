@@ -33,7 +33,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Thống Kê Thương Hiệu</h1>
+          <h1>Thống Kê Doanh Số</h1>
         </div>
       </div>
     </div>
@@ -56,26 +56,30 @@
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>Tên Thương Hiệu</th>
-                    <th colspan="2">Sửa Hoặc Xóa</th>
+                    <th>Trạng Thái Đơn Hàng</th>
+                    <th>Id sản phẩm</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng Bán</th>
+                    <th>Giá Bán Đơn Vị</th>
                   </tr>
                 </thead>
                 <tbody id="data">
                   @php
                     $count = 0;
                   @endphp
-                  @foreach ($brandList as $brand)
+                  @foreach ($saleList as $sale)
                   <tr>
                     <td>{{++$count}}</td>
-                    <td>{{$brand->name}}</td>
-                    <td><a class="btn btn-warning" href="{{route('brand_edit',['id'=>$brand->id])}}">Sửa</a></td>
-                    <td><button onclick="deleteBrand({{$brand->id}})" class="btn btn-danger">Xóa</button></td>
+                    <td>{{$sale->order_status_name}}</td>
+                    <td>{{$sale->product_id}}</td>
+                    <td>{{$sale->product_name}}</td>
+                    <td>{{$sale->sale_quantity}}</td>
+                     <td>{{$sale->product_price}}</td>
                   </tr>
                   @endforeach
                   
                 </tbody>
               </table>
-                <div style="margin-top: 10px">{{ $brandList->appends($_GET)->links() }}</div>
             </div>
             <!-- /.card-body -->
               

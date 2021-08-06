@@ -41,25 +41,32 @@
 
           <form enctype="multipart/form-data" method="post" action="{{route('news_store')}}">
             @csrf
-            <div class="form-group">
-              <label for="title">Tiêu đề bài viết</label>
-              <input name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
+            <div class="row">
+              <div class="col-5">
+                <div class="form-group">
+                  <label for="title">Tiêu đề</label>
+                  <input name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
+                </div>
+
+                <div for = "thumnail" class="form-group">
+                  <label>Hình minh họa</label>
+                  <input type="file" name="thumnail" class="form-control" id="thumnail">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Tóm tắt nội dung</label>
+                  <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content"></textarea>
+                </div>
+              </div>
+
+              <div class="col-7">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nội dung chi tiết</label>
+                  <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content"></textarea>
+                </div>
+              </div>
             </div>
 
-            <div for = "thumnail" class="form-group">
-              <label>Chọn hình minh họa bài viết</label>
-              <input type="file" name="thumnail" class="form-control" id="thumnail">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Nhập tóm tắt nội dung</label>
-              <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Nhập nội dung chi tiết bài viết</label>
-              <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content"></textarea>
-            </div>
             <button style="width: 100%" type="submit" class="btn btn-primary">Lưu Bài Viết</button>
           </form>
         </div>
@@ -82,7 +89,7 @@ $(document).ready(function() {
   });
    
   $('#content').summernote({
-    height: 500,
+    height: 450,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             that = $(this);

@@ -41,30 +41,37 @@
 
           <form enctype="multipart/form-data" method="post" action="{{route('news_update',['id'=>$news->id])}}">
             @csrf
-            <div class="form-group">
-              <label for="title">Tiêu đề bài viết</label>
-              <input value="{{$news->title}}" name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
+            <div class="row">
+              <div class="col-5">
+                <div class="form-group">
+                  <label for="title">Tiêu đề bài viết</label>
+                  <input value="{{$news->title}}" name="title" type="text" class="form-control" id="title" placeholder="Nhập tiêu đề bài viết...">
+                </div>
+
+                <div for = "thumnail" class="form-group">
+                  <label>Chọn hình minh họa bài viết</label>
+                  <input multiple type="file" name="thumnail" class="form-control" id="thumnail">
+                  <p><img style=" width: 100%" src="{{asset($news->thumnail)}}"></p>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nhập tóm tắt nội dung</label>
+                  <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content">
+                    {{$news->short_content}}
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="col-7">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nhập nội dung chi tiết bài viết</label>
+                  <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content">
+                    {!!$news->content!!}
+                  </textarea>
+                </div>
+              </div>
             </div>
 
-            <div for = "thumnail" class="form-group">
-              <label>Chọn hình minh họa bài viết</label>
-              <p><img style=" width: 100%" src="{{$news->thumnail}}"></p>
-              <input multiple type="file" name="thumnail" class="form-control" id="thumnail">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Nhập tóm tắt nội dung</label>
-              <textarea placeholder="Nhập tóm tắt nội dung" name="short_content" id="short_content">
-                {{$news->short_content}}
-              </textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Nhập nội dung chi tiết bài viết</label>
-              <textarea placeholder="Nhập nội dung chi tiết bài viết" name="content" id="content">
-                {!!$news->content!!}
-              </textarea>
-            </div>
             <button style="width: 100%" type="submit" class="btn btn-primary">Sửa Bài Viết</button>
           </form>
         </div>
