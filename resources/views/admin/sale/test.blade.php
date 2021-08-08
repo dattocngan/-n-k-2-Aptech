@@ -32,55 +32,42 @@
   <!-- Main content -->
   <section class="content">
 
-    <form method="get" action="">
+    <form method="post" action="{{route('sale_search')}}">
       @csrf
       <div class="row">
-        <div class="col-3">
+        <div class="col-12">
          <div class="form-group">
           <div class="input-group md-form form-sm form-2 pl-0">
-            <input value="{{$product_name}}" id="product_name" name="product_name" class="form-control my-0 py-1 amber-border" type="text" placeholder="Tên sản phẩm...">
+            <input value="" id="product_name" name="product_name" class="form-control my-0 py-1 amber-border" type="text" placeholder="Tên sản phẩm...">
           </div>
         </div>
       </div>
 
-      <div class="col-2">
-        <select name="sort_quantity" class="form-control">
-          <option>--Số lượng bán--</option>
-          <option
-          @if ($sort_quantity == "desc")
-           {{"selected"}}
-          @endif
-           value="desc">Giảm Dần
-         </option>
+      <div class="col-6">
+         <div class="form-group">
+          <div class="input-group md-form form-sm form-2 pl-0">
+              <label>Từ</label>
+            <input value="" type="date" name="time_start" class="form-control my-0 py-1 amber-border" type="text" >
+          </div>
+        </div>
+      </div>
 
-         <option
-          @if ($sort_quantity == "acs")
-            {{"selected"}}
-          @endif
-           value="asc">Tăng Dần
-         </option>
+      <div class="col-6">
+         <div class="form-group">
+          <div class="input-group md-form form-sm form-2 pl-0">
+              <label>Đến</label>
+            <input value="" type="date" name="time_end" class="form-control my-0 py-1 amber-border" type="text" >
+          </div>
+        </div>
+      </div>
+
+<!--       <div class="col-1">
+        <select name="sort" class="form-control">
+          <option>--Thời Gian--</option>
+          <option value="desc">Giảm Dần</option>
+          <option value="asc">Tăng Dần</option>
         </select>
-      </div>
-
-      <div class="col-3">
-         <div class="form-group">
-          <div class="input-group md-form form-sm form-2 pl-0">
-              <label>Từ &nbsp</label>
-            <input value="{{$time_start}}" type="date" name="time_start" class="form-control my-0 py-1 amber-border" type="text" >
-          </div>
-        </div>
-      </div>
-
-      <div class="col-3">
-         <div class="form-group">
-          <div class="input-group md-form form-sm form-2 pl-0">
-              <label>Đến &nbsp</label>
-            <input value="{{$time_end}}" type="date" name="time_end" class="form-control my-0 py-1 amber-border" type="text" >
-          </div>
-        </div>
-      </div>
-
-
+      </div> -->
 
       <div class="col-1">
         <button style="width: 100%" class="btn btn-success">Tìm</button>
@@ -110,9 +97,12 @@
                   </tr>
                 </thead>
                 <tbody id="data">
+                  @php
+                    $count = 0;
+                  @endphp
                   @foreach ($saleList as $sale)
                   <tr>
-                    <td>{{++$index}}</td>
+                    <td>{{++$count}}</td>
                     <td>{{$sale->order_status_name}}</td>
                     <td>{{$sale->product_id}}</td>
                     <td>{{$sale->product_name}}</td>
@@ -123,7 +113,6 @@
                   
                 </tbody>
               </table>
-               <div style="margin-top: 10px">{{ $saleList->appends($_GET)->links() }}</div>
             </div>
             <!-- /.card-body -->
               

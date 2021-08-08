@@ -494,9 +494,10 @@ class ClientController extends Controller
                 'address' => $request->address,
                 'order_date' => now(),
                 'status_id' => 1, // 1 la dang giao hang
-                'total_price' => $sum,
+                // 'total_price' => $sum,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
+                'is_deleted' => 0,
             ]);
             // cập nhật lên bảng order_details
             foreach($cartList as $cartItem){
@@ -506,7 +507,8 @@ class ClientController extends Controller
                     'quantity' => $cartItem->quantity,
                     'price' => $cartItem->price,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
+                    'is_deleted' => 0,
                 ]);
             }
             //xóa dữ liệu trong cart

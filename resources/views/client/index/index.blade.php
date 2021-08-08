@@ -3,8 +3,8 @@
 @section('css')
 	<style type="text/css">
 		img {
-			max-height: 150px;
-			/*min-width: 100%;*/
+			max-width: 100%;
+			height: auto;
 		}
 	</style>
 @stop
@@ -368,8 +368,15 @@
 															<a href="{{ route('client_single',['id'=>$item->id]) }}">{{$item->name}}</a>
 														</h4>
 														<div class="info-product-price my-2">
-															<span class="item_price">{{number_format($item->price_discount, 0, '', '.')}} VNĐ</span>
-															<del>{{number_format($item->price, 0, '', '.')}}</del>
+																		
+														@if ($item->price_discount > 0)
+																	<span class="item_price">{{number_format($item->price_discount, 0, '', '.')}} VNĐ</span>
+																	<del>{{number_format($item->price, 0, '', '.')}}</del>
+														@else
+															<span class="item_price">{{number_format($item->price, 0, '', '.')}} VNĐ</span>
+														@endif
+
+															
 														</div>
 														<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 															@if ($item->quantity_available <= 0)
@@ -444,7 +451,7 @@
 			
 						<!-- //electronics -->
 						
-						<!-- best seller -->
+						<!-- new product -->
 						<div class="f-grid py-2">
 							<h3 class="agileits-sear-head mb-3">Sản phẩm mới nhất</h3>
 							<div class="box-scroll">

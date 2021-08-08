@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SaleController;
-
+use App\Http\Controllers\Admin\PermissionController;
+use Illuminate\Support\Facades\Auth;
 
 Route::group(['prefix' => 'admin'], function () {
 
@@ -83,8 +84,9 @@ Route::group(['prefix' => 'admin'], function () {
 	});	
 
 	// Order
-	Route::resource('order', OrderController::class);
+	Route::resource('order', OrderController::class)-> only(['index','show','destroy']);
 
+	//Thay doi trang thai don hang
 	Route::group(['prefix' => 'order'], function () {
 		Route::post('/update', [OrderController::class , 'updateOrderStatus'])->name('order_update');
 	});
@@ -103,6 +105,21 @@ Route::group(['prefix' => 'admin'], function () {
 	//Sale
 	Route::group(['prefix' => 'sale'], function () {
 		Route::get('/index', [SaleController::class , 'indexSale'])->name('sale_index');
+	});
+
+	//Permission
+		//Xử lý xác nhận đơn hàng
+	//Hiện thị danh sách các Role
+	Route::group(['prefix' => 'permission'], function () {
+	   Route::get('/indexroles', [PermissionController::class , 'indexRoles'])->name('roles_index');
+
+	   //Hien thi bang Setting tung Role voi cac Route
+	   Route::get('/rolesetting/{id}', [PermissionController::class , 'settingRole'])->name('rolesetting');
+
+	   //Update trang thai Kich hoat hay khong kich hoat  trong bang setting
+	   Route::post('/update_permisson', [PermissionController::class , 'updatePermisson'])->name('update_permisson');
+
+
 	});
 
 });
