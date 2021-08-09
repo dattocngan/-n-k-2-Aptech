@@ -86,17 +86,17 @@
 					<div class="grid images_3_of_2">
 						<div class="flexslider">
 							<ul class="slides">
-								<li data-thumb="{{ URL::asset('project/images/si1.jpg') }}">
+								<li data-thumb="{{ URL::asset($thumbnailList[0]->thumbnail) }}">
 									<div class="thumb-image">
-										<img src="{{ URL::asset('project/images/si1.jpg') }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
+										<img src="{{ URL::asset($thumbnailList[0]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
-								<li data-thumb="{{ URL::asset('project/images/si2.jpg') }}">
+								<li data-thumb="{{ URL::asset($thumbnailList[1]->thumbnail) }}">
 									<div class="thumb-image">
-										<img src="{{ URL::asset('project/images/si2.jpg') }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
+										<img src="{{ URL::asset($thumbnailList[1]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
-								<li data-thumb="{{ URL::asset('project/images/si3.jpg') }}">
+								<li data-thumb="{{ URL::asset($thumbnailList[2]->thumbnail) }}">
 									<div class="thumb-image">
-										<img src="{{ URL::asset('project/images/si3.jpg') }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
+										<img src="{{ URL::asset($thumbnailList[2]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
 							</ul>
 							<div class="clearfix"></div>
@@ -107,8 +107,12 @@
 				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
 					<h3 class="mb-3">{{ $product->name }}</h3>
 					<p class="mb-3">
-						<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
-						<del class="mx-2 font-weight-light">{{number_format($product->price, 0, '', '.')}}</del>
+						@if($product->price_discount > 0)
+							<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
+							<del class="mx-2 font-weight-light">{{number_format($product->price, 0, '', '.')}}</del>
+						@else
+							<span class="item_price">{{number_format($product->price, 0, '', '.')}} VNĐ</span>
+						@endif
 						<label>Miễn phí vận chuyển</label>
 					</p>
 					<div class="single-infoagile">

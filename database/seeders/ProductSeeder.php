@@ -79,21 +79,21 @@ class ProductSeeder extends Seeder
         //     'image' => 'project/images/products/phones/m2.jpg'
         // ]);
 
-        DB::table('products')->insert([
-            'name' => 'Vinsmart Active 4',
-            'category_id' => 7,
-            'brand_id' => 4,
-            'price' => 21000000,
-            'price_discount' => 18000000,
-            'price_lever' => 4,
-            'quantity_available' => 150,
-            'quantity_sale' => 70,
-            'short_descreption' => 'Ram 32gb',
-            'descreption' => 'Rất tuyệt vời',
-            'created_at' => now(),
-            'updated_at' => now(),
-            'image' => 'project/images/products/phones/m1.jpg'
-        ]);
+        // DB::table('products')->insert([
+        //     'name' => 'Vinsmart Active 4',
+        //     'category_id' => 7,
+        //     'brand_id' => 4,
+        //     'price' => 21000000,
+        //     'price_discount' => 18000000,
+        //     'price_lever' => 4,
+        //     'quantity_available' => 150,
+        //     'quantity_sale' => 70,
+        //     'short_descreption' => 'Ram 32gb',
+        //     'descreption' => 'Rất tuyệt vời',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        //     'image' => 'project/images/products/phones/m1.jpg'
+        // ]);
 
         //Laptop
         // DB::table('products')->insert([
@@ -160,21 +160,21 @@ class ProductSeeder extends Seeder
         //     'image' => 'project/images/products/laptops/m6.jpg'
         // ]);
 
-        DB::table('products')->insert([
-            'name' => 'Dell XP1500',
-            'category_id' => 11,
-            'brand_id' => 6,
-            'price' => 21000000,
-            'price_discount' => 18000000,
-            'price_lever' => 4,
-            'quantity_available' => 150,
-            'quantity_sale' => 70,
-            'short_descreption' => 'CPU 2200',
-            'descreption' => 'Rất đẹp',
-            'created_at' => now(),
-            'updated_at' => now(),
-            'image' => 'project/images/products/laptops/m5.jpg'
-        ]);
+        // DB::table('products')->insert([
+        //     'name' => 'Dell XP1500',
+        //     'category_id' => 11,
+        //     'brand_id' => 6,
+        //     'price' => 21000000,
+        //     'price_discount' => 18000000,
+        //     'price_lever' => 4,
+        //     'quantity_available' => 150,
+        //     'quantity_sale' => 70,
+        //     'short_descreption' => 'CPU 2200',
+        //     'descreption' => 'Rất đẹp',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        //     'image' => 'project/images/products/laptops/m5.jpg'
+        // ]);
 
         //Smart Watch
         // DB::table('products')->insert([
@@ -241,20 +241,35 @@ class ProductSeeder extends Seeder
         //     'image' => 'project/images/products/smartwatchs/m8.jpg'
         // ]);
 
+        // DB::table('products')->insert([
+        //     'name' => 'Huawei GT Loyalty',
+        //     'category_id' => 15,
+        //     'brand_id' => 3,
+        //     'price' => 21000000,
+        //     'price_discount' => 18000000,
+        //     'price_lever' => 4,
+        //     'quantity_available' => 150,
+        //     'quantity_sale' => 70,
+        //     'short_descreption' => 'Pin 6000',
+        //     'descreption' => 'Rất sang trọng',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        //     'image' => 'project/images/products/smartwatchs/m7.jpg'
+        // ]);
+
+
         DB::table('products')->insert([
-            'name' => 'Huawei GT Loyalty',
-            'category_id' => 15,
+            'name' => 'Iphone 7 32GB',
+            'category_id' => 5,
             'brand_id' => 3,
-            'price' => 21000000,
-            'price_discount' => 18000000,
-            'price_lever' => 4,
+            'price' => 18000000,
+            'price_level' => 4,
             'quantity_available' => 150,
-            'quantity_sale' => 70,
-            'short_descreption' => 'Pin 6000',
-            'descreption' => 'Rất sang trọng',
+            'short_description' => 'Testing',
+            'description' => 'Testing',
             'created_at' => now(),
             'updated_at' => now(),
-            'image' => 'project/images/products/smartwatchs/m7.jpg'
+            'image' => 'project/images/products/phones/iphone7-32gb.jpeg'
         ]);
     }
 }
