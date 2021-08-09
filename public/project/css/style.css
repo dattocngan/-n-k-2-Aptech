@@ -15,6 +15,16 @@ body {
 #dong::focus{
     outline: none !important;
 }
+
+.men-thumb-item img{
+    height: 200px;
+}
+
+.invert-image img{
+    max-width: 200px !important;
+    max-height: 200px !important;
+}
+
 body a {
     text-decoration: none;
     transition: 0.5s all;
@@ -1573,7 +1583,6 @@ table.timetable_sub {
 }
 
 td.invert-image a img {
-    width: 30%;
     margin: 0 auto;
 }
 

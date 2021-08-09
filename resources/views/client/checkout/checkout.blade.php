@@ -98,7 +98,7 @@
 								<tr class="rem1">
 									<td class="invert">{{$index++}}</td>
 									<td class="invert-image">
-										<a href="single.html">
+										<a href="{{ route('client_single', ['id'=>$item->product_id]) }}">
 											<img src="{{ URL::asset($item->image) }}" alt=" " class="img-responsive">
 										</a>
 									</td>

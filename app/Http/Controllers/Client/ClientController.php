@@ -315,11 +315,16 @@ class ClientController extends Controller
         }else{
             return redirect(route('client_product'));
         }
-        // var_dump($product[0]);
+        //Lay ra cac thumbnails cua product do
+        $thumbnailList = DB::table('thumbnails')
+        ->where('product_id',$idProduct)
+        ->limit(3)
+        ->get();
         return view('client.single.single')->with([
             'categoryP' => $categoryP,
             'categoryC' => $categoryC,
-            'product' => $product[0]
+            'product' => $product[0],
+            'thumbnailList' => $thumbnailList
         ]);
     }
 
@@ -367,7 +372,7 @@ class ClientController extends Controller
                 'user_id' => $idUser,
                 'product_id' => $idProduct,
                 'quantity' => 1,
-                'price' => $product[0]->price_discount,
+                'price' => ($product[0]->price_discount > 0) ?$product[0]->price_discount:$product[0]->price,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -482,11 +487,6 @@ class ClientController extends Controller
                 'index' => 1
             ]);
         }else{
-            //Tìm tổng giá tiền trong giỏ hàng
-            $sum = 0;
-            foreach ($cartList as $item) {
-                $sum += $item->quantity * $item->price;
-            }
             // cập nhật lên bảng orders và đồng thời lấy luôn id
             $order_id = DB::table('orders')->insertGetId([
                 'user_id' => $idUser,
@@ -494,7 +494,6 @@ class ClientController extends Controller
                 'address' => $request->address,
                 'order_date' => now(),
                 'status_id' => 1, // 1 la dang giao hang
-                'total_price' => $sum,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -536,6 +535,7 @@ class ClientController extends Controller
         ->get();
         $orderList = DB::table('orders')
         ->where('user_id',$user->id)
+        ->where('is_deleted',0)
         ->orderBy('order_date','desc')
         ->get();
         return view('client.user.user')->with([
@@ -563,7 +563,11 @@ class ClientController extends Controller
         ->where('is_deleted',0)
         ->get();
 
-        if ($id <= 0 || !count(DB::table('orders')->where('user_id',Auth::id())->where('id',$id)->get())) {
+        //Lay ra kiem tra xem is_delete trong order do co bang 0 ko
+        $order = DB::table('orders')
+        ->where('id',$id)
+        ->get(); 
+        if ($id <= 0 || !count(DB::table('orders')->where('user_id',Auth::id())->where('id',$id)->get()) || $order[0]->is_deleted) {
             return view('client.order.order')->with([
                 'categoryP' =>$categoryP,
                 'categoryC' =>$categoryC,
@@ -573,6 +577,8 @@ class ClientController extends Controller
         $orderList = DB::table('order_details')
         ->leftJoin('products','order_details.product_id','=','products.id')
         ->where('order_id',$id)
+        ->where('products.is_deleted',0)
+        ->where('order_details.is_deleted',0)
         ->select('order_details.*','products.name','products.image')
         ->get();
         return view('client.order.order')->with([

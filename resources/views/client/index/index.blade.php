@@ -175,14 +175,14 @@
 														<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product->name}}</a>
 													</h4>
 													<div class="info-product-price my-2">
-											
+
 														@if ($product->price_discount > 0)
 																	<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
 																	<del>{{number_format($product->price, 0, '', '.')}}</del>
 														@else
 															<span class="item_price">{{number_format($product->price, 0, '', '.')}} VNĐ</span>
 														@endif
-														
+
 													</div>
 													@php
 														if (time() - strtotime($product->created_at) < 20*24*60*60 ) {
@@ -306,7 +306,13 @@
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
 											<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product-> name}}</a>
-											<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
+											<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">
+												@if ($product->price_discount > 0)
+													{{number_format($product->price_discount, 0, '', '.')}} VNĐ
+												@else
+													{{number_format($product->price, 0, '', '.')}} VNĐ
+												@endif
+											</a>
 										</div>
 									</div>
 									@php
@@ -368,8 +374,12 @@
 															<a href="{{ route('client_single',['id'=>$item->id]) }}">{{$item->name}}</a>
 														</h4>
 														<div class="info-product-price my-2">
-															<span class="item_price">{{number_format($item->price_discount, 0, '', '.')}} VNĐ</span>
-															<del>{{number_format($item->price, 0, '', '.')}}</del>
+															@if ($product->price_discount > 0)
+																	<span class="item_price">{{number_format($item->price_discount, 0, '', '.')}} VNĐ</span>
+																	<del>{{number_format($product->price, 0, '', '.')}}</del>
+															@else
+																<span class="item_price">{{number_format($item->price, 0, '', '.')}} VNĐ</span>
+															@endif
 														</div>
 														<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 															@if ($item->quantity_available <= 0)
@@ -459,7 +469,13 @@
 											</div>
 											<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
 												<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product-> name}}</a>
-												<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</a>
+												<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">
+													@if ($product->price_discount > 0)
+														{{number_format($product->price_discount, 0, '', '.')}} VNĐ
+													@else
+														{{number_format($product->price, 0, '', '.')}} VNĐ
+													@endif
+												</a>
 											</div>
 										</div>
 										@php
