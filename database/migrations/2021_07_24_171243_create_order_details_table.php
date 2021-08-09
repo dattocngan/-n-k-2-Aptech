@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreign('product_id')->references('id')->on("products");
             $table->Integer('quantity');
             $table->float('price');
+            $table->Integer('is_deteted')->default(0);
             $table->timestamps();
         });
     }

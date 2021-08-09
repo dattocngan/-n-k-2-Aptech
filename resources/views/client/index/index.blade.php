@@ -1,5 +1,14 @@
 @extends('client.layout.master')
 
+@section('css')
+	<style type="text/css">
+		img {
+			max-height: 150px;
+			/*min-width: 100%;*/
+		}
+	</style>
+@stop
+
 @section('list')
 	<li class="nav-item active mr-lg-3 mb-lg-0 mb-2">
 		<a class="nav-link" href="{{ route('client_index') }}">Trang chủ
@@ -166,12 +175,14 @@
 														<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product->name}}</a>
 													</h4>
 													<div class="info-product-price my-2">
+
 														@if ($product->price_discount > 0)
 																	<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
 																	<del>{{number_format($product->price, 0, '', '.')}}</del>
 														@else
 															<span class="item_price">{{number_format($product->price, 0, '', '.')}} VNĐ</span>
 														@endif
+
 													</div>
 													@php
 														if (time() - strtotime($product->created_at) < 20*24*60*60 ) {

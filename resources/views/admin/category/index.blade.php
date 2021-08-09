@@ -1,101 +1,156 @@
 @extends('admin/layouts/master')
+@section('css')
+<style type="text/css">
+  .card-body thead th {
+    text-align: center!important;
+  }
 
+  .card-body thead th {
+    padding: 5px 5px;
+  }
+
+  .card-body thead tr th:nth-child(1) {
+    width: 5%;
+  }
+
+  .card-body thead tr th:nth-child(2) {
+    width: 75%;
+  }
+
+  .card-body thead tr th:nth-child(3) {
+    width: 20%;
+  }
+  .card-title{
+    width: 100%;
+    display: flex;
+    padding: 5px 0px;
+  }
+
+  .card-title div:nth-child(1){
+    width: 20%;
+  }
+  .card-title div:nth-child(2){
+    width: 10%;
+  }
+  .card-title div:nth-child(3){
+    width: 10%;
+  }
+
+  tbody {
+    text-align: center;
+  }
+</style>
+@stop
 @section('content')
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>Danh mục sản phẩm</h1>
-				</div>
-			</div>
-		</div>
-		<!-- /.container-fluid -->
-	</section>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Thống Kê Danh Mục Sản Phẩm</h1>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
 
-	<!-- Main content -->
-	<section class="content">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">Danh sách</h3>
-							<div id="message"></div>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body">
-							<table id="example2" class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>STT</th>
-										<th>Tên Danh Mục Sản Phẩm</th>
-										<th colspan="2">Sửa Hoặc Xóa Danh Mục Sản Phẩm</th>
-									</tr>
-								</thead>
-								<tbody>
-									@foreach ($categoryList as $category)
-									<tr>
-										<td>{{++$count}}</td>
-										<td>{{$category->name}}</td>
-										<td ><a class="btn btn-warning"style="color: white" href="{{route('category_edit', ['id'=>$category->id])}}">Sửa</a></td>
-										<td><button onclick="deleteCategory({{$category->id}})" class="btn btn-danger">Xóa</button></td>
-									</tr>
-									@endforeach
-								</tbody>
-								<tfoot>
-									<tr>
-										<th>STT</th>
-										<th>Tên Danh Mục Sản Phẩm</th>
-									</tr>
-								</tfoot>
-							</table>
-							<div style="margin-top: 10px">{{ $categoryList->links() }}</div>
-						</div>
-						<!-- /.card-body -->
-					</div>
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.container-fluid -->
-	</section>
-	<!-- /.content -->
-</div>
-@stop
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Danh sách</h3>
+              <div id="message"></div>
+            </div>
+            <!-- /.card-header -->
+            <div id ="data" class="card-body">
+              @foreach ($categoryParentList as $categoryParent)
 
-@section('js')
-<script>
-	$(function () {
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"searching": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
-	});
+              <div class="card">
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th style="text-align: left!important;" colspan="2">{{$categoryParent->name}}</th>
+                        <th> <a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryParent->id])}}">Sửa</a></th>
+                        <th><button onclick="deleteCategory({{$categoryParent->id}})" class="btn btn-danger">Xóa</button></th>
+                      </tr>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tên Danh Mục</th>
+                        <th colspan="2">Sửa Hoặc Xóa Danh Mục</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @php
+                      $count = 0;
+                      @endphp
+                      @foreach ($categoryChildList as $categoryChild)
+                      @if ($categoryParent->id == $categoryChild->parent_id)
+                      <tr>
+                        <td>{{++$count}}</td>
+                        <td>{{$categoryChild->name}}</td>
+                        <td><a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryChild->id])}}">Sửa</a></td>
+                        <td><button onclick="deleteCategory({{$categoryChild->id}})" class="btn btn-danger">Xóa</button></td>
+                      </tr>
+                      @endif   
+                      @endforeach
 
-	function deleteCategory(id){
-			var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không?')
-			if (!option) {
-				return
-			}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              @endforeach
+              <!-- /.card-body -->
 
-		$.post('{{route('category_delete')}}', {
-			'id': id,
-			'_token': '{{csrf_token()}}'
-		} , function(data){
-			alert("Xóa danh mục sản phẩm thành côn");
-			location.reload();
-		})
-	}
-</script>
-@stop
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  @stop
+
+  @section('js')
+  <script>
+    $(function () {
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+
+
+    function deleteCategory(id){
+      var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không, toàn bộ các sản phẩm trong danh mục sẽ bị xóa?')
+      if (!option) {
+        return
+      }
+
+    $.post('{{route('category_delete')}}', {
+      'id': id,
+      '_token': '{{csrf_token()}}'
+    } , function(res){
+        alert(res);
+        location.reload();
+      })
+    }
+
+
+  </script>
+  @stop
 
 
 

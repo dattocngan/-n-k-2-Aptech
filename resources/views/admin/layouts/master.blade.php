@@ -26,6 +26,14 @@
   <link rel="stylesheet" href="{{asset('/template/admin/AdminLTE3/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('/template/admin/AdminLTE3/plugins/summernote/summernote-bs4.min.css')}}">
+
+  <style type="text/css">
+      body{
+      font-family: times new roman, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+  </style>
+
+
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -78,7 +86,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{asset('/template/admin/AdminLTE3/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
-<script src="{{asset('/template/admin/AdminLTE3/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{asset('/template/admin/AdminLTE3/plugins/summernote/summernote-bs4.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('/template/admin/AdminLTE3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
