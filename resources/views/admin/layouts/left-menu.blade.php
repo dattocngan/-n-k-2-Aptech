@@ -186,7 +186,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('news_index')}}" class="nav-link">
+                <a href="{{route('users_index')}}" class="nav-link">
                   <p>Danh sách tài khoản</p>
                 </a>
               </li>

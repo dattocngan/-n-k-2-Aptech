@@ -116,7 +116,7 @@
 
                           </td>
                           <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem Chi Tiết</a></td>
-                           <td><button type="button" onclick="deleteOrder({{$order->id}})" class="btn btn-danger">Hủy</button></td>
+                           <td><button type="button" onclick="deleteUser({{$user->id}})" class="btn btn-danger">Xóa</button></td>
                         </tr>
                       @endforeach
 
