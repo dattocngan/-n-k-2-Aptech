@@ -24,9 +24,10 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('quantity_available');
             $table->unsignedBigInteger('quantity_sale');
             $table->longtext('image');
-            $table->text('short_descreption');
-            $table->longtext('descreption');
+            $table->text('short_description');
+            $table->longtext('description');
             $table->Integer('is_deleted')->default(0);
+            $table->string('href_param');
             $table->timestamps();
         });
     }

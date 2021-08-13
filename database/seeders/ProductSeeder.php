@@ -14,6 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         //Dien thoai
         DB::table('products')->insert([
             'name' => 'Samsung Galaxy J7',
@@ -256,6 +257,8 @@ class ProductSeeder extends Seeder
             'updated_at' => now(),
             'image' => 'project/images/products/smartwatchs/m7.jpg'
         ]);
+=======
+>>>>>>> c78ea0cad2a8271973854c321be7c71dd90a85be
 
 
         DB::table('products')->insert([
@@ -270,6 +273,4 @@ class ProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'image' => 'project/images/products/phones/iphone7-32gb.jpeg'
-        ]);
     }
-}
