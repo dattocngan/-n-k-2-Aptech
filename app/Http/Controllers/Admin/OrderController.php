@@ -27,16 +27,17 @@ class OrderController extends Controller
             $orderList = $orderList ->where('users.name', 'like', '%'.$request->customer_name.'%');
         }
 
+        //Sắp xếp theo ngày đặt hàng
         if (isset($request->sort) && $request->sort != '' ) {
             if ($request->sort == 'asc') {
                 $orderList = $orderList ->orderBy('orders.order_date', 'asc');
             }
         }
 
-        $orderList = $orderList -> orderBy('orders.order_date', 'desc') ->paginate(20);
+        $orderList = $orderList -> orderBy('orders.order_date', 'desc') ->paginate(10);
 
         //Đánh lại số thứ tự từng page paginate
-        $num = 2;
+        $num = 10;
         $index = 0;
         if (isset($request->page)) {
             $index = ($request->page - 1) * $num;
@@ -126,7 +127,7 @@ class OrderController extends Controller
         $order_id = $id;
         $order = Order::find($order_id);
         $order->status_id = 6;
-
+        $order->updated_at = now();
         //Kiem tra trang thai don hang, neu don hang da xac nhan bi Admin huy thi cong lại số lượng bảng products
         $status_order = $request->status_order;
         if ($status_order == 'confirmed') {
@@ -156,6 +157,7 @@ class OrderController extends Controller
         $order_id = $request->order_id;
         $order = Order::find($order_id);
         $order->status_id = $request->status_id;
+        $order->updated_at = now();
         $order->save();
         return 'Đã sửa trạng thái đơn hàng thành công';
     }

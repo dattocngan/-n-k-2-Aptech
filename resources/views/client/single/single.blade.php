@@ -143,7 +143,7 @@
 							<i class="far fa-hand-point-right mr-2"></i>
 							<label>1 năm</label> bảo hành</p>
 						<div>
-							{{$product->short_description}}
+							{!!$product->short_description!!}
 						</div>
 						<p class="my-sm-4 my-3">
 							<i class="fas fa-retweet mr-3"></i>Ngân hàng điện tử và tín dụng/ Ghi nợ/ Thẻ ATM
@@ -165,8 +165,9 @@
 				</div>
 			</div>
 			<div class="description">
-				<h2 style="margin-bottom:20px;margin-top: 30px">Mô tả sản phẩm</h2>
-				{{$product->description}}
+
+				<h2 style="margin-bottom:20px">Mô tả sản phẩm</h2>
+				{!!$product->description!!}
 			</div>
 		</div>
 	</div>

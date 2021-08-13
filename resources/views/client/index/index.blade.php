@@ -3,8 +3,8 @@
 @section('css')
 	<style type="text/css">
 		img {
-			max-height: 150px;
-			/*min-width: 100%;*/
+			max-width: 100%;
+			height: auto;
 		}
 	</style>
 @stop
@@ -380,6 +380,7 @@
 															@else
 																<span class="item_price">{{number_format($item->price, 0, '', '.')}} VNĐ</span>
 															@endif
+
 														</div>
 														<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 															@if ($item->quantity_available <= 0)
@@ -454,7 +455,7 @@
 			
 						<!-- //electronics -->
 						
-						<!-- best seller -->
+						<!-- new product -->
 						<div class="f-grid py-2">
 							<h3 class="agileits-sear-head mb-3">Sản phẩm mới nhất</h3>
 							<div class="box-scroll">

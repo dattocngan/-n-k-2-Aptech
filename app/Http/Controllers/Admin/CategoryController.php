@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use Illuminate\Support\Facades\Auth;
+
 
 class CategoryController extends Controller
-{
+{	
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
+
 	public function indexCategory(Request $request) {
 		$categoryParentList = Category::where([
 		    ['is_deleted', '=', '0'],
