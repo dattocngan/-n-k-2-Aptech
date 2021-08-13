@@ -13,18 +13,18 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on("roles");
+        // Schema::create('permissions', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('role_id');
+        //     $table->foreign('role_id')->references('id')->on("roles");
 
-            $table->unsignedBigInteger('route_id');
-            $table->foreign('route_id')->references('id')->on("routes");
+        //     $table->unsignedBigInteger('route_id');
+        //     $table->foreign('route_id')->references('id')->on("routes");
 
-            $table->primary(['role_id', 'route_id']);
+        //     $table->primary(['role_id', 'route_id']);
 
-            $table->Integer('status');
-            $table->timestamps();
-        });
+        //     $table->Integer('status');
+        //     $table->timestamps();
+        // });
     }
 
     /**

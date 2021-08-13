@@ -44,12 +44,9 @@
 	</li>
 @endsection
 
-@section('content')
-	<!-- banner-2 -->
-	<div class="page-head_agile_info_w3l">
 
-	</div>
-	<!-- //banner-2 -->
+
+@section('content')
 	<!-- page -->
 	<div class="services-breadcrumb">
 		<div class="agile_inner_breadcrumb">
@@ -72,10 +69,20 @@
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
 				<span>X</span>ử <span>L</span>í
 			</h3>
-            <h4 class="mb-sm-4 mb-3">
+            {{-- <h4 class="mb-sm-4 mb-3">
                 <span>Đơn hàng của bạn đã đặt thành công!!!</span>
-            </h4>
-            <a href="{{route('client_index')}}"><button type="button"  class="btn btn-success" btn-lg btn-block">Trở về trang chủ</button></a>
+            </h4> --}}
+			<div class="success">
+				<div class="card">
+					<div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+					<i class="checkmark">✓</i>
+					</div>
+					<h1>Thành công</h1> 
+					<p>Chúng tôi đã nhận được đơn hàng bạn đặt<br/> Chúng ta sẽ xác nhận đơn hàng sớm nhất có thể!!</p>
+					<a  href="{{route('client_index')}}"><button type="button" style="margin-top: 25px;height:59px"  class="btn btn-success" btn-lg btn-block">Trở về trang chủ</button></a>
+				</div>
+			</div>
+            
 		</div>
 	</div>
 	<!-- //checkout page -->

@@ -18,8 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on("categories");
-            $table->unsignedBigInteger('brand_id');
-            $table->foreign('brand_id')->references('id')->on("brands");
             $table->float('price');
             $table->float('price_discount');
             $table->Integer('price_lever');

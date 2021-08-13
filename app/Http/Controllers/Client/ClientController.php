@@ -469,6 +469,7 @@ class ClientController extends Controller
                 if($product->id == $cartItem->product_id){
                     if ( ($cartItem->quantity > $product->quantity_available) || $product->quantity_available <= 0) {
                         $listFail[]=[
+                            'id' => $product->id,
                             'name' => $product->name,
                             'image' => $product->image,
                             'quantity_available' => $product->quantity_available
@@ -593,8 +594,33 @@ class ClientController extends Controller
     //Delete Order
     public function deleteOrder(Request $request)
     {
+        $idOrder = $request->id;
+        $order = DB::table('orders')
+        ->where('id',$idOrder)
+        ->get();
+
+        //Nếu đã xác nhận đơn hàng
+        if($order[0]->status_id != 1){
+            //Lay ra cac san pham theo don hang do
+            $orderDetailList = DB::table('order_details')
+            ->where('order_id',$idOrder)
+            ->get();
+            //Chay qua tung san pham
+            foreach ($orderDetailList as $item) {
+                //Lay ra san pham do
+                $product = DB::table('products')
+                ->where('id',$item->product_id)
+                ->get();
+                //Cong lai quantity
+                DB::table('products')
+                ->where('id',$item->product_id)
+                ->update([
+                    'quantity_available' => $product[0]->quantity_available + $item->quantity 
+                ]);
+            }
+        }
         DB::table('orders')
-        ->where('id',$request->id)
+        ->where('id',$idOrder)
         ->update([
             'status_id' => 5 
         ]);
