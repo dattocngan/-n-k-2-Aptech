@@ -17,10 +17,13 @@ class OrderController extends Controller
     {
         $statusList = DB::table("order_status") ->get();
 
-        $orderList = DB::table('orders') -> leftjoin('users', 'orders.user_id', '=', 'users.id') -> leftjoin ('order_status', 'orders.status_id', '=', 'order_status.id') -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.name as order_status_name') -> where([
-            ['orders.is_deleted', '=', '0'],
-            ['orders.status_id', '<>', '1'],
-        ]);
+        $orderList = DB::table('orders')
+            -> leftjoin('users', 'orders.user_id', '=', 'users.id')
+            -> leftjoin ('order_status', 'orders.status_id', '=', 'order_status.id')
+            -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.name as order_status_name') 
+            -> where('orders.status_id', '<>', '1')
+            -> where('orders.is_deleted', '=', '0');    
+
 
         //tim kiem theo ten khach hang
         if (isset($request->customer_name) && $request->customer_name != '' ) {
@@ -28,13 +31,13 @@ class OrderController extends Controller
         }
 
         //Sắp xếp theo ngày đặt hàng
-        if (isset($request->sort) && $request->sort != '' ) {
-            if ($request->sort == 'asc') {
+        if ($request->sort == 'asc') {
                 $orderList = $orderList ->orderBy('orders.order_date', 'asc');
+            }else {
+                $orderList = $orderList -> orderBy('orders.order_date', 'desc');
             }
-        }
 
-        $orderList = $orderList -> orderBy('orders.order_date', 'desc') ->paginate(10);
+            $orderList = $orderList ->paginate(10);
 
         //Đánh lại số thứ tự từng page paginate
         $num = 10;

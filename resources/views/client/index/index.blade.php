@@ -166,13 +166,13 @@
 													<img src="{{ URL::asset($product->image) }}" alt="">
 													<div class="men-cart-pro">
 														<div class="inner-men-cart-pro">
-															<a href="{{ route('client_single',['id'=>$product->id]) }}" class="link-product-add-cart">Chi tiết</a>
+															<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}" class="link-product-add-cart">Chi tiết</a>
 														</div>
 													</div>
 												</div>
 												<div class="item-info-product text-center border-top mt-4">
 													<h4 class="pt-1">
-														<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product->name}}</a>
+														<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}">{{$product->name}}</a>
 													</h4>
 													<div class="info-product-price my-2">
 
@@ -305,8 +305,8 @@
 											<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product-> name}}</a>
-											<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">
+											<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}">{{$product-> name}}</a>
+											<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}" class="price-mar mt-2">
 												@if ($product->price_discount > 0)
 													{{number_format($product->price_discount, 0, '', '.')}} VNĐ
 												@else
@@ -364,14 +364,14 @@
 														<img src="{{ URL::asset($item->image) }}" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="{{ route('client_single',['id'=>$item->id]) }}" class="link-product-add-cart">Chi tiết</a>
+																<a href="{{ route('client_single',['id'=>$item->id,'href_param'=>$product->href_param]) }}" class="link-product-add-cart">Chi tiết</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product text-center border-top mt-4">
 														<h4 class="pt-1">
-															<a href="{{ route('client_single',['id'=>$item->id]) }}">{{$item->name}}</a>
+															<a href="{{ route('client_single',['id'=>$item->id,'href_param'=>$product->href_param]) }}">{{$item->name}}</a>
 														</h4>
 														<div class="info-product-price my-2">
 															@if ($product->price_discount > 0)
@@ -431,19 +431,19 @@
 										<a href="{{ route('client_product', ['price_level'=>1,'idCategory'=>$idCategory]) }}">Dưới 1.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product',['price_level'=>2,'idCategory'=>$idCategory]) }}">1.000.000 - 5.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>2]) }}">1.000.000 - 5.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product',['price_level'=>3,'idCategory'=>$idCategory]) }}">5.000.000 - 10.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>3]) }}">5.000.000 - 10.000.000 VNĐ</a>
 									</li>
 									<li class="my-1">
-										<a href="{{ route('client_product',['price_level'=>4,'idCategory'=>$idCategory]) }}">10.000.000 - 20.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>4]) }}">10.000.000 - 20.000.000 VNĐ</a>
 									</li>
 									<li>
-										<a href="{{ route('client_product',['price_level'=>5,'idCategory'=>$idCategory]) }}">20.000.000 - 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>5]) }}">20.000.000 - 30.000.000 VNĐ</a>
 									</li>
 									<li class="mt-1">
-										<a href="{{ route('client_product',['price_level'=>6,'idCategory'=>$idCategory]) }}">Trên 30.000.000 VNĐ</a>
+										<a href="{{ route('client_product',['price_level'=>6]) }}">Trên 30.000.000 VNĐ</a>
 									</li>
 								</ul>
 							</div>
@@ -469,8 +469,8 @@
 												<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 											</div>
 											<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-												<a href="{{ route('client_single',['id'=>$product->id]) }}">{{$product-> name}}</a>
-												<a href="{{ route('client_single',['id'=>$product->id]) }}" class="price-mar mt-2">
+												<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}">{{$product-> name}}</a>
+												<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}" class="price-mar mt-2">
 													@if ($product->price_discount > 0)
 														{{number_format($product->price_discount, 0, '', '.')}} VNĐ
 													@else

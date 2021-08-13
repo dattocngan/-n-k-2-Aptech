@@ -28,15 +28,15 @@ class SaleController extends Controller
         }
 
         if (isset($request->time_start)) {
-           $time_start = strtotime($request->time_start); 
-           $time_start = date('Y-m-d H:i:s', $time_start);
-           $saleList =  $saleList->where('orders.updated_at', '>=', $time_start);
+           // $time_start = strtotime($request->time_start); 
+           // $time_start = date('Y-m-d H:i:s', $time_start);
+           $saleList =  $saleList->where('orders.updated_at', '>=', $request->time_start);
        }
 
        if (isset($request->time_end)) {
-           $time_end = strtotime($request->time_end); 
-           $time_end = date('Y-m-d H:i:s', $time_end);
-           $saleList =  $saleList->where('orders.updated_at', '<=', $time_end);
+           // $time_end = strtotime($request->time_end); 
+           // $time_end = date('Y-m-d H:i:s', $time_end);
+           $saleList =  $saleList->where('orders.updated_at', '<=', $request->time_end);
        }
 
        if (isset($request->sort_quantity) && $request->sort_quantity != '' ) {
@@ -66,3 +66,10 @@ class SaleController extends Controller
 
    
 }
+
+
+
+
+
+
+      

@@ -68,30 +68,16 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>T</span>in Tức
+				{{$newsDetails->title}}
 			</h3>
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->
 				<div class="agileinfo-ads-display col-lg-12">
 					<div class="wrapper">
-						<div class="product-sec1 px-sm-4 px-3 pb-sm-2 pb-2 pt-sm-5 pt-3 mb-4">
-							@foreach ($newsList as $news)
-							<div class="row mb-4">
-								<div class="col-md-5">
-									<img src="{{asset($news->thumnail)}}" style="width:100%" alt="">
-								</div>
-								<div class="col-md-7">
-									<h3><a href="{{ route('news_details',['id'=>$news->id, 'href_param'=>$news->href_param])}}">{{ $news->title }}</a></h3>
-									<p>{!!$news->short_content!!}</p>
-								</div>
-							</div>
-							<hr>
-							@endforeach
-						</div>
+			           {!!$newsDetails->content!!}
 					</div>
 				</div>
-				 <div style="margin-top: 10px">{{ $newsList->appends($_GET)->links() }}</div>
 			</div>
 		</div>
 	</div>

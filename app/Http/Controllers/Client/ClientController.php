@@ -686,7 +686,60 @@ class ClientController extends Controller
 
     //News
     public function news(Request $request)
-    {
-        return view('client.news.news');
+    {   
+                //Lấy ra danh sách bố
+        $categoryP = DB::table('categories')
+        ->where('parent_id',0)
+        ->where('is_deleted',0)
+        ->get();
+        //Lấy ra danh sách con
+        $categoryC = DB::table('categories')
+        ->where('parent_id','<>',0)
+        ->where('is_deleted',0)
+        ->get();
+
+        $number = 10;
+        $newsList = DB::table('news')
+        ->where('is_deleted', 0)
+        ->paginate($number);
+
+        $index = 0;
+        if (isset($request->page) && $request->page > 0) {
+            $index = ($request->page - 1) * $number;
+        }
+
+        return view('client.news.news')->with([
+            'newsList' => $newsList,
+            'index'  => $index,
+            'categoryP' =>$categoryP,
+            'categoryC' =>$categoryC,
+        ]);
+    }
+
+        public function newsDetails(Request $request, $id, $href_param)
+    {   
+
+         //Lấy ra danh sách bố
+        $categoryP = DB::table('categories')
+        ->where('parent_id',0)
+        ->where('is_deleted',0)
+        ->get();
+        //Lấy ra danh sách con
+        $categoryC = DB::table('categories')
+        ->where('parent_id','<>',0)
+        ->where('is_deleted',0)
+        ->get();
+        $newsDetails = DB::table('news')
+        ->where('is_deleted', 0)
+        ->where('id',$id)
+        ->get();
+
+        $newsDetails = $newsDetails[0];
+
+        return view('client.news.details')->with([
+            'newsDetails' => $newsDetails,
+            'categoryP' =>$categoryP,
+            'categoryC' =>$categoryC,
+        ]);
     }
 }

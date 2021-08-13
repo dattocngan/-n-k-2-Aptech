@@ -37,10 +37,10 @@ class CheckPermission
              if ($status == 1) {
                  return $next($request);
              }else {
-                 return redirect()->route('client_index');
+                 return redirect()->route('home');
              }
             }else {
-                return redirect()->route('client_index');
+                return redirect()->route('home');
             }
      }
          return $next($request);

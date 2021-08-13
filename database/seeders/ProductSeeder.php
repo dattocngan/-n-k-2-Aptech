@@ -260,7 +260,6 @@ class ProductSeeder extends Seeder
 =======
 >>>>>>> c78ea0cad2a8271973854c321be7c71dd90a85be
 
-
         DB::table('products')->insert([
             'name' => 'Iphone 7 32GB',
             'category_id' => 5,
@@ -273,4 +272,7 @@ class ProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'image' => 'project/images/products/phones/iphone7-32gb.jpeg'
+         ]);
     }
+
+}

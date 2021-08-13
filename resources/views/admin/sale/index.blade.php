@@ -33,7 +33,6 @@
   <section class="content">
 
     <form method="get" action="">
-      @csrf
       <div class="row">
         <div class="col-3">
          <div class="form-group">

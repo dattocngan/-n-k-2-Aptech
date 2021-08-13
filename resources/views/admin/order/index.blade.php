@@ -116,7 +116,7 @@
 
                           </td>
                           <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem Chi Tiết</a></td>
-                           <td><button type="button" onclick="deleteUser({{$user->id}})" class="btn btn-danger">Xóa</button></td>
+                        
                         </tr>
                       @endforeach
 
@@ -173,29 +173,6 @@
         location.reload();
       })
     }
-
-
-    function deleteOrder(id){
-      var option = confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')
-      if (!option) {
-        return
-      }
-
-      $.ajax({
-        data: {
-            "status_order" : "confirmed" ,
-            "id": id,
-            "_token": "{{ csrf_token() }}",
-        },
-        type: "DELETE",
-        url: location.origin +'/' + 'admin/order/' + id,
-        success: function(res) {
-          location.reload();
-        }
-      });
-}
-
-
   </script>
   @stop
 

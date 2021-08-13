@@ -9,11 +9,11 @@ class ProductThumnail extends Model
 {
     use HasFactory;
 
-     protected $table = 'thumnails';
+     protected $table = 'thumbnails';
 
 	protected $fillable = [
 		'product_id',
 		'title',
-		'thumnail',
+		'thumbnail',
 	];
 }

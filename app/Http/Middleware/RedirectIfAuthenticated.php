@@ -23,7 +23,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $role_id = Auth::guard($guard)->user()->role_id;
+
+                if ($role_id == 3) {
+                    return redirect(RouteServiceProvider::HOME);
+                }else{
+                    return redirect()->route('category_index');
+                }
+                
             }
         }
 
