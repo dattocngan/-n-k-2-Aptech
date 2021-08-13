@@ -92,14 +92,14 @@
 								<tr class="rem1">
 									<td class="invert">{{$index++}}</td>
 									<td class="invert-image">
-										<a href="single.html">
+										<a href="{{route('client_single',['id'=>$item['id']])}}">
 											<img src="{{ URL::asset($item['image']) }}" alt=" " class="img-responsive">
 										</a>
 									</td>
 									<td class="invert">
 										{{$item['quantity_available']}}	
 									</td>
-									<td class="invert">{{$item['name']}}</td>
+									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item['id']])}}">{{$item['name']}}</a></td>
 								</tr>
 							@endforeach
 							

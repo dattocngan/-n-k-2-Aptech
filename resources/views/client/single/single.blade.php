@@ -46,11 +46,6 @@
 @endsection
 
 @section('content')
-	<!-- banner-2 -->
-	<div class="page-head_agile_info_w3l">
-
-	</div>
-	<!-- //banner-2 -->
 	<!-- page -->
 	<div class="services-breadcrumb">
 		<div class="agile_inner_breadcrumb">
@@ -68,44 +63,59 @@
 	<!-- //page -->
 
 	<!-- Single Page -->
-	<div class="banner-bootom-w3-agileits py-5">
+	<div class="banner-bootom-w3-agileits py-2">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				@php
-				$title = $product->name;
-				for ($i=0; $i < strlen($title); $i++) { 
-					if($i == 0 || $title[$i-1] == ' ') echo "<span>$title[$i]</span>";
-					else echo $title[$i];
-				}
-				@endphp
+				<span>{{$product->name}}</span>
 			</h3>
 			<!-- //tittle heading -->
 			<div class="row">
+				@if( count($thumbnailList) > 0)
 				<div class="col-lg-5 col-md-8 single-right-left ">
 					<div class="grid images_3_of_2">
 						<div class="flexslider">
 							<ul class="slides">
+								@if( count($thumbnailList) >= 1)
 								<li data-thumb="{{ URL::asset($thumbnailList[0]->thumbnail) }}">
 									<div class="thumb-image">
 										<img src="{{ URL::asset($thumbnailList[0]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
+								@endif
+								@if( count($thumbnailList) >= 2)
 								<li data-thumb="{{ URL::asset($thumbnailList[1]->thumbnail) }}">
 									<div class="thumb-image">
 										<img src="{{ URL::asset($thumbnailList[1]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
+								@endif
+								@if( count($thumbnailList) >= 3)
 								<li data-thumb="{{ URL::asset($thumbnailList[2]->thumbnail) }}">
 									<div class="thumb-image">
 										<img src="{{ URL::asset($thumbnailList[2]->thumbnail) }}" data-imagezoom="true" class="img-fluid" alt=""> </div>
+								</li>
+								@endif
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				@else
+				<div class="col-lg-5 col-md-8 single-right-left ">
+					<div class="grid images_3_of_2">
+						<div class="flexslider">
+							<ul class="slides">
+								<li data-thumb="{{ URL::asset($product->image) }}">
+									<div class="thumb-image">
+										<img style="width: 50%" src="{{ URL::asset($product->image) }}"  data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
 							</ul>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
-
+				@endif
 				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
-					<h3 class="mb-3">{{ $product->name }}</h3>
+					<h2 class="mb-3">{{ $product->name }}</h2>
 					<p class="mb-3">
 						@if($product->price_discount > 0)
 							<span class="item_price">{{number_format($product->price_discount, 0, '', '.')}} VNĐ</span>
@@ -147,7 +157,7 @@
 								<form method="post" action="{{route('client_checkout')}}">
 									@csrf
 									<input hidden type="text" name="idProduct" value="{{$product->id}}">
-									<input type="submit" value="Thêm giỏ hàng" class="button" />
+									<input style="height: 75px;font-size:20px" type="submit" value="Thêm giỏ hàng" class="button" />
 								</form>
 							@endif
 						</div>
@@ -155,7 +165,7 @@
 				</div>
 			</div>
 			<div class="description">
-				<h2 style="margin-bottom:20px">Mô tả sản phẩm</h2>
+				<h2 style="margin-bottom:20px;margin-top: 30px">Mô tả sản phẩm</h2>
 				{{$product->description}}
 			</div>
 		</div>

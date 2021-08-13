@@ -13,12 +13,12 @@ class CreateBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->Integer('is_deleted')->default(0);
-            $table->timestamps();
-        });
+        // Schema::create('brands', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->Integer('is_deleted')->default(0);
+        //     $table->timestamps();
+        // });
     }
 
     /**

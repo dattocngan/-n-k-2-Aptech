@@ -92,7 +92,7 @@
 		</div>
 		<div class="container py-xl-4 py-lg-2">
 			<h2 style="color: #F44336">Lịch sử đơn hàng</h2>
-			<div class="table-responsive mt-4">
+			<div class="table-responsive mt-4 his">
 				<table class="timetable_sub">
 					<thead>
 						<tr>

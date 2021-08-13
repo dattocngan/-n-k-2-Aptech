@@ -78,25 +78,22 @@
 					<span>{{count($cartList)}}</span>
 				</h4>
 				<div class="table-responsive">
-					<table class="timetable_sub">
-						<thead>
+					<table class="timetable_sub" style="border:0px">
+						{{-- <thead>
 							<tr>
-								<th>SL No.</th>
-								<th>Product</th>
-								<th>Quality</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
+								<th><h4 style="color: red">Product</h4></th>
+								<th><h4 style="color: red">Số lượng</h4></th>
+								<th><h4 style="color: red">Tên sản phẩm</h4></th>
+								<th><h4 style="color: red">Giá tiền</h4></th>
+								<th><h4 style="color: red">Xóa sản phẩm</h4></th>
 							</tr>
-						</thead>
+						</thead> --}}
 						<tbody>
 							@php
 								$count = 1;
 							@endphp
 							@foreach ($cartList as $item)
 								<tr class="rem1">
-									<td class="invert">{{$index++}}</td>
 									<td class="invert-image">
 										<a href="{{ route('client_single', ['id'=>$item->product_id]) }}">
 											<img src="{{ URL::asset($item->image) }}" alt=" " class="img-responsive">
@@ -110,13 +107,13 @@
 													<span>{{$item->product_id}}</span>
 												</div>
 												<div class="entry value">
-													<span>{{$item->quantity}}</span>
+													{{$item->quantity}}
 												</div>
 												<div class="entry value-plus active">&nbsp;</div>
 											</div>
 										</div>
 									</td>
-									<td class="invert">{{$item->name}}</td>
+									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item->product_id])}}">{{$item->name}}</a></td>
 									<td class="invert">{{number_format($item->price, 0, '', '.')}} VNĐ</td>
 									<td class="invert">
 										<button type="button" onclick="deleteProduct({{$item->product_id}})" class="btn btn-danger">Xoá</button>
@@ -128,6 +125,7 @@
 					</table>
 				</div>
 			</div>
+			
 			@if (count($cartList) > 0)
 				<div class="checkout-left">
 					<div class="address_form_agile mt-sm-5 mt-4">

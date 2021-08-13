@@ -13,18 +13,18 @@ class CreateSmartwatchDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('smartwatch_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on("products");
-            $table->primary(['product_id']);
-            $table->string('battery');
-            $table->string('ram');
-            $table->string('display');
-            $table->string('cpu');
-            $table->string('gpu');
-            $table->string('storage');
-            $table->timestamps();
-        });
+        // Schema::create('smartwatch_details', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('product_id');
+        //     $table->foreign('product_id')->references('id')->on("products");
+        //     $table->primary(['product_id']);
+        //     $table->string('battery');
+        //     $table->string('ram');
+        //     $table->string('display');
+        //     $table->string('cpu');
+        //     $table->string('gpu');
+        //     $table->string('storage');
+        //     $table->timestamps();
+        // });
     }
 
     /**

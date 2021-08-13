@@ -13,18 +13,18 @@ class CreatePhoneDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('phone_details', function (Blueprint $table) {
-           $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on("products");
-            $table->primary(['product_id']);
-            $table->string('battery');
-            $table->string('ram');
-            $table->string('cpu');
-            $table->string('display');
-            $table->string('camera');
-            $table->string('storage');
-            $table->timestamps();
-        });
+        // Schema::create('phone_details', function (Blueprint $table) {
+        //    $table->unsignedBigInteger('product_id');
+        //     $table->foreign('product_id')->references('id')->on("products");
+        //     $table->primary(['product_id']);
+        //     $table->string('battery');
+        //     $table->string('ram');
+        //     $table->string('cpu');
+        //     $table->string('display');
+        //     $table->string('camera');
+        //     $table->string('storage');
+        //     $table->timestamps();
+        // });
     }
 
     /**

@@ -13,12 +13,12 @@ class CreateThumnailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('thumnails', function (Blueprint $table) {
+        Schema::create('thumbnails', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on("products");
             $table->string('title');
-            $table->text('thumnail');
+            $table->text('thumbnail');
         });
     }
 
