@@ -14,29 +14,29 @@ class PermissionController extends Controller
     }
 
     public function indexRoles(Request $request)
-    {	
-    	$roleList = DB::table('roles') ->paginate(10);
-    	return view('admin.permission.indexroles')->with([
-			'roleList' => $roleList,
-			'count' => 0,
-		]);
+    { 
+      $roleList = DB::table('roles') ->paginate(10);
+      return view('admin.permission.indexroles')->with([
+      'roleList' => $roleList,
+      'count' => 0,
+    ]);
     }
 
 
-    	//Hiển thị view cài đặt tửng Role
-        public function settingRole(Request $request, $id) {	
-    	$permissionList = DB::table('permissions') -> where('role_id', $id) ->get();
+      //Hiển thị view cài đặt tửng Role
+        public function settingRole(Request $request, $id) {  
+      $permissionList = DB::table('permissions') -> where('role_id', $id) ->get();
 
-    	$routeList = DB::table('routes') ->get();
+      $routeList = DB::table('routes') ->get();
 
-    	$list = [];
+      $list = [];
 
-    	foreach ($routeList as $route) {
-    		$status = 0; //Mặc định 0 là trạng thái chưa kích hoạt
-    		foreach ($permissionList as $item) {
-    			if($item->route_id == $route->id) {
-    				$status = $item->status;
-    				break;
+      foreach ($routeList as $route) {
+        $status = 0; //Mặc định 0 là trạng thái chưa kích hoạt
+        foreach ($permissionList as $item) {
+          if($item->route_id == $route->id) {
+            $status = $item->status;
+            break;
                  }
           }
           $list[] = [
@@ -47,12 +47,12 @@ class PermissionController extends Controller
         ];
     }
 
-    	// $list = $list ->paginate(20);
-    	return view('admin.permission.indexsettingrole')->with([
-			'list' => $list,
-			'role_id' => $id,
-			'count' => 0,
-		]);
+      // $list = $list ->paginate(20);
+      return view('admin.permission.indexsettingrole')->with([
+      'list' => $list,
+      'role_id' => $id,
+      'count' => 0,
+    ]);
     }
 
 

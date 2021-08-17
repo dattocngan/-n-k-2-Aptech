@@ -19,14 +19,14 @@ class SaleController extends Controller
 
     public function indexSale(Request $request)
     {
-    	$saleList = DB::table('orders') -> leftjoin('order_details', 'orders.id' ,'=', 'order_details.order_id') -> leftjoin('products', 'products.id', '=', 'order_details.product_id') ->leftjoin('order_status', 'orders.status_id','=','order_status.id')
+      $saleList = DB::table('orders') -> leftjoin('order_details', 'orders.id' ,'=', 'order_details.order_id') -> leftjoin('products', 'products.id', '=', 'order_details.product_id') ->leftjoin('order_status', 'orders.status_id','=','order_status.id')
 
-    	 -> select('order_status.name as order_status_name','products.id as product_id','products.name as product_name', DB::raw('sum(order_details.quantity) as sale_quantity'),'order_details.price as product_price')
-    		-> groupBy('products.id','order_status.name','products.id','products.name','order_details.price')
- 		   	 -> where([
+       -> select('order_status.name as order_status_name','products.id as product_id','products.name as product_name', DB::raw('sum(order_details.quantity) as sale_quantity'),'order_details.price as product_price')
+        -> groupBy('products.id','order_status.name','products.id','products.name','order_details.price')
+         -> where([
             ['orders.is_deleted', '=', '0'],
             ['order_status.name', '=', 'Hoàn Thành'],
-       		 ]);
+           ]);
 
            if (isset($request->product_name)) {
             $saleList =  $saleList->where('products.name', 'like', '%'.$request->product_name.'%');
@@ -58,14 +58,14 @@ class SaleController extends Controller
             $index = ($request->page - 1) * $num;
         }   
 
-    	 return view('admin.sale.index')->with([
+       return view('admin.sale.index')->with([
             'saleList' => $saleList,
             'index' => $index,
             'product_name' => $request->product_name,
             'sort_quantity' => $request->sort_quantity,
             'time_start' => $request->time_start,
             'time_end' => $request->time_end,
-        ]);	
+        ]); 
     }
 
 
