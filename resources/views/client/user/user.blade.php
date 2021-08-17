@@ -56,7 +56,7 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="index.html">Trang chủ</a>
 						<i>|</i>
 					</li>
 					<li>Thông tin cá nhân</li>
@@ -70,7 +70,7 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>P</span>rofile
+				<span>T</span>hông Tin
 			</h3>
                 <div class="form-group">
                     <label for="name">Họ tên</label>

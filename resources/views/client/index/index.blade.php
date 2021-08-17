@@ -305,7 +305,7 @@
 											<img src="{{ URL::asset($product->image) }}" alt="" class="img-fluid">
 										</div>
 										<div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-											<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}">{{$product-> name}}</a>
+											<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}">{{$product->name}}</a>
 											<a href="{{ route('client_single',['id'=>$product->id,'href_param'=>$product->href_param]) }}" class="price-mar mt-2">
 												@if ($product->price_discount > 0)
 													{{number_format($product->price_discount, 0, '', '.')}} VNĐ
@@ -628,7 +628,7 @@
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
-				event.preventDefault();
+				// event.preventDefault();
 
 				$('html,body').animate({
 					scrollTop: $(this.hash).offset().top

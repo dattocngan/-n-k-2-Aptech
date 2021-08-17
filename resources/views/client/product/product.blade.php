@@ -2,6 +2,11 @@
 @section('css')
 <style type="text/css">
 	h3::first-letter {color: blue}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
 </style>
 
 @stop
@@ -362,7 +367,7 @@
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
-				event.preventDefault();
+				// event.preventDefault();
 
 				$('html,body').animate({
 					scrollTop: $(this.hash).offset().top

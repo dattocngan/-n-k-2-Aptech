@@ -1,4 +1,12 @@
 @extends('client.layout.master')
+@section('css')
+	<style type="text/css">
+
+
+
+	</style>
+@stop
+
 
 @section('list')
 	<li class="nav-item mr-lg-3 mb-lg-0 mb-2">
@@ -106,7 +114,7 @@
 							<ul class="slides">
 								<li data-thumb="{{ URL::asset($product->image) }}">
 									<div class="thumb-image">
-										<img style="width: 50%" src="{{ URL::asset($product->image) }}"  data-imagezoom="true" class="img-fluid" alt=""> </div>
+										<img src="{{ URL::asset($product->image) }}"  data-imagezoom="true" class="img-fluid" alt=""> </div>
 								</li>
 							</ul>
 							<div class="clearfix"></div>
@@ -142,7 +150,7 @@
 						<p class="my-3">
 							<i class="far fa-hand-point-right mr-2"></i>
 							<label>1 năm</label> bảo hành</p>
-						<div>
+						<div class="short_description">
 							{!!$product->short_description!!}
 						</div>
 						<p class="my-sm-4 my-3">
@@ -157,7 +165,7 @@
 								<form method="post" action="{{route('client_checkout')}}">
 									@csrf
 									<input hidden type="text" name="idProduct" value="{{$product->id}}">
-									<input style="height: 75px;font-size:20px" type="submit" value="Thêm giỏ hàng" class="button" />
+									<input style="height: 50px;font-size:20px" type="submit" value="Mua Ngay" class="button" />
 								</form>
 							@endif
 						</div>

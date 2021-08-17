@@ -11,7 +11,12 @@ use App\Models\Admin\OrderDetails;
 use DB;
 
 class SaleController extends Controller
-{
+{   
+    public function __construct() {
+    $this->middleware('auth');
+    $this->middleware('checkpermission');
+  }
+
     public function indexSale(Request $request)
     {
     	$saleList = DB::table('orders') -> leftjoin('order_details', 'orders.id' ,'=', 'order_details.order_id') -> leftjoin('products', 'products.id', '=', 'order_details.product_id') ->leftjoin('order_status', 'orders.status_id','=','order_status.id')

@@ -45,27 +45,34 @@
            with font-awesome or any other icon font library -->
            <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <i class="fa fa-book" aria-hidden="true"></i>
               <p>
-                Danh mục sản phẩm
+                Sản Phẩm
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('category_index')}}" class="nav-link">
-                  <p>Danh sách</p>
+                  <p>Danh sách danh mục</p>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a href="{{route('category_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
+                <a href="{{route('product_index')}}" class="nav-link">
+                  <p>Danh sách sản phẩm</p>
+                </a>
+              </li>
+
+                            <li class="nav-item">
+                <a href="{{route('sale_index')}}" class="nav-link">
+                  <p>Doanh số</p>
                 </a>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item menu-open">
+<!--           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -85,33 +92,11 @@
                 </a>
               </li>
             </ul>
-          </li>         
+          </li> -->         
 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Sản phẩm
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('product_index')}}" class="nav-link">
-                  <p>Danh sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('product_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+             <i class="fa fa-book" aria-hidden="true"></i>
               <p>
                 Đơn hàng
                 <i class="right fas fa-angle-left"></i>
@@ -136,40 +121,19 @@
             </ul>
           </li>
 
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Doanh số
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('sale_index')}}" class="nav-link">
-                  <p>Danh sách</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+             <i class="fa fa-book" aria-hidden="true"></i>
               <p>
-                Quản lý tin tức
+                Tin Tức
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('news_index')}}" class="nav-link">
-                  <p>Danh sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('news_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
+                  <p>Danh sách tin tức</p>
                 </a>
               </li>
             </ul>
@@ -178,9 +142,9 @@
 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+             <i class="fa fa-book" aria-hidden="true"></i>
               <p>
-                Cài đặt phân quyền
+                Cài Đặt 
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

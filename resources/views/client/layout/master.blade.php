@@ -260,7 +260,7 @@
 					<div class="container py-md-5 py-sm-4 py-3">
 						<div class="row footer-info w3-agileits-info">
 							<!-- footer categories -->
-							<div class="col-md-3 col-sm-6 footer-grids">
+				<!-- 			<div class="col-md-3 col-sm-6 footer-grids">
 								<h3 class="text-white font-weight-bold mb-3">Danh mục</h3>
 								<ul>
 									<li class="mb-3">
@@ -273,10 +273,10 @@
 										<a href="{{ route('client_product') }}">Máy tính xách tay</a>
 									</li>
 								</ul>
-							</div>
+							</div> -->
 							<!-- //footer categories -->
 							<!-- quick links -->
-							<div class="col-md-3 col-sm-6 footer-grids mt-sm-0 mt-4">
+							<div class="col-md-4 col-sm-6 footer-grids mt-sm-0 mt-4">
 								<h3 class="text-white font-weight-bold mb-3">Liên kết nhanh</h3>
 								<ul>
 									<li class="mb-3">
@@ -299,26 +299,22 @@
 									</li>
 								</ul>
 							</div>
-							<div class="col-md-3 col-sm-6 footer-grids mt-md-0 mt-4">
+							<div class="col-md-4 col-sm-6 footer-grids mt-md-0 mt-4">
 								<h3 class="text-white font-weight-bold mb-3">Liên hệ</h3>
 								<ul>
 									<li class="mb-3">
-										<i class="fas fa-map-marker"></i> Nhà thầy Điệp</li>
+										<i class="fas fa-map-marker"></i> Tòa nhà Detech Số 8 Tôn Thất Thuyết, TP Hà Nội</li>
 										<li class="mb-3">
-											<i class="fas fa-mobile"></i> Số thầy Điệp </li>
+											<i class="fas fa-mobile"></i> +84.7646302 </li>
 											<li class="mb-3">
-												<i class="fas fa-phone"></i> 0 967 962 184 </li>
+												<i class="fas fa-phone"></i> 0967962184 </li>
 												<li class="mb-3">
 													<i class="fas fa-envelope-open"></i>
-													<a href="mailto:tiendat184.it@mail.com"> tiendat184.it@mail.com</a>
-												</li>
-												<li>
-													<i class="fas fa-envelope-open"></i>
-													<a href="mailto:tranvandiep.it@mail.com"> tranvandiep.it@mail.com</a>
+													<a href="mailto:tiendat184.it@mail.com"> electric.store@gmail.com</a>
 												</li>
 											</ul>
 										</div>
-										<div class="col-md-3 col-sm-6 footer-grids w3l-agileits mt-md-0 mt-4">
+										<div class="col-md-4 col-sm-6 footer-grids w3l-agileits mt-md-0 mt-4">
 											<!-- newsletter -->
 											<h3 class="text-white font-weight-bold mb-3">Bản tin</h3>
 											<p class="mb-3">Giao hàng miễn phí cho đơn hàng đầu tiên của bạn!</p>

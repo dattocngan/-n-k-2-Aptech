@@ -6,7 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 class PermissionController extends Controller
-{
+{ 
+
+    public function __construct() {
+    $this->middleware('auth');
+    $this->middleware('checkpermission');
+    }
+
     public function indexRoles(Request $request)
     {	
     	$roleList = DB::table('roles') ->paginate(10);
@@ -75,7 +81,6 @@ class PermissionController extends Controller
         ]);
      }
      return "Thay Đổi Trạng Thái Thành Công";
-
 
   }
 }

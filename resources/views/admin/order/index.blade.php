@@ -54,7 +54,7 @@
      </div>
 
       <div class="col-2">
-        <button style="width: 100%" class="btn btn-success">Tìm</button>
+        <button style="width: 100%" class="btn btn-primary">Tìm</button>
      </div>
    </div>
 
@@ -103,7 +103,7 @@
                             <select class="form-control" onchange="updateOrderStatus(this, {{$order->id}})">
                                 @foreach ($statusList as $status)
                                   <option 
-                                     @if ($status->id == "1" || $status->name == "Hủy")
+                                     @if ($status->id == "1" || $status->id == "5")
                                           {{"disabled"}}
                                       @endif
                                      @if ($order->order_status_name == $status->name)
@@ -116,7 +116,13 @@
 
                           </td>
                           <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem Chi Tiết</a></td>
-                        
+                          <td>
+                            @if($order->status_id == 4)
+                              <div class="alert alert-success">Đơn Hoàn Thành</div>
+                            @else
+                              <button onclick="deleteOrder({{$order->id}})" class="btn btn-danger">Hủy</button>
+                            @endif
+                          </td>
                         </tr>
                       @endforeach
 
@@ -173,6 +179,25 @@
         location.reload();
       })
     }
+
+      function deleteOrder(id){
+      var option = confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')
+      if (!option) {
+        return
+      }
+      $.ajax({
+        data: {
+            "status_order" : "confirmed" ,
+            "id": id,
+            "_token": "{{ csrf_token() }}",
+        },
+        type: "DELETE",
+        url: location.origin +'/' + 'admin/order/' + id,
+        success: function(res) {
+          location.reload();
+        }
+      });
+}
   </script>
   @stop
 

@@ -111,7 +111,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Price level ko tồn tại
                     //Đổ ra full sản phẩm theo search
@@ -124,7 +124,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
                 //San pham hot
                 $productListHot =DB::table('products')
@@ -164,7 +164,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Neu la category con
                     $productList = DB::table('products')
@@ -177,7 +177,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
             }else{
                 //Neu la category cha
@@ -191,7 +191,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Neu la category con
                     $productList = DB::table('products')
@@ -203,7 +203,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
             }
             //San pham hot
@@ -424,7 +424,7 @@ class ClientController extends Controller
         ->leftJoin('products','products.id','=', 'carts.product_id')
         ->where('user_id',$idUser)
         ->where('products.is_deleted',0)
-        ->select('carts.*','products.image','products.name')
+        ->select('carts.*','products.image','products.name as product_name')
         ->get();
         return view('client.checkout.checkout')->with([
             'cartList' => $cartList,

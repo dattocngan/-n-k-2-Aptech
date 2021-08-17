@@ -13,6 +13,11 @@ use DB;
 
 class ProductController extends Controller
 {
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
+	
 	public function createProduct(Request $request) {
 		$categoryParentList = Category::where([
 		    ['is_deleted', '=', '0'],
@@ -115,7 +120,7 @@ class ProductController extends Controller
 		$product->name = $request->name;
 		$product->price = $request->price;
 		$product->price_discount = $request->price_discount;
-		$product->href_param = $request->name;
+		$product->href_param = $this->exportParam($request->name);
 
 		$price_select = $request->price;
 		if (isset($request->price_discount) && $request->price_discount > 0 ) {
@@ -134,7 +139,7 @@ class ProductController extends Controller
 		else if ($price_select >= 10000000 && $price_select < 20000000){
 			$product->price_level = 4;
 		}
-		else if ($price_select >= 20000000 && $price_select < 30000.000){
+		else if ($price_select >= 20000000 && $price_select < 30000000){
 			$product->price_level = 5;
 		}
 		else {
@@ -281,7 +286,7 @@ class ProductController extends Controller
 		//Lưu nội dung tin tức trong Form sửa vào database
 		public function updateProduct(Request $request, $id){
 		$validatedNews = $request->validate([
-    		'name' => 'required|unique:products',
+    		'name' => 'required',
     		'price'  => 'required',
     		'quantity_available' => 'required',
     		'short_description' => 'required',
@@ -302,7 +307,7 @@ class ProductController extends Controller
 			$product->short_description = $request->short_description;
 			$product->description = $request->description;
 			$product->updated_at = date('Y-m-d H:i:s');
-			$product->href_param = $request->name;
+			$product->href_param = $this->exportParam($request->name);
 			
 			$price_select = $request->price;
 			if (isset($request->price_discount) && $request->price_discount > 0 ) {
@@ -321,7 +326,7 @@ class ProductController extends Controller
 			else if ($price_select >= 10000000 && $price_select < 20000000){
 			    $product->price_level = 4;
 			}
-			else if ($price_select >= 20000000 && $price_select < 30000.000){
+			else if ($price_select >= 20000000 && $price_select < 30000000){
 			    $product->price_level = 5;
 			}
 			else {
@@ -428,5 +433,21 @@ class ProductController extends Controller
           	 ];
 
 			return json_encode($res);
+	}
+
+	private function exportParam($str) {
+		$str = trim($str);
+		$str = strtolower($str);
+		$str = str_replace("_", " ", $str);
+		$str = str_replace(".", " ", $str);
+		$str = str_replace("[", " ", $str);
+		$str = str_replace("]", " ", $str);
+		$str = str_replace("-", " ", $str);
+		$str = trim($str);
+		$str = preg_replace('!\s+!', ' ', $str);
+		$str = str_replace(" ", "-", $str);
+		$str = preg_replace('/[^A-Za-z0-9\-]/', '', $str);
+
+	return $str;
 	}
 }

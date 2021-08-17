@@ -13,6 +13,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('checkpermission');
+    }
+
     public function index(Request $request)
     {
         $statusList = DB::table("order_status") ->get();
@@ -83,7 +88,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {   
-       $orderDetails = DB::table('order_details')->leftjoin('products', 'order_details.product_id', '=', 'products.id') -> select('order_details.*','products.name as product_name') -> where([
+       $orderDetails = DB::table('order_details')->leftjoin('products', 'order_details.product_id', '=', 'products.id') -> select('order_details.*','products.name as product_name', 'products.image as product_image') -> where([
             ['order_details.order_id', '=', $id],
         ]) ->get();
 
@@ -129,7 +134,7 @@ class OrderController extends Controller
     {
         $order_id = $id;
         $order = Order::find($order_id);
-        $order->status_id = 6;
+        $order->status_id = 5;
         $order->updated_at = now();
         //Kiem tra trang thai don hang, neu don hang da xac nhan bi Admin huy thi cong lại số lượng bảng products
         $status_order = $request->status_order;

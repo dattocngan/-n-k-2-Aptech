@@ -56,10 +56,10 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="index.html">Trang Chủ</a>
 						<i>|</i>
 					</li>
-					<li>Checkout</li>
+					<li>Giỏ Hàng</li>
 				</ul>
 			</div>
 		</div>
@@ -70,12 +70,14 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>C</span>heckout
+				<span>G</span>iỏ Hàng
 			</h3>
 			<!-- //tittle heading -->
 			<div class="checkout-right">
-				<h4 class="mb-sm-4 mb-3">Your shopping cart contains:
+				<h4 class="mb-sm-4 mb-3">
+					Giỏ hàng đang có
 					<span>{{count($cartList)}}</span>
+					sản phẩm
 				</h4>
 				<div class="table-responsive">
 					<table class="timetable_sub" style="border:0px">
@@ -95,7 +97,7 @@
 							@foreach ($cartList as $item)
 								<tr class="rem1">
 									<td class="invert-image">
-										<a href="{{ route('client_single', ['id'=>$item->product_id]) }}">
+										<a href="{{ route('client_single', ['id'=>$item->product_id,'href_param'=>$item->product_name]) }}">
 											<img src="{{ URL::asset($item->image) }}" alt=" " class="img-responsive">
 										</a>
 									</td>
@@ -113,7 +115,7 @@
 											</div>
 										</div>
 									</td>
-									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item->product_id])}}">{{$item->name}}</a></td>
+									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item->product_id,'href_param'=>$item->product_name])}}">{{$item->product_name}}</a></td>
 									<td class="invert">{{number_format($item->price, 0, '', '.')}} VNĐ</td>
 									<td class="invert">
 										<button type="button" onclick="deleteProduct({{$item->product_id}})" class="btn btn-danger">Xoá</button>
@@ -151,7 +153,7 @@
 											</div>
 										</div>
 									</div>
-									<button class="submit check_out btn">Vận chuyển tới địa chỉ này</button>
+									<button class="submit check_out btn">Đặt Hàng</button>
 								</div>
 							</div>
 						</form>

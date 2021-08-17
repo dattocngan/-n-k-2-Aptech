@@ -111,7 +111,7 @@
   </div>
 
   <div class="col-sm-2">
-   <button style="width: 100%" type="submit" class="btn btn-success">Tìm sản phẩm</button>
+   <button style="width: 100%" type="submit" class="btn btn-primary">Tìm sản phẩm</button>
  </div>
 </div>
 </form>
@@ -126,10 +126,10 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Danh sách</h3>
-            <div id="message"></div>
-          </div>
+            <div class="card-header" style="display: flex;">
+            <div style="width: 50%"><h3 class="card-title">Danh sách</h3></div>
+             <div style="width: 50%"><a style="float: right; width: 50%" class="btn btn-success" href="{{route('product_create')}}">Thêm Mới</a></div>
+            </div>
           <!-- /.card-header -->
           <div class="card-body">
             <table id="example2" class="table table-bordered table-hover">

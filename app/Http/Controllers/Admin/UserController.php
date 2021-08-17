@@ -8,7 +8,13 @@ use App\Models\User;
 use DB;
 
 class UserController extends Controller
-{
+{	
+
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
+	
 	public function indexUsers(Request $request)
 	{	
 		$roleList = DB::table('roles') ->get();

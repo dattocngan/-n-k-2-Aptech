@@ -10,15 +10,27 @@
   }
 
   .card-body thead tr th:nth-child(1) {
-    /*width: 5%;*/
+    width: 10%;
   }
 
   .card-body thead tr th:nth-child(2) {
-    /*width: 75%;*/
+    width: 25%;
   }
 
   .card-body thead tr th:nth-child(3) {
-    /*width: 20%;*/
+    width: 20%;
+  }
+
+    .card-body thead tr th:nth-child(4) {
+    width: 15%;
+  }
+
+  .card-body thead tr th:nth-child(5) {
+    width: 15%;
+  }
+
+  .card-body thead tr th:nth-child(6) {
+    width: 15%;
   }
   .card-title{
     width: 100%;
@@ -26,19 +38,16 @@
     padding: 5px 0px;
   }
 
-  .card-title div:nth-child(1){
-    width: 20%;
-  }
-  .card-title div:nth-child(2){
-    width: 10%;
-  }
-  .card-title div:nth-child(3){
-    width: 10%;
-  }
+
 
   tbody {
     text-align: center;
   }
+  tbody img{
+    max-width: 100%;
+    height: auto;
+  }
+
 </style>
 @stop
 @section('content')
@@ -75,6 +84,7 @@
                         <tr>
                           <th>STT</th>
                           <th>Tên Sản Phẩm</th>
+                           <th>Hình Ảnh</th>
                           <th>Số Lượng</th>
                           <th>Giá Đơn Vị</th>
                           <th>Tổng Tiền</th>
@@ -85,6 +95,7 @@
                         <tr>
                           <td>{{++$count}}</td>
                           <td>{{$item->product_name}}</td>
+                           <td><img src="{{asset($item->product_image)}}"></td>
                           <td>{{$item->quantity}}</td>
                           <td>{{number_format($item->price)}}</td>
                           <td>{{number_format($item->price * $item->quantity)}}</td>

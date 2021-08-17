@@ -8,6 +8,10 @@ use App\Models\Admin\News;
 use DB;
 class NewsController extends Controller
 {	
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
 
 	//Đổ ra Form Tạo Tin Tức mới
 	public function createNews(Request $request) {
