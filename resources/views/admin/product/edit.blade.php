@@ -107,7 +107,19 @@
           <div for = "image" class="form-group">
             <label>Hình Ảnh</label>
             <input type="file" name="image" class="form-control" id="image">
-            <p><img style="height: 100px" src="{{asset($product->image)}}"></p>
+            <p><img style="max-width: 100%" src="{{asset($product->image)}}"></p>
+          </div>
+
+          <div for = "slide" class="form-group">
+            <label>Hình Slide</label>
+            <input multiple type="file" name="slide[]" class="form-control" id="slide">
+            @if ( count($thumbnaiList) > 0 )
+                <div style="display: flex;">
+                  @foreach ($thumbnaiList as $thumbnail)
+                     <img style="max-width: 33.33%" src="{{asset($thumbnail->thumbnail)}}">
+                  @endforeach
+                </div>
+            @endif
           </div>
 
           <div class="row">

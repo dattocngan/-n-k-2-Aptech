@@ -9,6 +9,11 @@ use App\Models\Admin\Brand;
 
 class BrandController extends Controller
 {
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
+
 	public function indexBrand(Request $request) {
 		// $brandList = Brand::where([
 		//     ['is_deleted', '=', '0'],

@@ -111,7 +111,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Price level ko tồn tại
                     //Đổ ra full sản phẩm theo search
@@ -124,7 +124,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
                 //San pham hot
                 $productListHot =DB::table('products')
@@ -164,7 +164,7 @@ class ClientController extends Controller
                     ->where('products.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Neu la category con
                     $productList = DB::table('products')
@@ -177,7 +177,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
             }else{
                 //Neu la category cha
@@ -191,7 +191,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }else{
                     //Neu la category con
                     $productList = DB::table('products')
@@ -203,7 +203,7 @@ class ClientController extends Controller
                     ->where('categories.is_deleted',0)
                     ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                     ->groupBy('products.id')
-                    ->paginate(3);
+                    ->paginate(9);
                 }
             }
             //San pham hot
@@ -424,7 +424,7 @@ class ClientController extends Controller
         ->leftJoin('products','products.id','=', 'carts.product_id')
         ->where('user_id',$idUser)
         ->where('products.is_deleted',0)
-        ->select('carts.*','products.image','products.name')
+        ->select('carts.*','products.image','products.name as product_name')
         ->get();
         return view('client.checkout.checkout')->with([
             'cartList' => $cartList,
@@ -496,7 +496,8 @@ class ClientController extends Controller
                 'order_date' => now(),
                 'status_id' => 1, // 1 la dang giao hang
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
+                'is_deleted' => 0,
             ]);
             // cập nhật lên bảng order_details
             foreach($cartList as $cartItem){
@@ -506,7 +507,8 @@ class ClientController extends Controller
                     'quantity' => $cartItem->quantity,
                     'price' => $cartItem->price,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
+                    'is_deleted' => 0,
                 ]);
             }
             //xóa dữ liệu trong cart
@@ -684,7 +686,60 @@ class ClientController extends Controller
 
     //News
     public function news(Request $request)
-    {
-        return view('client.news.news');
+    {   
+                //Lấy ra danh sách bố
+        $categoryP = DB::table('categories')
+        ->where('parent_id',0)
+        ->where('is_deleted',0)
+        ->get();
+        //Lấy ra danh sách con
+        $categoryC = DB::table('categories')
+        ->where('parent_id','<>',0)
+        ->where('is_deleted',0)
+        ->get();
+
+        $number = 10;
+        $newsList = DB::table('news')
+        ->where('is_deleted', 0)
+        ->paginate($number);
+
+        $index = 0;
+        if (isset($request->page) && $request->page > 0) {
+            $index = ($request->page - 1) * $number;
+        }
+
+        return view('client.news.news')->with([
+            'newsList' => $newsList,
+            'index'  => $index,
+            'categoryP' =>$categoryP,
+            'categoryC' =>$categoryC,
+        ]);
+    }
+
+        public function newsDetails(Request $request, $id, $href_param)
+    {   
+
+         //Lấy ra danh sách bố
+        $categoryP = DB::table('categories')
+        ->where('parent_id',0)
+        ->where('is_deleted',0)
+        ->get();
+        //Lấy ra danh sách con
+        $categoryC = DB::table('categories')
+        ->where('parent_id','<>',0)
+        ->where('is_deleted',0)
+        ->get();
+        $newsDetails = DB::table('news')
+        ->where('is_deleted', 0)
+        ->where('id',$id)
+        ->get();
+
+        $newsDetails = $newsDetails[0];
+
+        return view('client.news.details')->with([
+            'newsDetails' => $newsDetails,
+            'categoryP' =>$categoryP,
+            'categoryC' =>$categoryC,
+        ]);
     }
 }

@@ -56,7 +56,7 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="index.html">Trang chủ</a>
 						<i>|</i>
 					</li>
 					<li>Chi tiết đơn hàng</li>

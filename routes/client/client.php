@@ -3,18 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
+Route::get('/', [\App\Http\Controllers\Client\ClientController::class,"index"])->name('client_index');
 
 Route::group(['prefix' => '/client'], function () {
     Route::get('/test', [\App\Http\Controllers\Client\ClientController::class,"test"])->name('test');
     //Index
-    Route::get('/index', [\App\Http\Controllers\Client\ClientController::class,"index"])->name('client_index');
+ 
     
     //Product
     Route::get('/product', [\App\Http\Controllers\Client\ClientController::class,"product"])->name('client_product');
 
     //Single
-    Route::get('/single/{id}', [\App\Http\Controllers\Client\ClientController::class,"single"])->name('client_single');
+    Route::get('/product/{id}-{href_param}.html', [\App\Http\Controllers\Client\ClientController::class,"single"])->name('client_single');
     
     //Checkout
     Route::post('/uptoDB', [\App\Http\Controllers\Client\ClientController::class,"checkout"])->name('client_checkout');
@@ -63,4 +63,6 @@ Route::group(['prefix' => '/client'], function () {
 
     //News
     Route::get('/news', [\App\Http\Controllers\Client\ClientController::class,"news"])->name('client_news');
+
+    Route::get('/newsdetails/{id}/{href_param}', [\App\Http\Controllers\Client\ClientController::class,"newsDetails"])->name('news_details');
 });

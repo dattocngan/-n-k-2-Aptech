@@ -2,24 +2,32 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-      <img src="{{asset('/template/admin/AdminLTE3/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Electron Store</span>
+      <img src="{{asset('/project/images/logo2.png')}}" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Electric Store</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="https://scontent.fpnh22-1.fna.fbcdn.net/v/t1.6435-9/72346489_2528544227375161_2578776653182271488_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=0debeb&_nc_ohc=jU34_f-IaEgAX83IdQU&_nc_ht=scontent.fpnh22-1.fna&oh=3c750c3ff5bf25fa667b10f12cf0c4f2&oe=612541C8" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block">Đỗ Trung Đức</a>
+
+          @if (Auth::check()) 
+          <span style="color: white; display: block; font-size: 1.2rem">Welcome: {{Auth::user()->name}}</span> 
+          <div>
+            <a href="{{ route('logout') }}"  class="text-white" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form>
+          </div>
+          @endif
+
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
+<!--       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -28,7 +36,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -37,27 +45,34 @@
            with font-awesome or any other icon font library -->
            <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+            <i class="fa fa-book" aria-hidden="true"></i>
               <p>
-                Danh mục sản phẩm
+                Sản Phẩm
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('category_index')}}" class="nav-link">
-                  <p>Danh sách</p>
+                  <p>Danh sách danh mục</p>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a href="{{route('category_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
+                <a href="{{route('product_index')}}" class="nav-link">
+                  <p>Danh sách sản phẩm</p>
+                </a>
+              </li>
+
+                            <li class="nav-item">
+                <a href="{{route('sale_index')}}" class="nav-link">
+                  <p>Doanh số</p>
                 </a>
               </li>
             </ul>
           </li>
 
-            <li class="nav-item menu-open">
+<!--           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -77,33 +92,11 @@
                 </a>
               </li>
             </ul>
-          </li>         
+          </li> -->         
 
-         <li class="nav-item menu-open">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Sản phẩm
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('product_index')}}" class="nav-link">
-                  <p>Danh sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('product_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+             <i class="fa fa-book" aria-hidden="true"></i>
               <p>
                 Đơn hàng
                 <i class="right fas fa-angle-left"></i>
@@ -120,31 +113,50 @@
                   <p>Danh sách đã xác nhận</p>
                 </a>
               </li>
-              <li class="nav-item">
+   <!--            <li class="nav-item">
                 <a href="" class="nav-link">
                   <p>Thêm mới</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
+
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+             <i class="fa fa-book" aria-hidden="true"></i>
               <p>
-                Quản lý tin tức
+                Tin Tức
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('news_index')}}" class="nav-link">
-                  <p>Danh sách</p>
+                  <p>Danh sách tin tức</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+             <i class="fa fa-book" aria-hidden="true"></i>
+              <p>
+                Cài Đặt 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('users_index')}}" class="nav-link">
+                  <p>Danh sách tài khoản</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('news_create')}}" class="nav-link">
-                  <p>Thêm mới</p>
+                <a href="{{route('roles_index')}}" class="nav-link">
+                  <p>Cài đặt chi tiết</p>
                 </a>
               </li>
             </ul>

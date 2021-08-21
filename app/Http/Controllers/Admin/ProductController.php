@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Product;
 use App\Models\Admin\Category;
 use App\Models\Admin\Brand;
+use App\Models\Admin\ProductThumnail;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class ProductController extends Controller
 {
+	public function __construct() {
+		$this->middleware('auth');
+		$this->middleware('checkpermission');
+	}
+	
 	public function createProduct(Request $request) {
 		$categoryParentList = Category::where([
 		    ['is_deleted', '=', '0'],
@@ -70,7 +77,7 @@ class ProductController extends Controller
 
 	//Lưu product mới vào Database
 	public function storeProduct(Request $request) {
-		$validatedNews = $request->validate([
+		$validated = $request->validate([
     		'name' => 'required|unique:products',
     		'price'  => 'required',
     		'quantity_available' => 'required',
@@ -85,6 +92,7 @@ class ProductController extends Controller
 			'image.required' => 'Bạn chưa chọn hình ảnh chính mô tả sản phẩm',
 
 		]);
+
 		//Upload anh chinh Image cua san pham
 		if ($request->hasFile('image')) {
 			$image = $request->file('image');
@@ -99,64 +107,97 @@ class ProductController extends Controller
 				}
 
           		$image->move('project/images/products/image/',$image_name); 
-          	
+
      		}else{
 	 			return redirect()->route('product_create') -> with([
 					'err_image' => "Chọn lại ảnh minh họa bài viết định dạng jpg, png, jpeg",
 				]);
      		}
   		}
-	  		$product = new Product;
-			$product->category_id = $request->categorychild_id;
-			$product->name = $request->name;
-			$product->price = $request->price;
-			$product->price_discount = $request->price_discount;
-			$product->href_param = $request->name;
-			
-			$price_select = $request->price;
-			if (isset($request->price_discount) && $request->price_discount > 0 ) {
-				$price_select = $request->price_discount;
-			}
 
-			if ($price_select < 1000000){
-			    $product->price_level = 1;
-			}
-			else if ($price_select >= 1000000 && $price_select < 5000000){
-			    $product->price_level = 2;
-			}
-			else if ($price_select >= 5000000 && $price_select < 10000000){
-			    $product->price_level = 3;
-			}
-			else if ($price_select >= 10000000 && $price_select < 20000000){
-			    $product->price_level = 4;
-			}
-			else if ($price_select >= 20000000 && $price_select < 30000.000){
-			    $product->price_level = 5;
-			}
-			else {
-			    $product->price_level = 6;  
-			}
+		$product = new Product;
+		$product->category_id = $request->categorychild_id;
+		$product->name = $request->name;
+		$product->price = $request->price;
+		$product->price_discount = $request->price_discount;
+		$product->href_param = $this->exportParam($request->name);
 
-			$product->quantity_available = $request->quantity_available;
-
-			if (isset($request->description) && $request->description != '' ) {
-				$product->description = $request->description;
-			}
-			
-			$product->is_deleted = 0;
-
-			$product->created_at = date('Y-m-d H:i:s');
-
-			$product->short_description = $request->short_description;
-
-			$product->image = '/project/images/products/image/'.$image_name;
-		
-			$product->save();
-
-			return redirect()->route('product_create') -> with([
-					'message' => "Đã thêm sản phẩm mới thành công",
-			]);
+		$price_select = $request->price;
+		if (isset($request->price_discount) && $request->price_discount > 0 ) {
+			$price_select = $request->price_discount;
 		}
+
+		if ($price_select < 1000000){
+			$product->price_level = 1;
+		}
+		else if ($price_select >= 1000000 && $price_select < 5000000){
+			$product->price_level = 2;
+		}
+		else if ($price_select >= 5000000 && $price_select < 10000000){
+			$product->price_level = 3;
+		}
+		else if ($price_select >= 10000000 && $price_select < 20000000){
+			$product->price_level = 4;
+		}
+		else if ($price_select >= 20000000 && $price_select < 30000000){
+			$product->price_level = 5;
+		}
+		else {
+			$product->price_level = 6;  
+		}
+
+		$product->quantity_available = $request->quantity_available;
+
+		if (isset($request->description) && $request->description != '' ) {
+			$product->description = $request->description;
+		}
+
+		$product->is_deleted = 0;
+
+		$product->created_at = date('Y-m-d H:i:s');
+
+		$product->short_description = $request->short_description;
+
+		$product->image = 'project/images/products/image/'.$image_name;
+		
+		$product->save();
+
+		//Upload anh phụ Slide cua san pham
+		if ($request->hasFile('slide')) {
+			$slide = $request->file('slide');
+			
+			//kiem tra dinh dang tung phan tu slide
+			foreach ($slide as $item) {
+				$type = $item->getClientOriginalExtension();
+				if ($type != 'jpg' && $type != 'png' && $type != 'jpeg') {
+					return redirect()->route('product_create') -> with([
+						'err_image' => "Chọn lại ảnh slide định dạng jpg, png, jpeg",
+					]);
+				}		
+			}
+
+			// Upload tung phan tu slide
+			foreach ($slide as $item) {
+				$item_name = time().'_'. $item->getClientOriginalName(); 
+
+				while (file_exists($item_name)) {
+					$$item_name = time().'_'.$item_name->getClientOriginalName();
+				}
+
+				$item->move('project/images/products/thumbnails/',$item_name); 
+
+			$product_thumnail = new ProductThumnail;
+			$product_thumnail->product_id = $product->id;
+			$product_thumnail->thumbnail = 'project/images/products/thumbnails/'.$item_name;
+			$product_thumnail->save();
+			}
+		}
+
+		return redirect()->route('product_create') -> with([
+			'message' => "Đã thêm sản phẩm mới thành công",
+		]);
+	}
+
 
 		//Đổ danh sách tin sản phẩm DataBase ra table dữ liệu
 		public function indexProduct(Request $request){
@@ -214,6 +255,10 @@ class ProductController extends Controller
 		    ['is_deleted', '=', '0'],
 			])->get();
 
+			$thumbnaiList = ProductThumnail::where([
+		  	  ['product_id', '=', $id],
+			])->get();
+
 
 			$product = Product::find($id);
 
@@ -226,12 +271,14 @@ class ProductController extends Controller
 
 			$categoryparent_id = $categoryparent->id;
 			//Tìm id của category to và nhỏ truyền sang view End
+
 			return view('admin.product.edit')->with([
 				'product' => $product,
 				'categorychild_id' => $categorychild_id,
 				'categoryparent_id' => $categoryparent_id,
 				'categoryChildList' => $categoryChildList,
-				'categoryParentList' => $categoryParentList
+				'categoryParentList' => $categoryParentList,
+				'thumbnaiList'=>$thumbnaiList
 			]);
 		}
 
@@ -239,7 +286,7 @@ class ProductController extends Controller
 		//Lưu nội dung tin tức trong Form sửa vào database
 		public function updateProduct(Request $request, $id){
 		$validatedNews = $request->validate([
-    		'name' => 'required|unique:products',
+    		'name' => 'required',
     		'price'  => 'required',
     		'quantity_available' => 'required',
     		'short_description' => 'required',
@@ -260,7 +307,7 @@ class ProductController extends Controller
 			$product->short_description = $request->short_description;
 			$product->description = $request->description;
 			$product->updated_at = date('Y-m-d H:i:s');
-			$product->href_param = $request->name;
+			$product->href_param = $this->exportParam($request->name);
 			
 			$price_select = $request->price;
 			if (isset($request->price_discount) && $request->price_discount > 0 ) {
@@ -279,7 +326,7 @@ class ProductController extends Controller
 			else if ($price_select >= 10000000 && $price_select < 20000000){
 			    $product->price_level = 4;
 			}
-			else if ($price_select >= 20000000 && $price_select < 30000.000){
+			else if ($price_select >= 20000000 && $price_select < 30000000){
 			    $product->price_level = 5;
 			}
 			else {
@@ -302,15 +349,59 @@ class ProductController extends Controller
 
 	      		$image->move('project/images/products/image/',$image_name); 
 
-				// if(file_exists($product->thumnail)){
-				//    unlink($product->thumnail);
-				// }
+				if(file_exists($product->image)){
+				   unlink($product->image);
+				}
 
-	          	$product->image = '/project/images/products/image/'.$image_name;
+	          	$product->image = 'project/images/products/image/'.$image_name;
   			}
 			
 		}
 				$product->save();
+
+	//Upload anh phụ Slide cua san pham
+		if ($request->hasFile('slide')) {
+
+
+			$slide = $request->file('slide');
+			
+			//kiem tra dinh dang tung phan tu slide
+			foreach ($slide as $item) {
+				$type = $item->getClientOriginalExtension();
+				if ($type != 'jpg' && $type != 'png' && $type != 'jpeg') {
+					return redirect()->route('product_edit') -> with([
+						'err_image' => "Chọn lại ảnh slide định dạng jpg, png, jpeg",
+					]);
+				}		
+			}
+
+			//Xoa cac anh slide cu di
+			$thumbnailList = ProductThumnail::where('product_id',$id) ->get();
+			foreach ($thumbnailList as $thumbnail) {
+
+				if(file_exists($thumbnail->thumbnail)){
+					unlink($thumbnail->thumbnail);
+				}
+				
+			}
+			ProductThumnail::where('product_id',$id) ->delete();
+
+			// Upload tung phan tu slide
+			foreach ($slide as $item) {
+				$item_name = time().'_'. $item->getClientOriginalName(); 
+
+				while (file_exists($item_name)) {
+					$$item_name = time().'_'.$item_name->getClientOriginalName();
+				}
+
+				$item->move('project/images/products/thumbnails/',$item_name); 
+
+			$product_thumnail = new ProductThumnail;
+			$product_thumnail->product_id = $product->id;
+			$product_thumnail->thumbnail = 'project/images/products/thumbnails/'.$item_name;
+			$product_thumnail->save();
+			}
+		}
 
 				return redirect()->route('product_edit',['id'=>$product->id]) -> with([
 					'message' => "Đã sửa sản phẩm thành công",
@@ -324,7 +415,6 @@ class ProductController extends Controller
 			$product->is_deleted = 1;
 			$product->save();
 
-			// $productList = Product::where('is_deleted', 0)->paginate(10);
 			$productList = DB::table('products') -> leftjoin('categories', 'products.category_id', '=', 'categories.id') -> select('products.*', 'categories.name as category_name')->where('products.is_deleted', 0);
 
 			if (isset($request->categorychild_id) && $request->categorychild_id > 0) {
@@ -343,5 +433,21 @@ class ProductController extends Controller
           	 ];
 
 			return json_encode($res);
+	}
+
+	private function exportParam($str) {
+		$str = trim($str);
+		$str = strtolower($str);
+		$str = str_replace("_", " ", $str);
+		$str = str_replace(".", " ", $str);
+		$str = str_replace("[", " ", $str);
+		$str = str_replace("]", " ", $str);
+		$str = str_replace("-", " ", $str);
+		$str = trim($str);
+		$str = preg_replace('!\s+!', ' ', $str);
+		$str = str_replace(" ", "-", $str);
+		$str = preg_replace('/[^A-Za-z0-9\-]/', '', $str);
+
+	return $str;
 	}
 }

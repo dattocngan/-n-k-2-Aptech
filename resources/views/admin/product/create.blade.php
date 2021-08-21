@@ -94,8 +94,13 @@
           </div>
 
           <div for = "image" class="form-group">
-            <label>Hình Ảnh</label>
+            <label>Hình Ảnh Chính</label>
             <input type="file" name="image" class="form-control" id="image">
+          </div>
+
+          <div for = "slide" class="form-group">
+            <label>Hình Slide</label>
+            <input multiple type="file" name="slide[]" class="form-control" id="slide">
           </div>
 
           <div class="row">

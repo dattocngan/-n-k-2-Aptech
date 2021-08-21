@@ -13,30 +13,39 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('checkpermission');
+    }
+
     public function index(Request $request)
     {
         $statusList = DB::table("order_status") ->get();
 
-        $orderList = DB::table('orders') -> leftjoin('users', 'orders.user_id', '=', 'users.id') -> leftjoin ('order_status', 'orders.status_id', '=', 'order_status.id') -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.name as order_status_name') -> where([
-            ['orders.is_deleted', '=', '0'],
-            ['orders.status_id', '<>', '1'],
-        ]);
+        $orderList = DB::table('orders')
+            -> leftjoin('users', 'orders.user_id', '=', 'users.id')
+            -> leftjoin ('order_status', 'orders.status_id', '=', 'order_status.id')
+            -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.name as order_status_name') 
+            -> where('orders.status_id', '<>', '1')
+            -> where('orders.is_deleted', '=', '0');    
+
 
         //tim kiem theo ten khach hang
         if (isset($request->customer_name) && $request->customer_name != '' ) {
             $orderList = $orderList ->where('users.name', 'like', '%'.$request->customer_name.'%');
         }
 
-        if (isset($request->sort) && $request->sort != '' ) {
-            if ($request->sort == 'asc') {
+        //Sắp xếp theo ngày đặt hàng
+        if ($request->sort == 'asc') {
                 $orderList = $orderList ->orderBy('orders.order_date', 'asc');
+            }else {
+                $orderList = $orderList -> orderBy('orders.order_date', 'desc');
             }
-        }
 
-        $orderList = $orderList -> orderBy('orders.order_date', 'desc') ->paginate(20);
+            $orderList = $orderList ->paginate(10);
 
         //Đánh lại số thứ tự từng page paginate
-        $num = 2;
+        $num = 10;
         $index = 0;
         if (isset($request->page)) {
             $index = ($request->page - 1) * $num;
@@ -79,7 +88,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {   
-       $orderDetails = DB::table('order_details')->leftjoin('products', 'order_details.product_id', '=', 'products.id') -> select('order_details.*','products.name as product_name') -> where([
+       $orderDetails = DB::table('order_details')->leftjoin('products', 'order_details.product_id', '=', 'products.id') -> select('order_details.*','products.name as product_name', 'products.image as product_image') -> where([
             ['order_details.order_id', '=', $id],
         ]) ->get();
 
@@ -125,8 +134,8 @@ class OrderController extends Controller
     {
         $order_id = $id;
         $order = Order::find($order_id);
-        $order->status_id = 6;
-
+        $order->status_id = 5;
+        $order->updated_at = now();
         //Kiem tra trang thai don hang, neu don hang da xac nhan bi Admin huy thi cong lại số lượng bảng products
         $status_order = $request->status_order;
         if ($status_order == 'confirmed') {
@@ -156,6 +165,7 @@ class OrderController extends Controller
         $order_id = $request->order_id;
         $order = Order::find($order_id);
         $order->status_id = $request->status_id;
+        $order->updated_at = now();
         $order->save();
         return 'Đã sửa trạng thái đơn hàng thành công';
     }

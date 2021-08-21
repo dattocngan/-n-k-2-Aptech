@@ -54,9 +54,9 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Danh sách</h3>
-              <div id="message"></div>
+            <div class="card-header" style="display: flex;">
+            <div style="width: 50%"><h3 class="card-title">Danh sách</h3></div>
+             <div style="width: 50%"><a style="float: right; width: 50%" class="btn btn-success" href="{{route('news_create')}}">Thêm Mới</a></div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

@@ -78,7 +78,7 @@
 					<i class="checkmark">✓</i>
 					</div>
 					<h1>Thành công</h1> 
-					<p>Chúng tôi đã nhận được đơn hàng bạn đặt<br/> Chúng ta sẽ xác nhận đơn hàng sớm nhất có thể!!</p>
+					<p>Chúng tôi đã nhận được đơn hàng bạn đặt<br/> Đơn hàng của bạn sẽ được xác nhận trong thời gian sớm nhất</p>
 					<a  href="{{route('client_index')}}"><button type="button" style="margin-top: 25px;height:59px"  class="btn btn-success" btn-lg btn-block">Trở về trang chủ</button></a>
 				</div>
 			</div>
