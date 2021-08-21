@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-class PermissionController extends Controller
-{ 
+class PermissionController extends Controller{ 
 
     public function __construct() {
     $this->middleware('auth');
     $this->middleware('checkpermission');
     }
+
 
     public function indexRoles(Request $request)
     { 
@@ -27,7 +27,9 @@ class PermissionController extends Controller
         public function settingRole(Request $request, $id) {  
       $permissionList = DB::table('permissions') -> where('role_id', $id) ->get();
 
-      $routeList = DB::table('routes') ->get();
+      $routeList = DB::table('routes') 
+      ->orderBy('name', 'asc')
+      ->get();
 
       $list = [];
 
@@ -47,7 +49,6 @@ class PermissionController extends Controller
         ];
     }
 
-      // $list = $list ->paginate(20);
       return view('admin.permission.indexsettingrole')->with([
       'list' => $list,
       'role_id' => $id,
@@ -81,6 +82,5 @@ class PermissionController extends Controller
         ]);
      }
      return "Thay Đổi Trạng Thái Thành Công";
-
   }
 }

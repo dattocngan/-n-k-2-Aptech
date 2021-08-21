@@ -125,6 +125,14 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
+        <div id="permission_alert">
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo -->
+          @if($errors->any())
+            <div class="alert alert-danger">{{$errors->first()}}</div>
+          @endif
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo end -->
+        </div>
+    
         <div class="card">
             <div class="card-header" style="display: flex;">
             <div style="width: 50%"><h3 class="card-title">Danh sách</h3></div>
@@ -157,7 +165,7 @@
                   <td>{{number_format($product->quantity_available)}}</td>
                   <td><img  src="{{asset($product->image)}}"></td>
                   <td><a class="btn btn-warning" href="{{route('product_edit',['id'=>$product->id])}}">Sửa</a></td>
-                  <td><button onclick="deleteProduct({{$product->id}})" class="btn btn-danger">Xóa</button></td>
+                  <td><button onclick="deleteProduct({{$product->id}},{{$delete_permission}})" class="btn btn-danger">Xóa</button></td>
                 </tr>
                 @endforeach
                 @else
@@ -199,7 +207,15 @@
   });
 
 
-  function deleteProduct(id){
+  function deleteProduct(id,delete_permission){
+
+      if (delete_permission == 0) {
+      $('#permission_alert').html(`
+         <div class="alert alert-danger">Bạn Không Được Thực Hiện Hành Động Xóa</div>
+        `)
+      return;
+    }
+
     var option = confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')
     if (!option) {
       return
@@ -209,32 +225,11 @@
       //Gui id product
       'id': id,
       //Gui id danh muc con và product name sang Controller dang tim kiem de lam dieu kien loc hien thi cac san pham thoa man dieu kien dang tim sau khi xoa
-      'categorychild_id': $('#category_child').val(),
-      'product_name': $('#product_name').val(),
       '_token': '{{csrf_token()}}'
     } , function(res){
       var res = JSON.parse(res);
-      var productList = res.productList.data;
-      console.log(productList);
-      $('#data').html('');
-
-      for(var i = 0; i < productList.length; i++){
-       $('#data').append(`
-         <tr>
-         <td>${i+1}</td>
-         <td>${productList[i].name}</td>
-         <td>${productList[i].category_name}}</td>
-         <td>${(productList[i].price)}</td>
-         <td>${(productList[i].price_discount)}</td>
-         <td>${(productList[i].quantity_available)}</td>
-         <td><img  src="${productList[i].image}"></td>
-         <td><a class="btn btn-warning" href=" {{ URL::to('/') }}/admin/product/edit/${productList[i].id}">Sửa</a></td>
-         <td><button onclick="deleteProduct(${productList[i].id})" class="btn btn-danger">Xóa</button></td>
-         </tr>
-         `)   ;
-     }
-
      alert(res.message);
+     location.reload();
    })
   }
 

@@ -85,7 +85,7 @@
 								<th>Sản phẩm</th>
                                 <th>Tên sản phẩm</th>
 								<th>Số lượng</th>
-                                <th>Giá tiền</th>
+                                <th>Giá tiền (VNĐ)</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,7 +101,7 @@
 									<td class="invert">
                                         <span>{{$item->quantity}}</span>
 									</td>
-									<td class="invert">{{$item->price}}</td>
+									<td class="invert">{{number_format($item->price, 0, '', '.')}} đ</td>
 								</tr>
 							@endforeach
 							

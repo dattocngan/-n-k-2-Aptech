@@ -137,10 +137,20 @@ class NewsController extends Controller
 				$index = ($request->page - 1) * $numberPage;
 			}
 
+
+			 //Kiêm tra phân quyền có được xóa danh muc không
+		    $delete_permission = checkAvaiableRoute('news_delete');
+		    if ( $delete_permission == true) {
+		    	$delete_permission = 1;
+		    }else{
+		    	$delete_permission = 0;
+		    }
+
 			// Danh so thu tu cho du lieu End
 			return view('admin.news.index')->with([
 				'newsList' => $newsList,
 				'index'=> $index,
+				'delete_permission'=>$delete_permission
 			]);
 		}
 
@@ -216,11 +226,9 @@ class NewsController extends Controller
 			$news = News::find($id);
 			$news->is_deleted = 1;
 			$news->save();
-
-			$newsList = News::where('is_deleted', 0)->paginate(10);
 			
 			$res = [
-          			'newsList'=> $newsList,
+          			// 'newsList'=> $newsList,
           			'message' => 'Đã xóa tin tức thành công',
           	 ];
 

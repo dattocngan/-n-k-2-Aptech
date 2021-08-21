@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
+
 use DB;
 
 class CheckPermission
@@ -37,10 +39,13 @@ class CheckPermission
              if ($status == 1) {
                  return $next($request);
              }else {
-                 return redirect()->route('home');
+                 // return redirect()->route('home');
+                return Redirect::back()->withErrors(['Bạn Không Được Thực Hiện Hành Động Sửa Hoặc Thêm Mới']);
              }
             }else {
-                return redirect()->route('home');
+
+                // return redirect()->route('home');
+                return Redirect::back()->withErrors(['Bạn Không Được Thực Hiện Hành Động Sửa Hoặc Thêm Mới']);
             }
      }
          return $next($request);

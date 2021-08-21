@@ -49,8 +49,11 @@
   @include('admin/layouts/left-menu')
 
   <!-- Content Wrapper. Contains page content -->
+  
   @yield('content')
+ 
   <!-- /.content-wrapper -->
+  
   @include('admin/layouts/footer')
 
   <!-- Control Sidebar -->

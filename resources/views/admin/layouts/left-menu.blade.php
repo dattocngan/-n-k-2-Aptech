@@ -64,15 +64,20 @@
                 </a>
               </li>
 
-                            <li class="nav-item">
+
+                @if (checkAvaiableRoute('sale_index') == true)
+                  <li class="nav-item">
                 <a href="{{route('sale_index')}}" class="nav-link">
                   <p>Doanh số</p>
                 </a>
               </li>
+                @endif
+     
             </ul>
           </li>
 
 <!--           <li class="nav-item menu-open">
+
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -121,7 +126,6 @@
             </ul>
           </li>
 
-
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
              <i class="fa fa-book" aria-hidden="true"></i>
@@ -140,6 +144,7 @@
           </li>
 
 
+             @if (checkAvaiableRoute('users_index') == true)
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
              <i class="fa fa-book" aria-hidden="true"></i>
@@ -161,6 +166,8 @@
               </li>
             </ul>
           </li>
+
+          @endif 
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
