@@ -495,6 +495,7 @@ class ClientController extends Controller
                 'address' => $request->address,
                 'order_date' => now(),
                 'status_id' => 1, // 1 la dang giao hang
+
                 'created_at' => now(),
                 'updated_at' => now(),
                 'is_deleted' => 0,

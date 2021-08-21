@@ -37,12 +37,14 @@ class OrderController extends Controller
 
         //Sắp xếp theo ngày đặt hàng
         if ($request->sort == 'asc') {
+
                 $orderList = $orderList ->orderBy('orders.order_date', 'asc');
             }else {
                 $orderList = $orderList -> orderBy('orders.order_date', 'desc');
             }
 
             $orderList = $orderList ->paginate(10);
+
 
         //Đánh lại số thứ tự từng page paginate
         $num = 10;
@@ -135,6 +137,7 @@ class OrderController extends Controller
         $order_id = $id;
         $order = Order::find($order_id);
         $order->status_id = 5;
+
         $order->updated_at = now();
         //Kiem tra trang thai don hang, neu don hang da xac nhan bi Admin huy thi cong lại số lượng bảng products
         $status_order = $request->status_order;

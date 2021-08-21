@@ -42,6 +42,7 @@ class SaleController extends Controller
            // $time_end = strtotime($request->time_end); 
            // $time_end = date('Y-m-d H:i:s', $time_end);
            $saleList =  $saleList->where('orders.updated_at', '<=', $request->time_end);
+
        }
 
        if (isset($request->sort_quantity) && $request->sort_quantity != '' ) {

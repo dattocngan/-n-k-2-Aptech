@@ -380,7 +380,6 @@
 															@else
 																<span class="item_price">{{number_format($item->price, 0, '', '.')}} VNĐ</span>
 															@endif
-
 														</div>
 														<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 															@if ($item->quantity_available <= 0)

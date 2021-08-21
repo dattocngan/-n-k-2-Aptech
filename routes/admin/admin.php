@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
+
 use Illuminate\Support\Facades\Auth;
 
 Route::group(['prefix' => 'admin'], function () {
