@@ -102,7 +102,7 @@
                           <td>{{$order->address}}</td>
                           <td>{{date('d-m-Y H:i:s', strtotime($order->order_date))}}</td>
                           <td>{{$order->order_status_name}}</td>
-                          <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem Chi Tiết</a></td>
+                          <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem</a></td>
                           <td><a class="btn btn-warning" href="{{route('order_confirm',['id'=>$order->id])}}">Xác Nhận</a></td>
                           <td><button type="button" onclick="deleteOrder({{$order->id}})" class="btn btn-danger">Hủy</button></td>
                         </tr>

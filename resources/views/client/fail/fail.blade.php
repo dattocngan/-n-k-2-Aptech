@@ -75,7 +75,7 @@
 			<!-- //tittle heading -->
 			<div class="checkout-right">
 				<h4 class="mb-sm-4 mb-3">
-					<span>Một số sản phẩm không đáp ứng được nhu cầu mua bán của bạn</span>
+					<span>Xin lỗi, một số sản phẩm không đáp ứng đủ số lượng bạn đặt mua, vui lòng đặt lại số lượng</span>
 				</h4>
 				<div class="table-responsive">
 					<table class="timetable_sub">
@@ -92,14 +92,14 @@
 								<tr class="rem1">
 									<td class="invert">{{$index++}}</td>
 									<td class="invert-image">
-										<a href="{{route('client_single',['id'=>$item['id']])}}">
+										<a href="{{route('client_single',['id'=>$item['id'],'href_param'=>$item['href_param']])}}">
 											<img src="{{ URL::asset($item['image']) }}" alt=" " class="img-responsive">
 										</a>
 									</td>
 									<td class="invert">
 										{{$item['quantity_available']}}	
 									</td>
-									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item['id']])}}">{{$item['name']}}</a></td>
+									<td class="invert"><a class="changeOrange" style="color: black" href="{{route('client_single',['id'=>$item['id'],'href_param'=>$item['href_param']])}}">{{$item['name']}}</a></td>
 								</tr>
 							@endforeach
 							

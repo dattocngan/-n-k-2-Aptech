@@ -5,18 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-class PermissionController extends Controller
-<<<<<<< HEAD
-{ 
+class PermissionController extends Controller{ 
 
     public function __construct() {
     $this->middleware('auth');
     $this->middleware('checkpermission');
     }
 
-=======
-{
->>>>>>> 08ca7b0 (22h 8.8.2021)
+
     public function indexRoles(Request $request)
     {	
     	$roleList = DB::table('roles') ->paginate(10);
@@ -31,7 +27,9 @@ class PermissionController extends Controller
         public function settingRole(Request $request, $id) {	
     	$permissionList = DB::table('permissions') -> where('role_id', $id) ->get();
 
-    	$routeList = DB::table('routes') ->get();
+      $routeList = DB::table('routes') 
+      ->orderBy('name', 'asc')
+      ->get();
 
     	$list = [];
 
@@ -51,12 +49,11 @@ class PermissionController extends Controller
         ];
     }
 
-    	// $list = $list ->paginate(20);
-    	return view('admin.permission.indexsettingrole')->with([
-			'list' => $list,
-			'role_id' => $id,
-			'count' => 0,
-		]);
+      return view('admin.permission.indexsettingrole')->with([
+      'list' => $list,
+      'role_id' => $id,
+      'count' => 0,
+    ]);
     }
 
 

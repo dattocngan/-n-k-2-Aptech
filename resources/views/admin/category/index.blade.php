@@ -60,6 +60,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
+        <div id="permission_alert">
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo -->
+          @if($errors->any())
+            <div class="alert alert-danger">{{$errors->first()}}</div>
+          @endif
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo end -->
+        </div>
           <div class="card">
             <div class="card-header" style="display: flex;">
             <div style="width: 50%"><h3 class="card-title">Danh sách</h3></div>
@@ -76,7 +83,7 @@
                       <tr>
                         <th style="text-align: left!important;" colspan="2">{{$categoryParent->name}}</th>
                         <th> <a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryParent->id])}}">Sửa</a></th>
-                        <th><button onclick="deleteCategory({{$categoryParent->id}})" class="btn btn-danger">Xóa</button></th>
+                        <th><button onclick="deleteCategory({{$categoryParent->id}},{{$delete_permission}})" class="btn btn-danger">Xóa</button></th>
                       </tr>
                       <tr>
                         <th>STT</th>
@@ -94,7 +101,7 @@
                         <td>{{++$count}}</td>
                         <td>{{$categoryChild->name}}</td>
                         <td><a class="btn btn-warning" href="{{route('category_edit',['id'=>$categoryChild->id])}}">Sửa</a></td>
-                        <td><button onclick="deleteCategory({{$categoryChild->id}})" class="btn btn-danger">Xóa</button></td>
+                        <td><button onclick="deleteCategory({{$categoryChild->id}},{{$delete_permission}})" class="btn btn-danger">Xóa</button></td>
                       </tr>
                       @endif   
                       @endforeach
@@ -133,7 +140,13 @@
     });
 
 
-    function deleteCategory(id){
+    function deleteCategory(id,delete_permission){
+     if (delete_permission == 0) {
+      $('#permission_alert').html(`
+         <div class="alert alert-danger">Bạn Không Được Thực Hiện Hành Động Xóa</div>
+        `)
+      return;
+    }
       var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không, toàn bộ các sản phẩm trong danh mục sẽ bị xóa?')
       if (!option) {
         return

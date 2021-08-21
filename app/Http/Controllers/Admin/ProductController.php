@@ -110,7 +110,7 @@ class ProductController extends Controller
 
      		}else{
 	 			return redirect()->route('product_create') -> with([
-					'err_image' => "Chọn lại ảnh minh họa bài viết định dạng jpg, png, jpeg",
+					'err_image' => "Hình ảnh của sản phẩm phải có định dạng jpg, png, jpeg",
 				]);
      		}
   		}
@@ -230,6 +230,14 @@ class ProductController extends Controller
 
 		    $productList = $productList->paginate(10);
 
+		    //Kiêm tra phân quyền có được xóa sản phẩm không
+		    $delete_permission = checkAvaiableRoute('product_delete');
+		    if ( $delete_permission == true) {
+		    	$delete_permission = 1;
+		    }else{
+		    	$delete_permission = 0;
+		    }
+
 		    	return view('admin.product.index')->with([
 		    		'productList' => $productList,
 		    		'categoryParentList' => $categoryParentList,
@@ -239,6 +247,7 @@ class ProductController extends Controller
 		    		'categoryparent_id' => $request->categoryparent_id,
 		    		'categorychild_id' => $request->categorychild_id,
 		    		'product_name' => $request->product_name,
+		    		 'delete_permission' =>$delete_permission
 		    	]);
 		}
 
@@ -415,20 +424,20 @@ class ProductController extends Controller
 			$product->is_deleted = 1;
 			$product->save();
 
-			$productList = DB::table('products') -> leftjoin('categories', 'products.category_id', '=', 'categories.id') -> select('products.*', 'categories.name as category_name')->where('products.is_deleted', 0);
+			// $productList = DB::table('products') -> leftjoin('categories', 'products.category_id', '=', 'categories.id') -> select('products.*', 'categories.name as category_name')->where('products.is_deleted', 0);
 
-			if (isset($request->categorychild_id) && $request->categorychild_id > 0) {
-				$productList = $productList->where('category_id', $request->categorychild_id);
-			}
+			// if (isset($request->categorychild_id) && $request->categorychild_id > 0) {
+			// 	$productList = $productList->where('category_id', $request->categorychild_id);
+			// }
 
-		   	if (isset($request->product_name) && $request->product_name != '' ) {
-		    		$productList = $productList ->where('products.name', 'like', '%'.$request->product_name.'%');
-		    }
+		 //   	if (isset($request->product_name) && $request->product_name != '' ) {
+		 //    		$productList = $productList ->where('products.name', 'like', '%'.$request->product_name.'%');
+		 //    }
 
-		    $productList = $productList->paginate(10);
+		 //    $productList = $productList->paginate(10);
 
 			$res = [
-          			'productList'=> $productList,
+          			// 'productList'=> $productList,
           			'message' => 'Đã xóa sản phẩm thành công',
           	 ];
 

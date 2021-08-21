@@ -53,6 +53,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
+        <div id="permission_alert">
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo -->
+          @if($errors->any())
+            <div class="alert alert-danger">{{$errors->first()}}</div>
+          @endif
+        <!-- Nếu không được phan quyền thì hiện ra message thông báo end -->
+        </div>
           <div class="card">
             <div class="card-header" style="display: flex;">
             <div style="width: 50%"><h3 class="card-title">Danh sách</h3></div>
@@ -79,7 +86,7 @@
                     <td><img width="100%" src="{{asset($news->thumnail)}}"></td>
                     <td>{!!$news->short_content!!}</td>
                     <td><a class="btn btn-warning" href="{{route('news_edit',['id'=>$news->id])}}">Sửa</a></td>
-                    <td><button onclick="deleteNews({{$news->id}})" class="btn btn-danger">Xóa</button></td>
+                    <td><button onclick="deleteNews({{$news->id}},{{$delete_permission}})" class="btn btn-danger">Xóa</button></td>
                   </tr>
                   @endforeach
                  
@@ -116,7 +123,15 @@
   });
 
 
-    function deleteNews(id){
+    function deleteNews(id,delete_permission){
+
+    if (delete_permission == 0) {
+      $('#permission_alert').html(`
+         <div class="alert alert-danger">Bạn Không Được Thực Hiện Hành Động Xóa</div>
+        `)
+      return;
+    }
+
       var option = confirm('Bạn có chắc chắn muốn xóa danh mục sản phẩm này không?')
       if (!option) {
         return
@@ -129,23 +144,7 @@
 
         var res = JSON.parse(res);
         alert(res.message);
-
-        var newsList = res.newsList.data;
-        console.log(newsList);
-        $('#data').html('');
-
-        for(var i = 0; i < newsList.length; i++){
-          $('#data').append(`
-              <tr>
-                <td>${i+1}</td>
-                <td>${newsList[i].title}</td>
-                <td><img width="100%" src="${newsList[i].thumnail}"></td>
-                <td>${newsList[i].short_content}</td>
-                <td><a class="btn btn-warning" href="{{ URL::to('/') }}/admin/news/edit/${newsList[i].id}">Sửa</a></td>
-                <td><button onclick="deleteNews(${newsList[i].id})" class="btn btn-danger">Xóa</button></td>
-              </tr>
-          `);
-        }
+        location.reload();
       })
     }
 

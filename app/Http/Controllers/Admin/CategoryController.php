@@ -28,9 +28,18 @@ class CategoryController extends Controller
 		    ['parent_id', '<>', '0'],
 		])->get();
 
+		//Kiêm tra phân quyền có được xóa danh muc không
+		$delete_permission = checkAvaiableRoute('news_delete');
+		if ( $delete_permission == true) {
+			$delete_permission = 1;
+		}else{
+			$delete_permission = 0;
+		}
+
 		return view('admin.category.index')->with([
 			'categoryParentList' => $categoryParentList,
 			'categoryChildList' => $categoryChildList,
+			'delete_permission'=>$delete_permission,
 		]);	
 	}
 
