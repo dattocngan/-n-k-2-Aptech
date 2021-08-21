@@ -25,7 +25,7 @@ class OrderController extends Controller
         $orderList = DB::table('orders')
             -> leftjoin('users', 'orders.user_id', '=', 'users.id')
             -> leftjoin ('order_status', 'orders.status_id', '=', 'order_status.id')
-            -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.name as order_status_name') 
+            -> select ('orders.*','orders.phone','orders.address', 'orders.order_date', 'users.name as user_name', 'order_status.id as order_status_id') 
             -> where('orders.status_id', '<>', '1')
             -> where('orders.is_deleted', '=', '0');    
 

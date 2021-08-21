@@ -245,7 +245,7 @@ class ClientController extends Controller
                 ->where('products.is_deleted',0)
                 ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                 ->groupBy('products.id')
-                ->paginate(3);
+                ->paginate(9);
             }else{
                 //Đổ ra full sản phẩm theo search
                 $title = "Sản phẩm";
@@ -257,7 +257,7 @@ class ClientController extends Controller
                 ->where('products.is_deleted',0)
                 ->select('products.*',DB::raw('COALESCE(SUM(order_details.quantity),0) as quantity_sale'))
                 ->groupBy('products.id')
-                ->paginate(3);
+                ->paginate(9);
             }
             //San pham hot
             $productListHot =DB::table('products')
@@ -472,7 +472,8 @@ class ClientController extends Controller
                             'id' => $product->id,
                             'name' => $product->name,
                             'image' => $product->image,
-                            'quantity_available' => $product->quantity_available
+                            'quantity_available' => $product->quantity_available,
+                            'href_param' => $product->href_param
                         ];
                     }
                     break;

@@ -9,6 +9,35 @@
         padding: 5px 5px;
     }
 
+  .card-body thead tr th:nth-child(1) {
+    width: 5%;
+  }
+
+  .card-body thead tr th:nth-child(2) {
+    width: 10%;
+  }
+
+  .card-body thead tr th:nth-child(3) {
+    width: 15%;
+  }
+
+  .card-body thead tr th:nth-child(4) {
+    width: 10%;
+  }
+
+  .card-body thead tr th:nth-child(5) {
+    width: 10%;
+  }
+
+  .card-body thead tr th:nth-child(6) {
+    width: 10%;
+  }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
 
     tbody {
       text-align: center;
@@ -102,8 +131,8 @@
                   <tr>
                     <th>STT</th>
                     <th>Trạng Thái Đơn Hàng</th>
-                    <th>Id sản phẩm</th>
                     <th>Tên Sản Phẩm</th>
+                    <th>Hình ảnh</th>
                     <th>Số Lượng Bán</th>
                     <th>Giá Bán Đơn Vị</th>
                   </tr>
@@ -113,10 +142,10 @@
                   <tr>
                     <td>{{++$index}}</td>
                     <td>{{$sale->order_status_name}}</td>
-                    <td>{{$sale->product_id}}</td>
                     <td>{{$sale->product_name}}</td>
+                    <td><img src="{{asset($sale->product_image)}}"></td>
                     <td>{{$sale->sale_quantity}}</td>
-                     <td>{{$sale->product_price}}</td>
+                     <td>{{number_format($sale->product_price, 0, '', '.')}}</td>
                   </tr>
                   @endforeach
                   

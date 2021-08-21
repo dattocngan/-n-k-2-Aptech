@@ -101,24 +101,38 @@
                           <td>{{date('d-m-Y H:i:s', strtotime($order->order_date))}}</td>
                           <td>
                             <select class="form-control" onchange="updateOrderStatus(this, {{$order->id}})">
-                                @foreach ($statusList as $status)
-                                  <option 
-                                     @if ($status->id == "1" || $status->id == "5")
-                                          {{"disabled"}}
-                                      @endif
-                                     @if ($order->order_status_name == $status->name)
+                              @if ($order->order_status_id==4 || $order->order_status_id==5)
+                                 @foreach ($statusList as $status)
+                                  <option disabled 
+                                     @if ($order->order_status_id == $status->id)
                                           {{"selected"}}
                                       @endif
                                    value = "{{$status->id}}">{{$status->name}}
                                   </option>
                                 @endforeach
+
+                                @else
+                                 @foreach ($statusList as $status)
+                                  <option 
+                                     @if ($status->id == "1" || $status->id == "5")
+                                          {{"disabled"}}
+                                      @endif
+                                     @if ($order->order_status_id == $status->id)
+                                          {{"selected"}}
+                                      @endif
+                                   value = "{{$status->id}}">{{$status->name}}
+                                  </option>
+                                @endforeach
+                              @endif
                             </select>
 
                           </td>
-                          <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem Chi Tiết</a></td>
+                          <td><a href="{{route('order.show',['order'=>$order->id])}}">Xem</a></td>
                           <td>
                             @if($order->status_id == 4)
-                              <div class="alert alert-success">Đơn Hoàn Thành</div>
+                              <div style="padding: 5px 0px" class="alert alert-success">Đơn Hoàn Thành</div>
+                            @elseif($order->status_id == 5)
+                              <div style="padding: 5px 0px" class="alert alert-warning">Đơn Bị Hủy</div>
                             @else
                               <button onclick="deleteOrder({{$order->id}})" class="btn btn-danger">Hủy</button>
                             @endif
@@ -162,13 +176,13 @@
     });
 
 
-    function updateOrderStatus(that, order_id){
+    function updateOrderStatus(that, order_id, status_id_begin){
+      var status_id = $(that).val();
       var option = confirm('Bạn có chắc chắn muốn sửa trạng thái đơn hàng?');
       if (option == false) {
         return
         location.reload();
       }
-      var status_id = $(that).val();
 
       $.post('{{route('order_update')}}', {
       'order_id': order_id,
